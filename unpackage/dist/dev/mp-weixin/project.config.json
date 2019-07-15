@@ -4,13 +4,12 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
-		"es6": true
+		"urlCheck": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
-	"appid": "touristappid",
-	"projectname": "uni_app_demo",
+	"appid": "wx4a9ee3a3edef27dc",
+	"projectname": "UniDemo",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -27,15 +26,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"name": "",
-					"path": "",
-					"query": "",
-					"id": 0
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }

@@ -1,7 +1,0 @@
-
-.canvas {
-	width: 610rpx;
-	height: 610rpx;
-	background-color: #fff;
-}
-

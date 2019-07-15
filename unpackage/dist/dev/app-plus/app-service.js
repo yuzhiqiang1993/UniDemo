@@ -1,254 +1,1383 @@
+var __wxAppData = {};
+var __wxRoute;
+var __wxRouteBegin;
+var __wxAppCode__ = {};
+var global = {};
+var __wxAppCurrentFile__;
+if(typeof __WXML_GLOBAL__ !== 'undefined'){
+  delete __WXML_GLOBAL__.ops_cached//remove ops_cached(v8 下会有 cache)
+}
+// var Component = Component || function() {};
+// var definePlugin = definePlugin || function() {};
+// var requirePlugin = requirePlugin || function() {};
+// var Behavior = Behavior || function() {};
+var $gwx;
+  
+/*v0.5vv_20190312_syb_scopedata*/global.__wcc_version__='v0.5vv_20190312_syb_scopedata';global.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
+var $gwxc
+var $gaic={}
+$gwx=function(path,global){
+if(typeof global === 'undefined') global={};if(typeof __WXML_GLOBAL__ === 'undefined') {__WXML_GLOBAL__={};
+}__WXML_GLOBAL__.modules = __WXML_GLOBAL__.modules || {};
+function _(a,b){if(typeof(b)!='undefined')a.children.push(b);}
+function _v(k){if(typeof(k)!='undefined')return {tag:'virtual','wxKey':k,children:[]};return {tag:'virtual',children:[]};}
+function _n(tag){$gwxc++;if($gwxc>=16000){throw 'Dom limit exceeded, please check if there\'s any mistake you\'ve made.'};return {tag:'wx-'+tag,attr:{},children:[],n:[],raw:{},generics:{}}}
+function _p(a,b){b&&a.properities.push(b);}
+function _s(scope,env,key){return typeof(scope[key])!='undefined'?scope[key]:env[key]}
+function _wp(m){console.warn("WXMLRT_$gwx:"+m)}
+function _wl(tname,prefix){_wp(prefix+':-1:-1:-1: Template `' + tname + '` is being called recursively, will be stop.')}
+$gwn=console.warn;
+$gwl=console.log;
+function $gwh()
+{
+function x()
+{
+}
+x.prototype = 
+{
+hn: function( obj, all )
+{
+if( typeof(obj) == 'object' )
+{
+var cnt=0;
+var any1=false,any2=false;
+for(var x in obj)
+{
+any1=any1|x==='__value__';
+any2=any2|x==='__wxspec__';
+cnt++;
+if(cnt>2)break;
+}
+return cnt == 2 && any1 && any2 && ( all || obj.__wxspec__ !== 'm' || this.hn(obj.__value__) === 'h' ) ? "h" : "n";
+}
+return "n";
+},
+nh: function( obj, special )
+{
+return { __value__: obj, __wxspec__: special ? special : true }
+},
+rv: function( obj )
+{
+return this.hn(obj,true)==='n'?obj:this.rv(obj.__value__);
+},
+hm: function( obj )
+{
+if( typeof(obj) == 'object' )
+{
+var cnt=0;
+var any1=false,any2=false;
+for(var x in obj)
+{
+any1=any1|x==='__value__';
+any2=any2|x==='__wxspec__';
+cnt++;
+if(cnt>2)break;
+}
+return cnt == 2 && any1 && any2 && (obj.__wxspec__ === 'm' || this.hm(obj.__value__) );
+}
+return false;
+}
+}
+return new x;
+}
+wh=$gwh();
+function $gstack(s){
+var tmp=s.split('\n '+' '+' '+' ');
+for(var i=0;i<tmp.length;++i){
+if(0==i) continue;
+if(")"===tmp[i][tmp[i].length-1])
+tmp[i]=tmp[i].replace(/\s\(.*\)$/,"");
+else
+tmp[i]="at anonymous function";
+}
+return tmp.join('\n '+' '+' '+' ');
+}
+function $gwrt( should_pass_type_info )
+{
+function ArithmeticEv( ops, e, s, g, o )
+{
+var _f = false;
+var rop = ops[0][1];
+var _a,_b,_c,_d, _aa, _bb;
+switch( rop )
+{
+case '?:':
+_a = rev( ops[1], e, s, g, o, _f );
+_c = should_pass_type_info && ( wh.hn(_a) === 'h' );
+_d = wh.rv( _a ) ? rev( ops[2], e, s, g, o, _f ) : rev( ops[3], e, s, g, o, _f );
+_d = _c && wh.hn( _d ) === 'n' ? wh.nh( _d, 'c' ) : _d;
+return _d;
+break;
+case '&&':
+_a = rev( ops[1], e, s, g, o, _f );
+_c = should_pass_type_info && ( wh.hn(_a) === 'h' );
+_d = wh.rv( _a ) ? rev( ops[2], e, s, g, o, _f ) : wh.rv( _a );
+_d = _c && wh.hn( _d ) === 'n' ? wh.nh( _d, 'c' ) : _d;
+return _d;
+break;
+case '||':
+_a = rev( ops[1], e, s, g, o, _f );
+_c = should_pass_type_info && ( wh.hn(_a) === 'h' );
+_d = wh.rv( _a ) ? wh.rv(_a) : rev( ops[2], e, s, g, o, _f );
+_d = _c && wh.hn( _d ) === 'n' ? wh.nh( _d, 'c' ) : _d;
+return _d;
+break;
+case '+':
+case '*':
+case '/':
+case '%':
+case '|':
+case '^':
+case '&':
+case '===':
+case '==':
+case '!=':
+case '!==':
+case '>=':
+case '<=':
+case '>':
+case '<':
+case '<<':
+case '>>':
+_a = rev( ops[1], e, s, g, o, _f );
+_b = rev( ops[2], e, s, g, o, _f );
+_c = should_pass_type_info && (wh.hn( _a ) === 'h' || wh.hn( _b ) === 'h');
+switch( rop )
+{
+case '+':
+_d = wh.rv( _a ) + wh.rv( _b );
+break;
+case '*':
+_d = wh.rv( _a ) * wh.rv( _b );
+break;
+case '/':
+_d = wh.rv( _a ) / wh.rv( _b );
+break;
+case '%':
+_d = wh.rv( _a ) % wh.rv( _b );
+break;
+case '|':
+_d = wh.rv( _a ) | wh.rv( _b );
+break;
+case '^':
+_d = wh.rv( _a ) ^ wh.rv( _b );
+break;
+case '&':
+_d = wh.rv( _a ) & wh.rv( _b );
+break;
+case '===':
+_d = wh.rv( _a ) === wh.rv( _b );
+break;
+case '==':
+_d = wh.rv( _a ) == wh.rv( _b );
+break;
+case '!=':
+_d = wh.rv( _a ) != wh.rv( _b );
+break;
+case '!==':
+_d = wh.rv( _a ) !== wh.rv( _b );
+break;
+case '>=':
+_d = wh.rv( _a ) >= wh.rv( _b );
+break;
+case '<=':
+_d = wh.rv( _a ) <= wh.rv( _b );
+break;
+case '>':
+_d = wh.rv( _a ) > wh.rv( _b );
+break;
+case '<':
+_d = wh.rv( _a ) < wh.rv( _b );
+break;
+case '<<':
+_d = wh.rv( _a ) << wh.rv( _b );
+break;
+case '>>':
+_d = wh.rv( _a ) >> wh.rv( _b );
+break;
+default:
+break;
+}
+return _c ? wh.nh( _d, "c" ) : _d;
+break;
+case '-':
+_a = ops.length === 3 ? rev( ops[1], e, s, g, o, _f ) : 0;
+_b = ops.length === 3 ? rev( ops[2], e, s, g, o, _f ) : rev( ops[1], e, s, g, o, _f );
+_c = should_pass_type_info && (wh.hn( _a ) === 'h' || wh.hn( _b ) === 'h');
+_d = _c ? wh.rv( _a ) - wh.rv( _b ) : _a - _b;
+return _c ? wh.nh( _d, "c" ) : _d;
+break;
+case '!':
+_a = rev( ops[1], e, s, g, o, _f );
+_c = should_pass_type_info && (wh.hn( _a ) == 'h');
+_d = !wh.rv(_a);
+return _c ? wh.nh( _d, "c" ) : _d;
+case '~':
+_a = rev( ops[1], e, s, g, o, _f );
+_c = should_pass_type_info && (wh.hn( _a ) == 'h');
+_d = ~wh.rv(_a);
+return _c ? wh.nh( _d, "c" ) : _d;
+default:
+$gwn('unrecognized op' + rop );
+}
+}
+function rev( ops, e, s, g, o, newap )
+{
+var op = ops[0];
+var _f = false;
+if ( typeof newap !== "undefined" ) o.ap = newap;
+if( typeof(op)==='object' )
+{
+var vop=op[0];
+var _a, _aa, _b, _bb, _c, _d, _s, _e, _ta, _tb, _td;
+switch(vop)
+{
+case 2:
+return ArithmeticEv(ops,e,s,g,o);
+break;
+case 4: 
+return rev( ops[1], e, s, g, o, _f );
+break;
+case 5: 
+switch( ops.length )
+{
+case 2: 
+_a = rev( ops[1],e,s,g,o,_f );
+return should_pass_type_info?[_a]:[wh.rv(_a)];
+return [_a];
+break;
+case 1: 
+return [];
+break;
+default:
+_a = rev( ops[1],e,s,g,o,_f );
+_b = rev( ops[2],e,s,g,o,_f );
+_a.push( 
+should_pass_type_info ?
+_b :
+wh.rv( _b )
+);
+return _a;
+break;
+}
+break;
+case 6:
+_a = rev(ops[1],e,s,g,o);
+var ap = o.ap;
+_ta = wh.hn(_a)==='h';
+_aa = _ta ? wh.rv(_a) : _a;
+o.is_affected |= _ta;
+if( should_pass_type_info )
+{
+if( _aa===null || typeof(_aa) === 'undefined' )
+{
+return _ta ? wh.nh(undefined, 'e') : undefined;
+}
+_b = rev(ops[2],e,s,g,o,_f);
+_tb = wh.hn(_b) === 'h';
+_bb = _tb ? wh.rv(_b) : _b;
+o.ap = ap;
+o.is_affected |= _tb;
+if( _bb===null || typeof(_bb) === 'undefined' || 
+_bb === "__proto__" || _bb === "prototype" || _bb === "caller" ) 
+{
+return (_ta || _tb) ? wh.nh(undefined, 'e') : undefined;
+}
+_d = _aa[_bb];
+if ( typeof _d === 'function' && !ap ) _d = undefined;
+_td = wh.hn(_d)==='h';
+o.is_affected |= _td;
+return (_ta || _tb) ? (_td ? _d : wh.nh(_d, 'e')) : _d;
+}
+else
+{
+if( _aa===null || typeof(_aa) === 'undefined' )
+{
+return undefined;
+}
+_b = rev(ops[2],e,s,g,o,_f);
+_tb = wh.hn(_b) === 'h';
+_bb = _tb ? wh.rv(_b) : _b;
+o.ap = ap;
+o.is_affected |= _tb;
+if( _bb===null || typeof(_bb) === 'undefined' || 
+_bb === "__proto__" || _bb === "prototype" || _bb === "caller" ) 
+{
+return undefined;
+}
+_d = _aa[_bb];
+if ( typeof _d === 'function' && !ap ) _d = undefined;
+_td = wh.hn(_d)==='h';
+o.is_affected |= _td;
+return _td ? wh.rv(_d) : _d;
+}
+case 7: 
+switch(ops[1][0])
+{
+case 11:
+o.is_affected |= wh.hn(g)==='h';
+return g;
+case 3:
+_s = wh.rv( s );
+_e = wh.rv( e );
+_b = ops[1][1];
+if (g && g.f && g.f.hasOwnProperty(_b) )
+{
+_a = g.f;
+o.ap = true;
+}
+else
+{
+_a = _s && _s.hasOwnProperty(_b) ? 
+s : (_e && _e.hasOwnProperty(_b) ? e : undefined );
+}
+if( should_pass_type_info )
+{
+if( _a )
+{
+_ta = wh.hn(_a) === 'h';
+_aa = _ta ? wh.rv( _a ) : _a;
+_d = _aa[_b];
+_td = wh.hn(_d) === 'h';
+o.is_affected |= _ta || _td;
+_d = _ta && !_td ? wh.nh(_d,'e') : _d;
+return _d;
+}
+}
+else
+{
+if( _a )
+{
+_ta = wh.hn(_a) === 'h';
+_aa = _ta ? wh.rv( _a ) : _a;
+_d = _aa[_b];
+_td = wh.hn(_d) === 'h';
+o.is_affected |= _ta || _td;
+return wh.rv(_d);
+}
+}
+return undefined;
+}
+break;
+case 8: 
+_a = {};
+_a[ops[1]] = rev(ops[2],e,s,g,o,_f);
+return _a;
+break;
+case 9: 
+_a = rev(ops[1],e,s,g,o,_f);
+_b = rev(ops[2],e,s,g,o,_f);
+function merge( _a, _b, _ow )
+{
+var ka, _bbk;
+_ta = wh.hn(_a)==='h';
+_tb = wh.hn(_b)==='h';
+_aa = wh.rv(_a);
+_bb = wh.rv(_b);
+for(var k in _bb)
+{
+if ( _ow || !_aa.hasOwnProperty(k) )
+{
+_aa[k] = should_pass_type_info ? (_tb ? wh.nh(_bb[k],'e') : _bb[k]) : wh.rv(_bb[k]);
+}
+}
+return _a;
+}
+var _c = _a
+var _ow = true
+if ( typeof(ops[1][0]) === "object" && ops[1][0][0] === 10 ) {
+_a = _b
+_b = _c
+_ow = false
+}
+if ( typeof(ops[1][0]) === "object" && ops[1][0][0] === 10 ) {
+var _r = {}
+return merge( merge( _r, _a, _ow ), _b, _ow );
+}
+else
+return merge( _a, _b, _ow );
+break;
+case 10:
+_a = rev(ops[1],e,s,g,o,_f);
+_a = should_pass_type_info ? _a : wh.rv( _a );
+return _a ;
+break;
+case 12:
+var _r;
+_a = rev(ops[1],e,s,g,o);
+if ( !o.ap )
+{
+return should_pass_type_info && wh.hn(_a)==='h' ? wh.nh( _r, 'f' ) : _r;
+}
+var ap = o.ap;
+_b = rev(ops[2],e,s,g,o,_f);
+o.ap = ap;
+_ta = wh.hn(_a)==='h';
+_tb = _ca(_b);
+_aa = wh.rv(_a);	
+_bb = wh.rv(_b); snap_bb=$gdc(_bb,"nv_");
+try{
+_r = typeof _aa === "function" ? $gdc(_aa.apply(null, snap_bb)) : undefined;
+} catch (e){
+e.message = e.message.replace(/nv_/g,"");
+e.stack = e.stack.substring(0,e.stack.indexOf("\n", e.stack.lastIndexOf("at nv_")));
+e.stack = e.stack.replace(/\snv_/g," "); 
+e.stack = $gstack(e.stack);	
+if(g.debugInfo)
+{
+e.stack += "\n "+" "+" "+" at "+g.debugInfo[0]+":"+g.debugInfo[1]+":"+g.debugInfo[2];
+console.error(e);
+}
+_r = undefined;
+}
+return should_pass_type_info && (_tb || _ta) ? wh.nh( _r, 'f' ) : _r;
+}
+}
+else
+{
+if( op === 3 || op === 1) return ops[1];
+else if( op === 11 ) 
+{
+var _a='';
+for( var i = 1 ; i < ops.length ; i++ )
+{
+var xp = wh.rv(rev(ops[i],e,s,g,o,_f));
+_a += typeof(xp) === 'undefined' ? '' : xp;
+}
+return _a;
+}
+}
+}
+function wrapper( ops, e, s, g, o, newap )
+{
+if( ops[0] == '11182016' )
+{
+g.debugInfo = ops[2];
+return rev( ops[1], e, s, g, o, newap );
+}
+else
+{
+g.debugInfo = null;
+return rev( ops, e, s, g, o, newap );
+}
+}
+return wrapper;
+}
+gra=$gwrt(true); 
+grb=$gwrt(false); 
+function TestTest( expr, ops, e,s,g, expect_a, expect_b, expect_affected )
+{
+{
+var o = {is_affected:false};
+var a = gra( ops, e,s,g, o );
+if( JSON.stringify(a) != JSON.stringify( expect_a )
+|| o.is_affected != expect_affected )
+{
+console.warn( "A. " + expr + " get result " + JSON.stringify(a) + ", " + o.is_affected + ", but " + JSON.stringify( expect_a ) + ", " + expect_affected + " is expected" );
+}
+}
+{
+var o = {is_affected:false};
+var a = grb( ops, e,s,g, o );
+if( JSON.stringify(a) != JSON.stringify( expect_b )
+|| o.is_affected != expect_affected )
+{
+console.warn( "B. " + expr + " get result " + JSON.stringify(a) + ", " + o.is_affected + ", but " + JSON.stringify( expect_b ) + ", " + expect_affected + " is expected" );
+}
+}
+}
+
+function wfor( to_iter, func, env, _s, global, father, itemname, indexname, keyname )
+{
+var _n = wh.hn( to_iter ) === 'n'; 
+var scope = wh.rv( _s ); 
+var has_old_item = scope.hasOwnProperty(itemname);
+var has_old_index = scope.hasOwnProperty(indexname);
+var old_item = scope[itemname];
+var old_index = scope[indexname];
+var full = Object.prototype.toString.call(wh.rv(to_iter));
+var type = full[8]; 
+if( type === 'N' && full[10] === 'l' ) type = 'X'; 
+var _y;
+if( _n )
+{
+if( type === 'A' ) 
+{
+var r_iter_item;
+for( var i = 0 ; i < to_iter.length ; i++ )
+{
+scope[itemname] = to_iter[i];
+scope[indexname] = _n ? i : wh.nh(i, 'h');
+r_iter_item = wh.rv(to_iter[i]);
+var key = keyname && r_iter_item ? (keyname==="*this" ? r_iter_item : wh.rv(r_iter_item[keyname])) : undefined;
+_y = _v(key);
+_(father,_y);
+func( env, scope, _y, global );
+}
+}
+else if( type === 'O' ) 
+{
+var i = 0;
+var r_iter_item;
+for( var k in to_iter )
+{
+scope[itemname] = to_iter[k];
+scope[indexname] = _n ? k : wh.nh(k, 'h');
+r_iter_item = wh.rv(to_iter[k]);
+var key = keyname && r_iter_item ? (keyname==="*this" ? r_iter_item : wh.rv(r_iter_item[keyname])) : undefined;
+_y = _v(key);
+_(father,_y);
+func( env,scope,_y,global );
+i++;
+}
+}
+else if( type === 'S' ) 
+{
+for( var i = 0 ; i < to_iter.length ; i++ )
+{
+scope[itemname] = to_iter[i];
+scope[indexname] = _n ? i : wh.nh(i, 'h');
+_y = _v( to_iter[i] + i );
+_(father,_y);
+func( env,scope,_y,global );
+}
+}
+else if( type === 'N' ) 
+{
+for( var i = 0 ; i < to_iter ; i++ )
+{
+scope[itemname] = i;
+scope[indexname] = _n ? i : wh.nh(i, 'h');
+_y = _v( i );
+_(father,_y);
+func(env,scope,_y,global);
+}
+}
+else
+{
+}
+}
+else
+{
+var r_to_iter = wh.rv(to_iter);
+var r_iter_item, iter_item;
+if( type === 'A' ) 
+{
+for( var i = 0 ; i < r_to_iter.length ; i++ )
+{
+iter_item = r_to_iter[i];
+iter_item = wh.hn(iter_item)==='n' ? wh.nh(iter_item,'h') : iter_item;
+r_iter_item = wh.rv( iter_item );
+scope[itemname] = iter_item
+scope[indexname] = _n ? i : wh.nh(i, 'h');
+var key = keyname && r_iter_item ? (keyname==="*this" ? r_iter_item : wh.rv(r_iter_item[keyname])) : undefined;
+_y = _v(key);
+_(father,_y);
+func( env, scope, _y, global );
+}
+}
+else if( type === 'O' ) 
+{
+var i=0;
+for( var k in r_to_iter )
+{
+iter_item = r_to_iter[k];
+iter_item = wh.hn(iter_item)==='n'? wh.nh(iter_item,'h') : iter_item;
+r_iter_item = wh.rv( iter_item );
+scope[itemname] = iter_item;
+scope[indexname] = _n ? k : wh.nh(k, 'h');
+var key = keyname && r_iter_item ? (keyname==="*this" ? r_iter_item : wh.rv(r_iter_item[keyname])) : undefined;
+_y=_v(key);
+_(father,_y);
+func( env, scope, _y, global );
+i++
+}
+}
+else if( type === 'S' ) 
+{
+for( var i = 0 ; i < r_to_iter.length ; i++ )
+{
+iter_item = wh.nh(r_to_iter[i],'h');
+scope[itemname] = iter_item;
+scope[indexname] = _n ? i : wh.nh(i, 'h');
+_y = _v( to_iter[i] + i );
+_(father,_y);
+func( env, scope, _y, global );
+}
+}
+else if( type === 'N' ) 
+{
+for( var i = 0 ; i < r_to_iter ; i++ )
+{
+iter_item = wh.nh(i,'h');
+scope[itemname] = iter_item;
+scope[indexname]= _n ? i : wh.nh(i,'h');
+_y = _v( i );
+_(father,_y);
+func(env,scope,_y,global);
+}
+}
+else
+{
+}
+}
+if(has_old_item)
+{
+scope[itemname]=old_item;
+}
+else
+{
+delete scope[itemname];
+}
+if(has_old_index)
+{
+scope[indexname]=old_index;
+}
+else
+{
+delete scope[indexname];
+}
+}
+
+function _ca(o)
+{ 
+if ( wh.hn(o) == 'h' ) return true;
+if ( typeof o !== "object" ) return false;
+for(var i in o){ 
+if ( o.hasOwnProperty(i) ){
+if (_ca(o[i])) return true;
+}
+}
+return false;
+}
+function _da( node, attrname, opindex, raw, o )
+{
+var isaffected = false;
+var value = $gdc( raw, "", 2 );
+if ( o.ap && value && value.constructor===Function ) 
+{
+attrname = "$wxs:" + attrname; 
+node.attr["$gdc"] = $gdc;
+}
+if ( o.is_affected || _ca(raw) ) 
+{
+node.n.push( attrname );
+node.raw[attrname] = raw;
+}
+node.attr[attrname] = value;
+}
+function _r( node, attrname, opindex, env, scope, global ) 
+{
+global.opindex=opindex;
+var o = {}, _env;
+var a = grb( z[opindex], env, scope, global, o );
+_da( node, attrname, opindex, a, o );
+}
+function _rz( z, node, attrname, opindex, env, scope, global ) 
+{
+global.opindex=opindex;
+var o = {}, _env;
+var a = grb( z[opindex], env, scope, global, o );
+_da( node, attrname, opindex, a, o );
+}
+function _o( opindex, env, scope, global )
+{
+global.opindex=opindex;
+var nothing = {};
+var r = grb( z[opindex], env, scope, global, nothing );
+return (r&&r.constructor===Function) ? undefined : r;
+}
+function _oz( z, opindex, env, scope, global )
+{
+global.opindex=opindex;
+var nothing = {};
+var r = grb( z[opindex], env, scope, global, nothing );
+return (r&&r.constructor===Function) ? undefined : r;
+}
+function _1( opindex, env, scope, global, o )
+{
+var o = o || {};
+global.opindex=opindex;
+return gra( z[opindex], env, scope, global, o );
+}
+function _1z( z, opindex, env, scope, global, o )
+{
+var o = o || {};
+global.opindex=opindex;
+return gra( z[opindex], env, scope, global, o );
+}
+function _2( opindex, func, env, scope, global, father, itemname, indexname, keyname )
+{
+var o = {};
+var to_iter = _1( opindex, env, scope, global );
+wfor( to_iter, func, env, scope, global, father, itemname, indexname, keyname );
+}
+function _2z( z, opindex, func, env, scope, global, father, itemname, indexname, keyname )
+{
+var o = {};
+var to_iter = _1z( z, opindex, env, scope, global );
+wfor( to_iter, func, env, scope, global, father, itemname, indexname, keyname );
+}
+
+
+function _m(tag,attrs,generics,env,scope,global)
+{
+var tmp=_n(tag);
+var base=0;
+for(var i = 0 ; i < attrs.length ; i+=2 )
+{
+if(base+attrs[i+1]<0)
+{
+tmp.attr[attrs[i]]=true;
+}
+else
+{
+_r(tmp,attrs[i],base+attrs[i+1],env,scope,global);
+if(base===0)base=attrs[i+1];
+}
+}
+for(var i=0;i<generics.length;i+=2)
+{
+if(base+generics[i+1]<0)
+{
+tmp.generics[generics[i]]="";
+}
+else
+{
+var $t=grb(z[base+generics[i+1]],env,scope,global);
+if ($t!="") $t="wx-"+$t;
+tmp.generics[generics[i]]=$t;
+if(base===0)base=generics[i+1];
+}
+}
+return tmp;
+}
+function _mz(z,tag,attrs,generics,env,scope,global)
+{
+var tmp=_n(tag);
+var base=0;
+for(var i = 0 ; i < attrs.length ; i+=2 )
+{
+if(base+attrs[i+1]<0)
+{
+tmp.attr[attrs[i]]=true;
+}
+else
+{
+_rz(z, tmp,attrs[i],base+attrs[i+1],env,scope,global);
+if(base===0)base=attrs[i+1];
+}
+}
+for(var i=0;i<generics.length;i+=2)
+{
+if(base+generics[i+1]<0)
+{
+tmp.generics[generics[i]]="";
+}
+else
+{
+var $t=grb(z[base+generics[i+1]],env,scope,global);
+if ($t!="") $t="wx-"+$t;
+tmp.generics[generics[i]]=$t;
+if(base===0)base=generics[i+1];
+}
+}
+return tmp;
+}
+
+var nf_init=function(){
+if(typeof __WXML_GLOBAL__==="undefined"||undefined===__WXML_GLOBAL__.wxs_nf_init){
+nf_init_Object();nf_init_Function();nf_init_Array();nf_init_String();nf_init_Boolean();nf_init_Number();nf_init_Math();nf_init_Date();nf_init_RegExp();
+}
+if(typeof __WXML_GLOBAL__!=="undefined") __WXML_GLOBAL__.wxs_nf_init=true;
+};
+var nf_init_Object=function(){
+Object.defineProperty(Object.prototype,"nv_constructor",{writable:true,value:"Object"})
+Object.defineProperty(Object.prototype,"nv_toString",{writable:true,value:function(){return "[object Object]"}})
+}
+var nf_init_Function=function(){
+Object.defineProperty(Function.prototype,"nv_constructor",{writable:true,value:"Function"})
+Object.defineProperty(Function.prototype,"nv_length",{get:function(){return this.length;},set:function(){}});
+Object.defineProperty(Function.prototype,"nv_toString",{writable:true,value:function(){return "[function Function]"}})
+}
+var nf_init_Array=function(){
+Object.defineProperty(Array.prototype,"nv_toString",{writable:true,value:function(){return this.nv_join();}})
+Object.defineProperty(Array.prototype,"nv_join",{writable:true,value:function(s){
+s=undefined==s?',':s;
+var r="";
+for(var i=0;i<this.length;++i){
+if(0!=i) r+=s;
+if(null==this[i]||undefined==this[i]) r+='';	
+else if(typeof this[i]=='function') r+=this[i].nv_toString();
+else if(typeof this[i]=='object'&&this[i].nv_constructor==="Array") r+=this[i].nv_join();
+else r+=this[i].toString();
+}
+return r;
+}})
+Object.defineProperty(Array.prototype,"nv_constructor",{writable:true,value:"Array"})
+Object.defineProperty(Array.prototype,"nv_concat",{writable:true,value:Array.prototype.concat})
+Object.defineProperty(Array.prototype,"nv_pop",{writable:true,value:Array.prototype.pop})
+Object.defineProperty(Array.prototype,"nv_push",{writable:true,value:Array.prototype.push})
+Object.defineProperty(Array.prototype,"nv_reverse",{writable:true,value:Array.prototype.reverse})
+Object.defineProperty(Array.prototype,"nv_shift",{writable:true,value:Array.prototype.shift})
+Object.defineProperty(Array.prototype,"nv_slice",{writable:true,value:Array.prototype.slice})
+Object.defineProperty(Array.prototype,"nv_sort",{writable:true,value:Array.prototype.sort})
+Object.defineProperty(Array.prototype,"nv_splice",{writable:true,value:Array.prototype.splice})
+Object.defineProperty(Array.prototype,"nv_unshift",{writable:true,value:Array.prototype.unshift})
+Object.defineProperty(Array.prototype,"nv_indexOf",{writable:true,value:Array.prototype.indexOf})
+Object.defineProperty(Array.prototype,"nv_lastIndexOf",{writable:true,value:Array.prototype.lastIndexOf})
+Object.defineProperty(Array.prototype,"nv_every",{writable:true,value:Array.prototype.every})
+Object.defineProperty(Array.prototype,"nv_some",{writable:true,value:Array.prototype.some})
+Object.defineProperty(Array.prototype,"nv_forEach",{writable:true,value:Array.prototype.forEach})
+Object.defineProperty(Array.prototype,"nv_map",{writable:true,value:Array.prototype.map})
+Object.defineProperty(Array.prototype,"nv_filter",{writable:true,value:Array.prototype.filter})
+Object.defineProperty(Array.prototype,"nv_reduce",{writable:true,value:Array.prototype.reduce})
+Object.defineProperty(Array.prototype,"nv_reduceRight",{writable:true,value:Array.prototype.reduceRight})
+Object.defineProperty(Array.prototype,"nv_length",{get:function(){return this.length;},set:function(value){this.length=value;}});
+}
+var nf_init_String=function(){
+Object.defineProperty(String.prototype,"nv_constructor",{writable:true,value:"String"})
+Object.defineProperty(String.prototype,"nv_toString",{writable:true,value:String.prototype.toString})
+Object.defineProperty(String.prototype,"nv_valueOf",{writable:true,value:String.prototype.valueOf})
+Object.defineProperty(String.prototype,"nv_charAt",{writable:true,value:String.prototype.charAt})
+Object.defineProperty(String.prototype,"nv_charCodeAt",{writable:true,value:String.prototype.charCodeAt})
+Object.defineProperty(String.prototype,"nv_concat",{writable:true,value:String.prototype.concat})
+Object.defineProperty(String.prototype,"nv_indexOf",{writable:true,value:String.prototype.indexOf})
+Object.defineProperty(String.prototype,"nv_lastIndexOf",{writable:true,value:String.prototype.lastIndexOf})
+Object.defineProperty(String.prototype,"nv_localeCompare",{writable:true,value:String.prototype.localeCompare})
+Object.defineProperty(String.prototype,"nv_match",{writable:true,value:String.prototype.match})
+Object.defineProperty(String.prototype,"nv_replace",{writable:true,value:String.prototype.replace})
+Object.defineProperty(String.prototype,"nv_search",{writable:true,value:String.prototype.search})
+Object.defineProperty(String.prototype,"nv_slice",{writable:true,value:String.prototype.slice})
+Object.defineProperty(String.prototype,"nv_split",{writable:true,value:String.prototype.split})
+Object.defineProperty(String.prototype,"nv_substring",{writable:true,value:String.prototype.substring})
+Object.defineProperty(String.prototype,"nv_toLowerCase",{writable:true,value:String.prototype.toLowerCase})
+Object.defineProperty(String.prototype,"nv_toLocaleLowerCase",{writable:true,value:String.prototype.toLocaleLowerCase})
+Object.defineProperty(String.prototype,"nv_toUpperCase",{writable:true,value:String.prototype.toUpperCase})
+Object.defineProperty(String.prototype,"nv_toLocaleUpperCase",{writable:true,value:String.prototype.toLocaleUpperCase})
+Object.defineProperty(String.prototype,"nv_trim",{writable:true,value:String.prototype.trim})
+Object.defineProperty(String.prototype,"nv_length",{get:function(){return this.length;},set:function(value){this.length=value;}});
+}
+var nf_init_Boolean=function(){
+Object.defineProperty(Boolean.prototype,"nv_constructor",{writable:true,value:"Boolean"})
+Object.defineProperty(Boolean.prototype,"nv_toString",{writable:true,value:Boolean.prototype.toString})
+Object.defineProperty(Boolean.prototype,"nv_valueOf",{writable:true,value:Boolean.prototype.valueOf})
+}
+var nf_init_Number=function(){
+Object.defineProperty(Number,"nv_MAX_VALUE",{writable:false,value:Number.MAX_VALUE})
+Object.defineProperty(Number,"nv_MIN_VALUE",{writable:false,value:Number.MIN_VALUE})
+Object.defineProperty(Number,"nv_NEGATIVE_INFINITY",{writable:false,value:Number.NEGATIVE_INFINITY})
+Object.defineProperty(Number,"nv_POSITIVE_INFINITY",{writable:false,value:Number.POSITIVE_INFINITY})
+Object.defineProperty(Number.prototype,"nv_constructor",{writable:true,value:"Number"})
+Object.defineProperty(Number.prototype,"nv_toString",{writable:true,value:Number.prototype.toString})
+Object.defineProperty(Number.prototype,"nv_toLocaleString",{writable:true,value:Number.prototype.toLocaleString})
+Object.defineProperty(Number.prototype,"nv_valueOf",{writable:true,value:Number.prototype.valueOf})
+Object.defineProperty(Number.prototype,"nv_toFixed",{writable:true,value:Number.prototype.toFixed})
+Object.defineProperty(Number.prototype,"nv_toExponential",{writable:true,value:Number.prototype.toExponential})
+Object.defineProperty(Number.prototype,"nv_toPrecision",{writable:true,value:Number.prototype.toPrecision})
+}
+var nf_init_Math=function(){
+Object.defineProperty(Math,"nv_E",{writable:false,value:Math.E})
+Object.defineProperty(Math,"nv_LN10",{writable:false,value:Math.LN10})
+Object.defineProperty(Math,"nv_LN2",{writable:false,value:Math.LN2})
+Object.defineProperty(Math,"nv_LOG2E",{writable:false,value:Math.LOG2E})
+Object.defineProperty(Math,"nv_LOG10E",{writable:false,value:Math.LOG10E})
+Object.defineProperty(Math,"nv_PI",{writable:false,value:Math.PI})
+Object.defineProperty(Math,"nv_SQRT1_2",{writable:false,value:Math.SQRT1_2})
+Object.defineProperty(Math,"nv_SQRT2",{writable:false,value:Math.SQRT2})
+Object.defineProperty(Math,"nv_abs",{writable:false,value:Math.abs})
+Object.defineProperty(Math,"nv_acos",{writable:false,value:Math.acos})
+Object.defineProperty(Math,"nv_asin",{writable:false,value:Math.asin})
+Object.defineProperty(Math,"nv_atan",{writable:false,value:Math.atan})
+Object.defineProperty(Math,"nv_atan2",{writable:false,value:Math.atan2})
+Object.defineProperty(Math,"nv_ceil",{writable:false,value:Math.ceil})
+Object.defineProperty(Math,"nv_cos",{writable:false,value:Math.cos})
+Object.defineProperty(Math,"nv_exp",{writable:false,value:Math.exp})
+Object.defineProperty(Math,"nv_floor",{writable:false,value:Math.floor})
+Object.defineProperty(Math,"nv_log",{writable:false,value:Math.log})
+Object.defineProperty(Math,"nv_max",{writable:false,value:Math.max})
+Object.defineProperty(Math,"nv_min",{writable:false,value:Math.min})
+Object.defineProperty(Math,"nv_pow",{writable:false,value:Math.pow})
+Object.defineProperty(Math,"nv_random",{writable:false,value:Math.random})
+Object.defineProperty(Math,"nv_round",{writable:false,value:Math.round})
+Object.defineProperty(Math,"nv_sin",{writable:false,value:Math.sin})
+Object.defineProperty(Math,"nv_sqrt",{writable:false,value:Math.sqrt})
+Object.defineProperty(Math,"nv_tan",{writable:false,value:Math.tan})
+}
+var nf_init_Date=function(){
+Object.defineProperty(Date.prototype,"nv_constructor",{writable:true,value:"Date"})
+Object.defineProperty(Date,"nv_parse",{writable:true,value:Date.parse})
+Object.defineProperty(Date,"nv_UTC",{writable:true,value:Date.UTC})
+Object.defineProperty(Date,"nv_now",{writable:true,value:Date.now})
+Object.defineProperty(Date.prototype,"nv_toString",{writable:true,value:Date.prototype.toString})
+Object.defineProperty(Date.prototype,"nv_toDateString",{writable:true,value:Date.prototype.toDateString})
+Object.defineProperty(Date.prototype,"nv_toTimeString",{writable:true,value:Date.prototype.toTimeString})
+Object.defineProperty(Date.prototype,"nv_toLocaleString",{writable:true,value:Date.prototype.toLocaleString})
+Object.defineProperty(Date.prototype,"nv_toLocaleDateString",{writable:true,value:Date.prototype.toLocaleDateString})
+Object.defineProperty(Date.prototype,"nv_toLocaleTimeString",{writable:true,value:Date.prototype.toLocaleTimeString})
+Object.defineProperty(Date.prototype,"nv_valueOf",{writable:true,value:Date.prototype.valueOf})
+Object.defineProperty(Date.prototype,"nv_getTime",{writable:true,value:Date.prototype.getTime})
+Object.defineProperty(Date.prototype,"nv_getFullYear",{writable:true,value:Date.prototype.getFullYear})
+Object.defineProperty(Date.prototype,"nv_getUTCFullYear",{writable:true,value:Date.prototype.getUTCFullYear})
+Object.defineProperty(Date.prototype,"nv_getMonth",{writable:true,value:Date.prototype.getMonth})
+Object.defineProperty(Date.prototype,"nv_getUTCMonth",{writable:true,value:Date.prototype.getUTCMonth})
+Object.defineProperty(Date.prototype,"nv_getDate",{writable:true,value:Date.prototype.getDate})
+Object.defineProperty(Date.prototype,"nv_getUTCDate",{writable:true,value:Date.prototype.getUTCDate})
+Object.defineProperty(Date.prototype,"nv_getDay",{writable:true,value:Date.prototype.getDay})
+Object.defineProperty(Date.prototype,"nv_getUTCDay",{writable:true,value:Date.prototype.getUTCDay})
+Object.defineProperty(Date.prototype,"nv_getHours",{writable:true,value:Date.prototype.getHours})
+Object.defineProperty(Date.prototype,"nv_getUTCHours",{writable:true,value:Date.prototype.getUTCHours})
+Object.defineProperty(Date.prototype,"nv_getMinutes",{writable:true,value:Date.prototype.getMinutes})
+Object.defineProperty(Date.prototype,"nv_getUTCMinutes",{writable:true,value:Date.prototype.getUTCMinutes})
+Object.defineProperty(Date.prototype,"nv_getSeconds",{writable:true,value:Date.prototype.getSeconds})
+Object.defineProperty(Date.prototype,"nv_getUTCSeconds",{writable:true,value:Date.prototype.getUTCSeconds})
+Object.defineProperty(Date.prototype,"nv_getMilliseconds",{writable:true,value:Date.prototype.getMilliseconds})
+Object.defineProperty(Date.prototype,"nv_getUTCMilliseconds",{writable:true,value:Date.prototype.getUTCMilliseconds})
+Object.defineProperty(Date.prototype,"nv_getTimezoneOffset",{writable:true,value:Date.prototype.getTimezoneOffset})
+Object.defineProperty(Date.prototype,"nv_setTime",{writable:true,value:Date.prototype.setTime})
+Object.defineProperty(Date.prototype,"nv_setMilliseconds",{writable:true,value:Date.prototype.setMilliseconds})
+Object.defineProperty(Date.prototype,"nv_setUTCMilliseconds",{writable:true,value:Date.prototype.setUTCMilliseconds})
+Object.defineProperty(Date.prototype,"nv_setSeconds",{writable:true,value:Date.prototype.setSeconds})
+Object.defineProperty(Date.prototype,"nv_setUTCSeconds",{writable:true,value:Date.prototype.setUTCSeconds})
+Object.defineProperty(Date.prototype,"nv_setMinutes",{writable:true,value:Date.prototype.setMinutes})
+Object.defineProperty(Date.prototype,"nv_setUTCMinutes",{writable:true,value:Date.prototype.setUTCMinutes})
+Object.defineProperty(Date.prototype,"nv_setHours",{writable:true,value:Date.prototype.setHours})
+Object.defineProperty(Date.prototype,"nv_setUTCHours",{writable:true,value:Date.prototype.setUTCHours})
+Object.defineProperty(Date.prototype,"nv_setDate",{writable:true,value:Date.prototype.setDate})
+Object.defineProperty(Date.prototype,"nv_setUTCDate",{writable:true,value:Date.prototype.setUTCDate})
+Object.defineProperty(Date.prototype,"nv_setMonth",{writable:true,value:Date.prototype.setMonth})
+Object.defineProperty(Date.prototype,"nv_setUTCMonth",{writable:true,value:Date.prototype.setUTCMonth})
+Object.defineProperty(Date.prototype,"nv_setFullYear",{writable:true,value:Date.prototype.setFullYear})
+Object.defineProperty(Date.prototype,"nv_setUTCFullYear",{writable:true,value:Date.prototype.setUTCFullYear})
+Object.defineProperty(Date.prototype,"nv_toUTCString",{writable:true,value:Date.prototype.toUTCString})
+Object.defineProperty(Date.prototype,"nv_toISOString",{writable:true,value:Date.prototype.toISOString})
+Object.defineProperty(Date.prototype,"nv_toJSON",{writable:true,value:Date.prototype.toJSON})
+}
+var nf_init_RegExp=function(){
+Object.defineProperty(RegExp.prototype,"nv_constructor",{writable:true,value:"RegExp"})
+Object.defineProperty(RegExp.prototype,"nv_exec",{writable:true,value:RegExp.prototype.exec})
+Object.defineProperty(RegExp.prototype,"nv_test",{writable:true,value:RegExp.prototype.test})
+Object.defineProperty(RegExp.prototype,"nv_toString",{writable:true,value:RegExp.prototype.toString})
+Object.defineProperty(RegExp.prototype,"nv_source",{get:function(){return this.source;},set:function(){}});
+Object.defineProperty(RegExp.prototype,"nv_global",{get:function(){return this.global;},set:function(){}});
+Object.defineProperty(RegExp.prototype,"nv_ignoreCase",{get:function(){return this.ignoreCase;},set:function(){}});
+Object.defineProperty(RegExp.prototype,"nv_multiline",{get:function(){return this.multiline;},set:function(){}});
+Object.defineProperty(RegExp.prototype,"nv_lastIndex",{get:function(){return this.lastIndex;},set:function(v){this.lastIndex=v;}});
+}
+nf_init();
+var nv_getDate=function(){var args=Array.prototype.slice.call(arguments);args.unshift(Date);return new(Function.prototype.bind.apply(Date, args));}
+var nv_getRegExp=function(){var args=Array.prototype.slice.call(arguments);args.unshift(RegExp);return new(Function.prototype.bind.apply(RegExp, args));}
+var nv_console={}
+nv_console.nv_log=function(){var res="WXSRT:";for(var i=0;i<arguments.length;++i)res+=arguments[i]+" ";console.log(res);}
+var nv_parseInt = parseInt, nv_parseFloat = parseFloat, nv_isNaN = isNaN, nv_isFinite = isFinite, nv_decodeURI = decodeURI, nv_decodeURIComponent = decodeURIComponent, nv_encodeURI = encodeURI, nv_encodeURIComponent = encodeURIComponent;
+function $gdc(o,p,r) {
+o=wh.rv(o);
+if(o===null||o===undefined) return o;
+if(o.constructor===String||o.constructor===Boolean||o.constructor===Number) return o;
+if(o.constructor===Object){
+var copy={};
+for(var k in o)
+if(o.hasOwnProperty(k))
+if(undefined===p) copy[k.substring(3)]=$gdc(o[k],p,r);
+else copy[p+k]=$gdc(o[k],p,r);
+return copy;
+}
+if(o.constructor===Array){
+var copy=[];
+for(var i=0;i<o.length;i++) copy.push($gdc(o[i],p,r));
+return copy;
+}
+if(o.constructor===Date){
+var copy=new Date();
+copy.setTime(o.getTime());
+return copy;
+}
+if(o.constructor===RegExp){
+var f="";
+if(o.global) f+="g";
+if(o.ignoreCase) f+="i";
+if(o.multiline) f+="m";
+return (new RegExp(o.source,f));
+}
+if(r&&o.constructor===Function){
+if ( r == 1 ) return $gdc(o(),undefined, 2);
+if ( r == 2 ) return o;
+}
+return null;
+}
+var nv_JSON={}
+nv_JSON.nv_stringify=function(o){
+JSON.stringify(o);
+return JSON.stringify($gdc(o));
+}
+nv_JSON.nv_parse=function(o){
+if(o===undefined) return undefined;
+var t=JSON.parse(o);
+return $gdc(t,'nv_');
+}
+
+function _af(p, a, c){
+p.extraAttr = {"t_action": a, "t_cid": c};
+}
+
+function _ai(i,p,e,me,r,c){var x=_grp(p,e,me);if(x)i.push(x);else{i.push('');_wp(me+':import:'+r+':'+c+': Path `'+p+'` not found from `'+me+'`.')}}
+function _grp(p,e,me){if(p[0]!='/'){var mepart=me.split('/');mepart.pop();var ppart=p.split('/');for(var i=0;i<ppart.length;i++){if( ppart[i]=='..')mepart.pop();else if(!ppart[i]||ppart[i]=='.')continue;else mepart.push(ppart[i]);}p=mepart.join('/');}if(me[0]=='.'&&p[0]=='/')p='.'+p;if(e[p])return p;if(e[p+'.wxml'])return p+'.wxml';}
+function _gd(p,c,e,d){if(!c)return;if(d[p][c])return d[p][c];for(var x=e[p].i.length-1;x>=0;x--){if(e[p].i[x]&&d[e[p].i[x]][c])return d[e[p].i[x]][c]};for(var x=e[p].ti.length-1;x>=0;x--){var q=_grp(e[p].ti[x],e,p);if(q&&d[q][c])return d[q][c]}var ii=_gapi(e,p);for(var x=0;x<ii.length;x++){if(ii[x]&&d[ii[x]][c])return d[ii[x]][c]}for(var k=e[p].j.length-1;k>=0;k--)if(e[p].j[k]){for(var q=e[e[p].j[k]].ti.length-1;q>=0;q--){var pp=_grp(e[e[p].j[k]].ti[q],e,p);if(pp&&d[pp][c]){return d[pp][c]}}}}
+function _gapi(e,p){if(!p)return [];if($gaic[p]){return $gaic[p]};var ret=[],q=[],h=0,t=0,put={},visited={};q.push(p);visited[p]=true;t++;while(h<t){var a=q[h++];for(var i=0;i<e[a].ic.length;i++){var nd=e[a].ic[i];var np=_grp(nd,e,a);if(np&&!visited[np]){visited[np]=true;q.push(np);t++;}}for(var i=0;a!=p&&i<e[a].ti.length;i++){var ni=e[a].ti[i];var nm=_grp(ni,e,a);if(nm&&!put[nm]){put[nm]=true;ret.push(nm);}}}$gaic[p]=ret;return ret;}
+var $ixc={};function _ic(p,ent,me,e,s,r,gg){var x=_grp(p,ent,me);ent[me].j.push(x);if(x){if($ixc[x]){_wp('-1:include:-1:-1: `'+p+'` is being included in a loop, will be stop.');return;}$ixc[x]=true;try{ent[x].f(e,s,r,gg)}catch(e){}$ixc[x]=false;}else{_wp(me+':include:-1:-1: Included path `'+p+'` not found from `'+me+'`.')}}
+function _w(tn,f,line,c){_wp(f+':template:'+line+':'+c+': Template `'+tn+'` not found.');}function _ev(dom){var changed=false;delete dom.properities;delete dom.n;if(dom.children){do{changed=false;var newch = [];for(var i=0;i<dom.children.length;i++){var ch=dom.children[i];if( ch.tag=='virtual'){changed=true;for(var j=0;ch.children&&j<ch.children.length;j++){newch.push(ch.children[j]);}}else { newch.push(ch); } } dom.children = newch; }while(changed);for(var i=0;i<dom.children.length;i++){_ev(dom.children[i]);}} return dom; }
+function _tsd( root )
+{
+if( root.tag == "wx-wx-scope" ) 
+{
+root.tag = "virtual";
+root.wxCkey = "11";
+root['wxScopeData'] = root.attr['wx:scope-data'];
+delete root.n;
+delete root.raw;
+delete root.generics;
+delete root.attr;
+}
+for( var i = 0 ; root.children && i < root.children.length ; i++ )
+{
+_tsd( root.children[i] );
+}
+return root;
+}
+
+var e_={}
+if(typeof(global.entrys)==='undefined')global.entrys={};e_=global.entrys;
+var d_={}
+if(typeof(global.defines)==='undefined')global.defines={};d_=global.defines;
+var f_={}
+if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules || {};
+var p_={}
+__WXML_GLOBAL__.ops_cached = __WXML_GLOBAL__.ops_cached || {}
+__WXML_GLOBAL__.ops_set = __WXML_GLOBAL__.ops_set || {};
+__WXML_GLOBAL__.ops_init = __WXML_GLOBAL__.ops_init || {};
+var z=__WXML_GLOBAL__.ops_set.$gwx || [];
+function gz$gwx_1(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_1)return __WXML_GLOBAL__.ops_cached.$gwx_1
+__WXML_GLOBAL__.ops_cached.$gwx_1=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+})(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
+}
+__WXML_GLOBAL__.ops_set.$gwx=z;
+__WXML_GLOBAL__.ops_init.$gwx=true;
+var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
+}}}()
+var x=['./pages/index/index.wxml'];d_[x[0]]={}
+var m0=function(e,s,r,gg){
+var z=gz$gwx_1()
+return r
+}
+e_[x[0]]={f:m0,j:[],i:[],ti:[],ic:[]}
+if(path&&e_[path]){
+return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
+var main=e_[path].f
+if (typeof global==="undefined")global={};global.f=$gdc(f_[path],"",1);
+try{
+main(env,{},root,global);
+_tsd(root)
+}catch(err){
+console.log(err)
+}
+return root;
+}
+}
+}
+
+
+
+__wxAppCode__['app.json']={"pages":["pages/index/index"],"subPackages":[],"window":{"navigationBarTextStyle":"white","navigationBarTitleText":"YZQ","navigationBarBackgroundColor":"#1E90FF","backgroundColor":"#1E90FF"},"nvueCompiler":"weex","splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"appname":"UniDemo","compilerVersion":"2.0.1","usingComponents":{}};
+__wxAppCode__['app.wxml']=$gwx('./app.wxml');
+
+__wxAppCode__['pages/index/index.json']={"navigationBarTitleText":"YZQ","enablePullDownRefresh":true,"usingComponents":{}};
+__wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
+
+
+
+define('common/main.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/main"],{
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue":
+/*!****************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css& */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=script&lang=js&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!../../../../HBuilderX/plugins/uniapp-cli/node_modules/css-loader??ref--6-oneOf-1-2!../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--6-oneOf-1-3!../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+{
+  onLaunch: function onLaunch() {
+    console.log('App Launch', " at App.vue:4");
+  },
+  onShow: function onShow() {
+    console.log('App Show', " at App.vue:7");
+  },
+  onHide: function onHide() {
+    console.log('App Hide', " at App.vue:10");
+  } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ })
+
+},[["../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/main.js","common/runtime","common/vendor"]]]);
+});
+define('common/runtime.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
+"use strict"; /******/(function (modules) {// webpackBootstrap
+  /******/ // install a JSONP callback for chunk loading
+  /******/function webpackJsonpCallback(data) {
+    /******/var chunkIds = data[0];
+    /******/var moreModules = data[1];
+    /******/var executeModules = data[2];
+    /******/
+    /******/ // add "moreModules" to the modules object,
+    /******/ // then flag all "chunkIds" as loaded and fire callback
+    /******/var moduleId,chunkId,i = 0,resolves = [];
+    /******/for (; i < chunkIds.length; i++) {
+      /******/chunkId = chunkIds[i];
+      /******/if (installedChunks[chunkId]) {
+        /******/resolves.push(installedChunks[chunkId][0]);
+        /******/}
+      /******/installedChunks[chunkId] = 0;
+      /******/}
+    /******/for (moduleId in moreModules) {
+      /******/if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+        /******/modules[moduleId] = moreModules[moduleId];
+        /******/}
+      /******/}
+    /******/if (parentJsonpFunction) parentJsonpFunction(data);
+    /******/
+    /******/while (resolves.length) {
+      /******/resolves.shift()();
+      /******/}
+    /******/
+    /******/ // add entry modules from loaded chunk to deferred list
+    /******/deferredModules.push.apply(deferredModules, executeModules || []);
+    /******/
+    /******/ // run deferred modules when all chunks ready
+    /******/return checkDeferredModules();
+    /******/};
+  /******/function checkDeferredModules() {
+    /******/var result;
+    /******/for (var i = 0; i < deferredModules.length; i++) {
+      /******/var deferredModule = deferredModules[i];
+      /******/var fulfilled = true;
+      /******/for (var j = 1; j < deferredModule.length; j++) {
+        /******/var depId = deferredModule[j];
+        /******/if (installedChunks[depId] !== 0) fulfilled = false;
+        /******/}
+      /******/if (fulfilled) {
+        /******/deferredModules.splice(i--, 1);
+        /******/result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+        /******/}
+      /******/}
+    /******/return result;
+    /******/}
+  /******/
+  /******/ // The module cache
+  /******/var installedModules = {};
+  /******/
+  /******/ // object to store loaded and loading chunks
+  /******/ // undefined = chunk not loaded, null = chunk preloaded/prefetched
+  /******/ // Promise = chunk loading, 0 = chunk loaded
+  /******/var installedChunks = {
+    /******/"common/runtime": 0
+    /******/ };
+  /******/
+  /******/var deferredModules = [];
+  /******/
+  /******/ // The require function
+  /******/function __webpack_require__(moduleId) {
+    /******/
+    /******/ // Check if module is in cache
+    /******/if (installedModules[moduleId]) {
+      /******/return installedModules[moduleId].exports;
+      /******/}
+    /******/ // Create a new module (and put it into the cache)
+    /******/var module = installedModules[moduleId] = {
+      /******/i: moduleId,
+      /******/l: false,
+      /******/exports: {}
+      /******/ };
+    /******/
+    /******/ // Execute the module function
+    /******/modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+    /******/
+    /******/ // Flag the module as loaded
+    /******/module.l = true;
+    /******/
+    /******/ // Return the exports of the module
+    /******/return module.exports;
+    /******/}
+  /******/
+  /******/
+  /******/ // expose the modules object (__webpack_modules__)
+  /******/__webpack_require__.m = modules;
+  /******/
+  /******/ // expose the module cache
+  /******/__webpack_require__.c = installedModules;
+  /******/
+  /******/ // define getter function for harmony exports
+  /******/__webpack_require__.d = function (exports, name, getter) {
+    /******/if (!__webpack_require__.o(exports, name)) {
+      /******/Object.defineProperty(exports, name, { enumerable: true, get: getter });
+      /******/}
+    /******/};
+  /******/
+  /******/ // define __esModule on exports
+  /******/__webpack_require__.r = function (exports) {
+    /******/if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+      /******/Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+      /******/}
+    /******/Object.defineProperty(exports, '__esModule', { value: true });
+    /******/};
+  /******/
+  /******/ // create a fake namespace object
+  /******/ // mode & 1: value is a module id, require it
+  /******/ // mode & 2: merge all properties of value into the ns
+  /******/ // mode & 4: return value when already ns object
+  /******/ // mode & 8|1: behave like require
+  /******/__webpack_require__.t = function (value, mode) {
+    /******/if (mode & 1) value = __webpack_require__(value);
+    /******/if (mode & 8) return value;
+    /******/if (mode & 4 && typeof value === 'object' && value && value.__esModule) return value;
+    /******/var ns = Object.create(null);
+    /******/__webpack_require__.r(ns);
+    /******/Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+    /******/if (mode & 2 && typeof value != 'string') for (var key in value) {__webpack_require__.d(ns, key, function (key) {return value[key];}.bind(null, key));}
+    /******/return ns;
+    /******/};
+  /******/
+  /******/ // getDefaultExport function for compatibility with non-harmony modules
+  /******/__webpack_require__.n = function (module) {
+    /******/var getter = module && module.__esModule ?
+    /******/function getDefault() {return module['default'];} :
+    /******/function getModuleExports() {return module;};
+    /******/__webpack_require__.d(getter, 'a', getter);
+    /******/return getter;
+    /******/};
+  /******/
+  /******/ // Object.prototype.hasOwnProperty.call
+  /******/__webpack_require__.o = function (object, property) {return Object.prototype.hasOwnProperty.call(object, property);};
+  /******/
+  /******/ // __webpack_public_path__
+  /******/__webpack_require__.p = "/";
+  /******/
+  /******/var jsonpArray = global["webpackJsonp"] = global["webpackJsonp"] || [];
+  /******/var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+  /******/jsonpArray.push = webpackJsonpCallback;
+  /******/jsonpArray = jsonpArray.slice();
+  /******/for (var i = 0; i < jsonpArray.length; i++) {webpackJsonpCallback(jsonpArray[i]);}
+  /******/var parentJsonpFunction = oldJsonpFunction;
+  /******/
+  /******/
+  /******/ // run deferred modules from other chunks
+  /******/checkDeferredModules();
+  /******/})(
+/************************************************************************/
+/******/[]);
+});
+define('common/vendor.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
-/***/ "../../../workspace/github/UniDemo/common/vmeitime-http/index.js":
-/*!*****************************************************************!*\
-  !*** D:/workspace/github/UniDemo/common/vmeitime-http/index.js ***!
-  \*****************************************************************/
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/main.js":
+/*!****************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/main.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.banner = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ "../../../workspace/github/UniDemo/common/vmeitime-http/interface.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-/**
-                                                                                                                                                                                                                                                                                                       * 将业务所有接口统一起来便于维护
-                                                                                                                                                                                                                                                                                                       * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
-                                                                                                                                                                                                                                                                                                       * 
-                                                                                                                                                                                                                                                                                                       */
-
-// 单独导出(测试接口) import {test} from '@/common/vmeitime-http/'
-var taskList = function taskList() {
-
-  //设置请求结束后拦截器
-  _interface.default.interceptor.response = function (response) {
-    return response;
-  };
-  return _interface.default.request({
-    url: 'mock/5ce266bc36fff24a477c4e6a/getNews/mock',
-    dataType: 'json' });
-
-};
-
-// 轮播图
-exports.taskList = taskList;var banner = function banner(data) {
-  return _interface.default.request({
-    url: '/banner/36kr',
-    method: 'GET',
-    data: data
-    // handle:true
-  });
-};
-
-// 默认全部导出  import api from '@/common/vmeitime-http/'
-exports.banner = banner;var _default = {
-  taskList: taskList,
-  banner: banner };exports.default = _default;
-
-/***/ }),
-
-/***/ "../../../workspace/github/UniDemo/common/vmeitime-http/interface.js":
-/*!*********************************************************************!*\
-  !*** D:/workspace/github/UniDemo/common/vmeitime-http/interface.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} /**
-                                                                                                                                                                                                                                                                                                                * 通用uni-app网络请求
-                                                                                                                                                                                                                                                                                                                * 基于 Promise 对象实现更简单的 request 使用方式，支持请求和响应拦截
-                                                                                                                                                                                                                                                                                                                */var _default =
-
-
-{
-  config: {
-    baseUrl: "https://www.easy-mock.com/",
-    header: _defineProperty({
-      'Content-Type': 'application/json;charset=UTF-8' }, "Content-Type",
-    'application/x-www-form-urlencoded'),
-
-    data: {},
-    method: "GET",
-    dataType: "json",
-    /* 如设为json，会对返回的数据做一次 JSON.parse */
-    responseType: "text",
-    success: function success() {},
-    fail: function fail() {},
-    complete: function complete() {} },
-
-  interceptor: {
-    request: function request() {
-
-      console.log("全局请求拦截器");
-
-    },
-    response: function response() {
-      console.log("全局响应拦截器");
-    } },
-
-  request: function request(options) {var _this = this;
-    if (!options) {
-      options = {};
-    }
-    options.baseUrl = options.baseUrl || this.config.baseUrl;
-    options.dataType = options.dataType || this.config.dataType;
-    options.url = options.baseUrl + options.url;
-    options.data = options.data || {};
-    options.method = options.method || this.config.method;
-    //TODO 加密数据
-
-    //TODO 数据签名
-    /* 
-    _token = {'token': getStorage(STOREKEY_LOGIN).token || 'undefined'},
-    _sign = {'sign': sign(JSON.stringify(options.data))}
-    options.header = Object.assign({}, options.header, _token,_sign) 
-    */
-
-
-
-    return new Promise(function (resolve, reject) {
-      var _config = null;
-
-      options.complete = function (response) {
-        var statusCode = response.statusCode;
-        response.config = _config;
-        if (true) {
-          if (statusCode === 200) {
-            console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data));
-          }
-        }
-        if (_this.interceptor.response) {
-          var newResponse = _this.interceptor.response(response);
-          if (newResponse) {
-            response = newResponse;
-          }
-        }
-        // 统一的响应日志记录
-        // _reslog(response)
-        if (statusCode === 200) {//成功
-
-          resolve(response);
-        } else {
-          reject(response);
-        }
-      };
-
-      _config = Object.assign({}, _this.config, options);
-      _config.requestId = new Date().getTime();
-
-      if (_this.interceptor.request) {
-        _this.interceptor.request(_config);
-      }
-
-      // 统一的请求日志记录
-      // _reqlog(_config)
-
-      if (true) {
-        console.log("【" + _config.requestId + "】 地址：" + _config.url);
-        if (_config.data) {
-          console.log("【" + _config.requestId + "】 参数：" + JSON.stringify(_config.data));
-        }
-      }
-
-      uni.request(_config);
-    });
-  },
-  get: function get(url, data, options) {
-    if (!options) {
-      options = {};
-    }
-    options.url = url;
-    options.data = data;
-    options.method = 'GET';
-    return this.request(options);
-  },
-  post: function post(url, data, options) {
-    if (!options) {
-      options = {};
-    }
-    options.url = url;
-    options.data = data;
-    options.method = 'POST';
-    return this.request(options);
-  },
-  put: function put(url, data, options) {
-    if (!options) {
-      options = {};
-    }
-    options.url = url;
-    options.data = data;
-    options.method = 'PUT';
-    return this.request(options);
-  },
-  delete: function _delete(url, data, options) {
-    if (!options) {
-      options = {};
-    }
-    options.url = url;
-    options.data = data;
-    options.method = 'DELETE';
-    return this.request(options);
-  } };
-
-
-
-/**
-        * 请求接口日志记录
-        */exports.default = _default;
-function _reqlog(req) {
-  if (true) {
-    console.log("【" + req.requestId + "】 地址：" + req.url);
-    if (req.data) {
-      console.log("【" + req.requestId + "】 请求参数：" + JSON.stringify(req.data));
-    }
-  }
-  //TODO 调接口异步写入日志数据库
-}
-
-/**
-   * 响应接口日志记录
-   */
-function _reslog(res) {
-  var _statusCode = res.statusCode;
-  if (true) {
-    console.log("【" + res.config.requestId + "】 地址：" + res.config.url);
-    if (res.config.data) {
-      console.log("【" + res.config.requestId + "】 请求参数：" + JSON.stringify(res.config.data));
-    }
-    console.log("【" + res.config.requestId + "】 响应结果：" + JSON.stringify(res));
-  }
-  //TODO 除了接口服务错误外，其他日志调接口异步写入日志数据库
-  switch (_statusCode) {
-    case 200:
-      break;
-    case 401:
-      break;
-    case 404:
-      break;
-    default:
-      break;}
-
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
-
-/***/ }),
-
-/***/ "../../../workspace/github/UniDemo/main.js":
-/*!*******************************************!*\
-  !*** D:/workspace/github/UniDemo/main.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../workspace/github/UniDemo/pages.json");
+/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages.json");
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../workspace/github/UniDemo/App.vue"));
-var _vmeitimeHttp = _interopRequireDefault(__webpack_require__(/*! @/common/vmeitime-http/ */ "../../../workspace/github/UniDemo/common/vmeitime-http/index.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/App.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 
 _vue.default.config.productionTip = false;
-_vue.default.prototype.$api = _vmeitimeHttp.default;
 
 _App.default.mpType = 'app';
 
@@ -256,48 +1385,31 @@ var app = new _vue.default(_objectSpread({},
 _App.default));
 
 createApp(app).$mount();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createApp"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createApp"]))
 
 /***/ }),
 
-/***/ "../../../workspace/github/UniDemo/main.js?{\"page\":\"pages%2Findex%2Findex\"}":
-/*!****************************************************************************!*\
-  !*** D:/workspace/github/UniDemo/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \****************************************************************************/
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/main.js?{\"page\":\"pages%2Findex%2Findex\"}":
+/*!*************************************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/main.js?{"page":"pages%2Findex%2Findex"} ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../workspace/github/UniDemo/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ "../../../workspace/github/UniDemo/pages/index/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../workspace/github/UniDemo/main.js?{\"page\":\"pages%2Ftask%2Ftask\"}":
-/*!**************************************************************************!*\
-  !*** D:/workspace/github/UniDemo/main.js?{"page":"pages%2Ftask%2Ftask"} ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../workspace/github/UniDemo/pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _task = _interopRequireDefault(__webpack_require__(/*! ./pages/task/task.vue */ "../../../workspace/github/UniDemo/pages/task/task.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_task.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "../../../workspace/github/UniDemo/pages.json":
-/*!**********************************************!*\
-  !*** D:/workspace/github/UniDemo/pages.json ***!
-  \**********************************************/
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages.json":
+/*!*******************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages.json ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -306,15 +1418,15 @@ createPage(_task.default);
 
 /***/ }),
 
-/***/ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
-  \************************************************************/
+/***/ "./node_modules/@dcloudio/uni-app-plus/dist/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-app-plus/dist/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createPage = createPage;exports.createComponent = createComponent;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createPage = createPage;exports.createComponent = createComponent;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -462,43 +1574,7 @@ function upx2px(number, newDeviceWidth) {
   return number < 0 ? -result : result;
 }
 
-var previewImage = {
-  args: function args(fromArgs) {
-    var currentIndex = parseInt(fromArgs.current);
-    if (isNaN(currentIndex)) {
-      return;
-    }
-    var urls = fromArgs.urls;
-    if (!Array.isArray(urls)) {
-      return;
-    }
-    var len = urls.length;
-    if (!len) {
-      return;
-    }
-    if (currentIndex < 0) {
-      currentIndex = 0;
-    } else if (currentIndex >= len) {
-      currentIndex = len - 1;
-    }
-    if (currentIndex > 0) {
-      fromArgs.current = urls[currentIndex];
-      fromArgs.urls = urls.filter(
-      function (item, index) {return index < currentIndex ? item !== urls[currentIndex] : true;});
-
-    } else {
-      fromArgs.current = urls[0];
-    }
-    return {
-      indicator: false,
-      loop: false };
-
-  } };
-
-
-var protocols = {
-  previewImage: previewImage };
-
+var protocols = {};
 var todos = [];
 var canIUses = [];
 
@@ -523,7 +1599,7 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
           keyOption = keyOption(fromArgs[key], fromArgs, toArgs);
         }
         if (!keyOption) {// 不支持的参数
-          console.warn("\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F ".concat(methodName, "\u6682\u4E0D\u652F\u6301").concat(key));
+          console.warn("app-plus ".concat(methodName, "\u6682\u4E0D\u652F\u6301").concat(key));
         } else if (isStr(keyOption)) {// 重写参数 key
           toArgs[keyOption] = fromArgs[key];
         } else if (isPlainObject(keyOption)) {// {name:newName,value:value}可重新指定参数 key:value
@@ -556,7 +1632,7 @@ function wrapper(methodName, method) {
     var protocol = protocols[methodName];
     if (!protocol) {// 暂不支持的 api
       return function () {
-        console.error("\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F \u6682\u4E0D\u652F\u6301".concat(methodName));
+        console.error("app-plus \u6682\u4E0D\u652F\u6301".concat(methodName));
       };
     }
     return function (arg1, arg2) {// 目前 api 最多两个参数
@@ -608,40 +1684,6 @@ TODOS.forEach(function (name) {
   todoApis[name] = createTodoApi(name);
 });
 
-var providers = {
-  oauth: ['weixin'],
-  share: ['weixin'],
-  payment: ['wxpay'],
-  push: ['weixin'] };
-
-
-function getProvider(_ref2)
-
-
-
-
-{var service = _ref2.service,success = _ref2.success,fail = _ref2.fail,complete = _ref2.complete;
-  var res = false;
-  if (providers[service]) {
-    res = {
-      errMsg: 'getProvider:ok',
-      service: service,
-      provider: providers[service] };
-
-    isFn(success) && success(res);
-  } else {
-    res = {
-      errMsg: 'getProvider:fail:服务[' + service + ']不存在' };
-
-    isFn(fail) && fail(res);
-  }
-  isFn(complete) && complete(res);
-}
-
-var extraApi = /*#__PURE__*/Object.freeze({
-  getProvider: getProvider });
-
-
 var getEmitter = function () {
   if (typeof getUniEmitter === 'function') {
     /* eslint-disable no-undef */
@@ -682,10 +1724,78 @@ var eventApi = /*#__PURE__*/Object.freeze({
   $emit: $emit });
 
 
+function wrapper$1(webview) {
+  webview.$processed = true;
 
+  webview.postMessage = function (data) {
+    plus.webview.postMessageToUniNView({
+      type: 'UniAppSubNVue',
+      data: data },
+    webview.id);
+  };
+  var callbacks = [];
+  webview.onMessage = function (callback) {
+    callbacks.push(callback);
+  };
+  webview.$consumeMessage = function (e) {
+    callbacks.forEach(function (callback) {return callback(e);});
+  };
 
-var api = /*#__PURE__*/Object.freeze({});
+  if (!webview.__uniapp_mask_id) {
+    return;
+  }
+  var maskColor = webview.__uniapp_mask;
+  var maskWebview = plus.webview.getWebviewById(webview.__uniapp_mask_id);
+  maskWebview = maskWebview.parent() || maskWebview; // 再次检测父
+  var oldShow = webview.show;
+  var oldHide = webview.hide;
+  var oldClose = webview.close;
 
+  var showMask = function showMask() {
+    maskWebview.setStyle({
+      mask: maskColor });
+
+  };
+  var closeMask = function closeMask() {
+    maskWebview.setStyle({
+      mask: 'none' });
+
+  };
+  webview.show = function () {
+    showMask();for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {args[_key2] = arguments[_key2];}
+    return oldShow.apply(webview, args);
+  };
+  webview.hide = function () {
+    closeMask();for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {args[_key3] = arguments[_key3];}
+    return oldHide.apply(webview, args);
+  };
+  webview.close = function () {
+    closeMask();
+    callbacks = [];for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
+    return oldClose.apply(webview, args);
+  };
+}
+
+function getSubNVueById(id) {
+  var webview = plus.webview.getWebviewById(id);
+  if (webview && !webview.$processed) {
+    wrapper$1(webview);
+  }
+  return webview;
+}
+
+function requireNativePlugin(pluginName) {
+  /* eslint-disable no-undef */
+  if (typeof weex !== 'undefined') {
+    return weex.requireModule(pluginName);
+  }
+  /* eslint-disable no-undef */
+  return __requireNativePlugin__(pluginName);
+}
+
+var api = /*#__PURE__*/Object.freeze({
+  requireNativePlugin: requireNativePlugin,
+  getSubNVueById: getSubNVueById });
 
 
 var MPPage = Page;
@@ -704,7 +1814,7 @@ function initTriggerEvent(mpInstance) {
     }
   }
   var oldTriggerEvent = mpInstance.triggerEvent;
-  mpInstance.triggerEvent = function (event) {for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {args[_key2 - 1] = arguments[_key2];}
+  mpInstance.triggerEvent = function (event) {for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {args[_key5 - 1] = arguments[_key5];}
     return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
   };
 }
@@ -717,7 +1827,7 @@ function initHook(name, options) {
     };
   } else {
     options[name] = function () {
-      initTriggerEvent(this);for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {args[_key3] = arguments[_key3];}
+      initTriggerEvent(this);for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {args[_key6] = arguments[_key6];}
       return oldHook.apply(this, args);
     };
   }
@@ -751,45 +1861,11 @@ function initMocks(vm, mocks) {
   });
 }
 
-function hasHook(hook, vueOptions) {
-  if (!vueOptions) {
-    return true;
-  }
-
-  if (_vue.default.options && Array.isArray(_vue.default.options[hook])) {
-    return true;
-  }
-
-  vueOptions = vueOptions.default || vueOptions;
-
-  if (isFn(vueOptions)) {
-    if (isFn(vueOptions.extendOptions[hook])) {
-      return true;
-    }
-    if (vueOptions.super &&
-    vueOptions.super.options &&
-    Array.isArray(vueOptions.super.options[hook])) {
-      return true;
-    }
-    return false;
-  }
-
-  if (isFn(vueOptions[hook])) {
-    return true;
-  }
-  var mixins = vueOptions.mixins;
-  if (Array.isArray(mixins)) {
-    return !!mixins.find(function (mixin) {return hasHook(hook, mixin);});
-  }
-}
-
-function initHooks(mpOptions, hooks, vueOptions) {
+function initHooks(mpOptions, hooks) {
   hooks.forEach(function (hook) {
-    if (hasHook(hook, vueOptions)) {
-      mpOptions[hook] = function (args) {
-        return this.$vm && this.$vm.__call_hook(hook, args);
-      };
-    }
+    mpOptions[hook] = function (args) {
+      return this.$vm && this.$vm.__call_hook(hook, args);
+    };
   });
 }
 
@@ -835,7 +1911,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -889,14 +1965,8 @@ function initBehaviors(vueOptions, initBehavior) {
           vueProps.push('name');
           vueProps.push('value');
         } else {
-          vueProps['name'] = {
-            type: String,
-            default: '' };
-
-          vueProps['value'] = {
-            type: [String, Number, Boolean, Array, Object, Date],
-            default: '' };
-
+          vueProps['name'] = String;
+          vueProps['value'] = null;
         }
       }
     });
@@ -986,7 +2056,7 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
   return properties;
 }
 
-function wrapper$1(event) {
+function wrapper$2(event) {
   // TODO 又得兼容 mpvue 的 mp 对象
   try {
     event.mp = JSON.parse(JSON.stringify(event));
@@ -1148,14 +2218,10 @@ function isMatchEventType(eventType, optType) {
 }
 
 function handleEvent(event) {var _this = this;
-  event = wrapper$1(event);
+  event = wrapper$2(event);
 
   // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
-  var dataset = (event.currentTarget || event.target).dataset;
-  if (!dataset) {
-    return console.warn("\u4E8B\u4EF6\u4FE1\u606F\u4E0D\u5B58\u5728");
-  }
-  var eventOpts = dataset.eventOpts || dataset['event-opts']; // 支付宝 web-view 组件 dataset 非驼峰
+  var eventOpts = (event.currentTarget || event.target).dataset.eventOpts;
   if (!eventOpts) {
     return console.warn("\u4E8B\u4EF6\u4FE1\u606F\u4E0D\u5B58\u5728");
   }
@@ -1214,11 +2280,11 @@ var hooks = [
 'onPageNotFound'];
 
 
-function parseBaseApp(vm, _ref3)
+function parseBaseApp(vm, _ref2)
 
 
-{var mocks = _ref3.mocks,initRefs = _ref3.initRefs;
-  _vue.default.prototype.mpHost = "mp-weixin";
+{var mocks = _ref2.mocks,initRefs = _ref2.initRefs;
+  _vue.default.prototype.mpHost = "app-plus";
 
   _vue.default.mixin({
     beforeCreate: function beforeCreate() {
@@ -1247,14 +2313,6 @@ function parseBaseApp(vm, _ref3)
 
   var appOptions = {
     onLaunch: function onLaunch(args) {
-      if (this.$vm) {// 已经初始化过了，主要是为了百度，百度 onShow 在 onLaunch 之前
-        return;
-      }
-      {
-        if (!wx.canIUse('nextTick')) {// 事实 上2.2.3 即可，简单使用 2.3.0 的 nextTick 判断
-          console.error('当前微信基础库版本过低，请将 微信开发者工具-详情-项目设置-调试基础库版本 更换为`2.3.0`以上');
-        }
-      }
 
       this.$vm = vm;
 
@@ -1332,11 +2390,11 @@ function initRefs(vm) {
 
 }
 
-function handleLink(event) {var _ref4 =
+function handleLink(event) {var _ref3 =
 
 
 
-  event.detail || event.value,vuePid = _ref4.vuePid,vueOptions = _ref4.vueOptions; // detail 是微信,value 是百度(dipatch)
+  event.detail || event.value,vuePid = _ref3.vuePid,vueOptions = _ref3.vueOptions; // detail 是微信,value 是百度(dipatch)
 
   var parentVm;
 
@@ -1358,15 +2416,27 @@ function parseApp(vm) {
 
 }
 
+var hooks$1 = [
+'onUniNViewMessage'];
+
+
+function parseApp$1(vm) {
+  var appOptions = parseApp(vm);
+
+  initHooks(appOptions, hooks$1);
+
+  return appOptions;
+}
+
 function createApp(vm) {
-  App(parseApp(vm));
+  App(parseApp$1(vm));
   return vm;
 }
 
 function parseBaseComponent(vueComponentOptions)
 
 
-{var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage$$1 = _ref5.isPage,initRelation$$1 = _ref5.initRelation;var _initVueComponent =
+{var _ref4 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage$$1 = _ref4.isPage,initRelation$$1 = _ref4.initRelation;var _initVueComponent =
   initVueComponent(_vue.default, vueComponentOptions),_initVueComponent2 = _slicedToArray(_initVueComponent, 2),VueComponent = _initVueComponent2[0],vueOptions = _initVueComponent2[1];
 
   var componentOptions = {
@@ -1447,24 +2517,33 @@ function parseComponent(vueComponentOptions) {
 
 }
 
-var hooks$1 = [
+function parseComponent$1(vueComponentOptions) {
+  var componentOptions = parseComponent(vueComponentOptions);
+
+  componentOptions.methods.$getAppWebview = function () {
+    return plus.webview.getWebviewById("".concat(this.__wxWebviewId__));
+  };
+  return componentOptions;
+}
+
+var hooks$2 = [
 'onShow',
 'onHide',
 'onUnload'];
 
 
-hooks$1.push.apply(hooks$1, PAGE_EVENT_HOOKS);
+hooks$2.push.apply(hooks$2, PAGE_EVENT_HOOKS);
 
-function parseBasePage(vuePageOptions, _ref6)
+function parseBasePage(vuePageOptions, _ref5)
 
 
-{var isPage = _ref6.isPage,initRelation = _ref6.initRelation;
-  var pageOptions = parseComponent(vuePageOptions, {
+{var isPage = _ref5.isPage,initRelation = _ref5.initRelation;
+  var pageOptions = parseComponent$1(vuePageOptions, {
     isPage: isPage,
     initRelation: initRelation });
 
 
-  initHooks(pageOptions.methods, hooks$1, vuePageOptions);
+  initHooks(pageOptions.methods, hooks$2);
 
   pageOptions.methods.onLoad = function (args) {
     this.$vm.$mp.query = args; // 兼容 mpvue
@@ -1481,15 +2560,31 @@ function parsePage(vuePageOptions) {
 
 }
 
+var hooks$3 = [
+'onBackPress',
+'onNavigationBarButtonTap',
+'onNavigationBarSearchInputChanged',
+'onNavigationBarSearchInputConfirmed',
+'onNavigationBarSearchInputClicked'];
+
+
+function parsePage$1(vuePageOptions) {
+  var pageOptions = parsePage(vuePageOptions);
+
+  initHooks(pageOptions.methods, hooks$3);
+
+  return pageOptions;
+}
+
 function createPage(vuePageOptions) {
   {
-    return Component(parsePage(vuePageOptions));
+    return Component(parsePage$1(vuePageOptions));
   }
 }
 
 function createComponent(vueOptions) {
   {
-    return Component(parseComponent(vueOptions));
+    return Component(parseComponent$1(vueOptions));
   }
 }
 
@@ -1507,7 +2602,7 @@ canIUses.forEach(function (canIUseApi) {
 
 var uni = {};
 
-if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
+if (typeof Proxy !== 'undefined') {
   uni = new Proxy({}, {
     get: function get(target, name) {
       if (name === 'upx2px') {
@@ -1515,14 +2610,6 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
       }
       if (api[name]) {
         return promisify(name, api[name]);
-      }
-      {
-        if (extraApi[name]) {
-          return promisify(name, extraApi[name]);
-        }
-        if (todoApis[name]) {
-          return promisify(name, todoApis[name]);
-        }
       }
       if (eventApi[name]) {
         return eventApi[name];
@@ -1535,15 +2622,6 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
 
 } else {
   uni.upx2px = upx2px;
-
-  {
-    Object.keys(todoApis).forEach(function (name) {
-      uni[name] = promisify(name, todoApis[name]);
-    });
-    Object.keys(extraApi).forEach(function (name) {
-      uni[name] = promisify(name, todoApis[name]);
-    });
-  }
 
   Object.keys(eventApi).forEach(function (name) {
     uni[name] = eventApi[name];
@@ -1560,6 +2638,12 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
   });
 }
 
+{
+  if (typeof global !== 'undefined') {
+    global.UniEmitter = eventApi;
+  }
+}
+
 wx.createApp = createApp;
 wx.createPage = createPage;
 wx.createComponent = createComponent;
@@ -1567,6 +2651,7 @@ wx.createComponent = createComponent;
 var uni$1 = uni;var _default =
 
 uni$1;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -6136,22 +7221,8 @@ function initProps (vm, propsOptions) {
                 return
             }
             //fixed by xxxxxx __next_tick_pending,uni://form-field 时不告警
-            if(
-                key === 'value' && 
-                Array.isArray(vm.$options.behaviors) &&
-                vm.$options.behaviors.indexOf('uni://form-field') !== -1
-              ){
+            if(vm._getFormData || (vm.$parent && vm.$parent.__next_tick_pending)){
               return
-            }
-            if(vm._getFormData){
-              return
-            }
-            var $parent = vm.$parent;
-            while($parent){
-              if($parent.__next_tick_pending){
-                return  
-              }
-              $parent = $parent.$parent;
             }
           }
           warn(
@@ -7038,7 +8109,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7059,14 +8130,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7098,64 +8169,57 @@ function nextTick$1(vm, cb) {
 /*  */
 
 function cloneWithData(vm) {
-  // 确保当前 vm 所有数据被同步
-  var ret = Object.create(null);
-  var dataKeys = [].concat(
-    Object.keys(vm._data || {}),
-    Object.keys(vm._computedWatchers || {}));
+    // 确保当前 vm 所有数据被同步
+    var dataKeys = [].concat(
+        Object.keys(vm._data || {}),
+        Object.keys(vm._computedWatchers || {}));
 
-  dataKeys.reduce(function(ret, key) {
-    ret[key] = vm[key];
-    return ret
-  }, ret);
-  //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
-  Object.assign(ret, vm.$mp.data || {});
-  if (
-    Array.isArray(vm.$options.behaviors) &&
-    vm.$options.behaviors.indexOf('uni://form-field') !== -1
-  ) { //form-field
-    ret['name'] = vm.name;
-    ret['value'] = vm.value;
-  }
-
-  return JSON.parse(JSON.stringify(ret))
+    var ret = dataKeys.reduce(function(ret, key) {
+        ret[key] = vm[key];
+        return ret
+    }, Object.create(null));
+    //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
+    Object.assign(ret, vm.$mp.data || {});
+    if (
+        Array.isArray(vm.$options.behaviors) &&
+        vm.$options.behaviors.indexOf('uni://form-field') !== -1
+    ) { //form-field
+        ret['name'] = vm.name;
+        ret['value'] = vm.value;
+    }
+    return JSON.parse(JSON.stringify(ret))
 }
 
 var patch = function(oldVnode, vnode) {
-  var this$1 = this;
+    var this$1 = this;
 
-  if (vnode === null) { //destroy
-    return
-  }
-  if (this.mpType === 'page' || this.mpType === 'component') {
-    var mpInstance = this.$scope;
-    var data = Object.create(null);
-    try {
-      data = cloneWithData(this);
-    } catch (err) {
-      console.error(err);
+    if (vnode === null) { //destroy
+        return
     }
-    data.__webviewId__ = mpInstance.data.__webviewId__;
-    var mpData = Object.create(null);
-    Object.keys(data).forEach(function (key) { //仅同步 data 中有的数据
-      mpData[key] = mpInstance.data[key];
-    });
-    var diffData = diff(data, mpData);
-    if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
-        console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
-          ']差量更新',
-          JSON.stringify(diffData));
-      }
-      this.__next_tick_pending = true;
-      mpInstance.setData(diffData, function () {
-        this$1.__next_tick_pending = false;
-        flushCallbacks$1(this$1);
-      });
-    } else {
-      flushCallbacks$1(this);
+    if (this.mpType === 'page' || this.mpType === 'component') {
+        var mpInstance = this.$scope;
+        var data = cloneWithData(this);
+        data.__webviewId__ = mpInstance.data.__webviewId__;
+        var mpData = Object.create(null);
+        Object.keys(data).forEach(function (key) { //仅同步 data 中有的数据
+            mpData[key] = mpInstance.data[key];
+        });
+        var diffData = diff(data, mpData);
+        if (Object.keys(diffData).length) {
+            if (Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+                console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
+                    ']差量更新',
+                    JSON.stringify(diffData));
+            }
+            this.__next_tick_pending = true;
+            mpInstance.setData(diffData, function () {
+                this$1.__next_tick_pending = false;
+                flushCallbacks$1(this$1);
+            });
+        } else {
+            flushCallbacks$1(this);
+        }
     }
-  }
 };
 
 /*  */
@@ -7301,136 +8365,111 @@ function normalizeStyleBinding (bindingStyle) {
 var MP_METHODS = ['createSelectorQuery', 'createIntersectionObserver', 'selectAllComponents', 'selectComponent'];
 
 function getTarget(obj, path) {
-  var parts = path.split('.');
-  var key = parts[0];
-  if (key.indexOf('__$n') === 0) { //number index
-    key = parseInt(key.replace('__$n', ''));
-  }
-  if (parts.length === 1) {
-    return obj[key]
-  }
-  return getTarget(obj[key], parts.slice(1).join('.'))
+    var parts = path.split('.');
+    var key = parts[0];
+    if (key.indexOf('__$n') === 0) { //number index
+        key = parseInt(key.replace('__$n', ''));
+    }
+    if (parts.length === 1) {
+        return obj[key]
+    }
+    return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
 function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err) {
-    console.error(err);
-  };
+    var oldEmit = Vue.prototype.$emit;
 
-  var oldEmit = Vue.prototype.$emit;
-
-  Vue.prototype.$emit = function(event) {
-    if (this.$scope && event) {
-      this.$scope['triggerEvent'](event, {
-        __args__: toArray(arguments, 1)
-      });
-    }
-    return oldEmit.apply(this, arguments)
-  };
-
-  Vue.prototype.$nextTick = function(fn) {
-    return nextTick$1(this, fn)
-  };
-
-  MP_METHODS.forEach(function (method) {
-    Vue.prototype[method] = function(args) {
-      if (this.$scope) {
-        return this.$scope[method](args)
-      }
+    Vue.prototype.$emit = function(event) {
+        if (this.$scope && event) {
+            this.$scope['triggerEvent'](event, {
+                __args__: toArray(arguments, 1)
+            });
+        }
+        return oldEmit.apply(this, arguments)
     };
-  });
+    
+    Vue.prototype.$nextTick = function (fn) {
+      return nextTick$1(this, fn)
+    };
 
-  Vue.prototype.__init_provide = initProvide;
+    MP_METHODS.forEach(function (method) {
+        Vue.prototype[method] = function(args) {
+            if (this.$scope) {
+                return this.$scope[method](args)
+            }
+        };
+    });
 
-  Vue.prototype.__init_injections = initInjections;
+    Vue.prototype.__init_provide = initProvide;
 
-  Vue.prototype.__call_hook = function(hook, args) {
-    var vm = this;
-    // #7573 disable dep collection when invoking lifecycle hooks
-    pushTarget();
-    var handlers = vm.$options[hook];
-    var info = hook + " hook";
-    var ret;
-    if (handlers) {
-      for (var i = 0, j = handlers.length; i < j; i++) {
-        ret = invokeWithErrorHandling(handlers[i], vm, args ? [args] : null, vm, info);
-      }
-    }
-    if (vm._hasHookEvent) {
-      vm.$emit('hook:' + hook);
-    }
-    popTarget();
-    return ret
-  };
+    Vue.prototype.__init_injections = initInjections;
 
-  Vue.prototype.__set_model = function(target, key, value, modifiers) {
-    if (Array.isArray(modifiers)) {
-      if (modifiers.indexOf('trim') !== -1) {
-        value = value.trim();
-      }
-      if (modifiers.indexOf('number') !== -1) {
-        value = this._n(value);
-      }
-    }
-    if (!target) {
-      target = this;
-    }
-    target[key] = value;
-  };
+    Vue.prototype.__call_hook = function(hook, args) {
+        var vm = this;
+        // #7573 disable dep collection when invoking lifecycle hooks
+        pushTarget();
+        var handlers = vm.$options[hook];
+        var info = hook + " hook";
+        var ret;
+        if (handlers) {
+            for (var i = 0, j = handlers.length; i < j; i++) {
+                ret = invokeWithErrorHandling(handlers[i], vm, args ? [args] : null, vm, info);
+            }
+        }
+        if (vm._hasHookEvent) {
+            vm.$emit('hook:' + hook);
+        }
+        popTarget();
+        return ret
+    };
 
-  Vue.prototype.__set_sync = function(target, key, value) {
-    if (!target) {
-      target = this;
-    }
-    target[key] = value;
-  };
+    Vue.prototype.__set_model = function(target, key, value, modifiers) {
+        if (Array.isArray(modifiers)) {
+            if (modifiers.indexOf('trim') !== -1) {
+                value = value.trim();
+            }
+            if (modifiers.indexOf('number') !== -1) {
+                value = this._n(value);
+            }
+        }
+        if(!target){
+            target = this;
+        }
+        target[key] = value;
+    };
 
-  Vue.prototype.__get_orig = function(item) {
-    if (isPlainObject(item)) {
-      return item['$orig'] || item
-    }
-    return item
-  };
+    Vue.prototype.__set_sync = function(target, key, value) {
+        if(!target){
+            target = this;
+        }
+        target[key] = value;
+    };
 
-  Vue.prototype.__get_value = function(dataPath, target) {
-    return getTarget(target || this, dataPath)
-  };
+    Vue.prototype.__get_orig = function(item) {
+        if (isPlainObject(item)) {
+            return item['$orig'] || item
+        }
+        return item
+    };
+
+    Vue.prototype.__get_value = function(dataPath, target) {
+        return getTarget(target || this, dataPath)
+    };
 
 
-  Vue.prototype.__get_class = function(dynamicClass, staticClass) {
-    return renderClass(staticClass, dynamicClass)
-  };
+    Vue.prototype.__get_class = function(dynamicClass, staticClass) {
+        return renderClass(staticClass, dynamicClass)
+    };
 
-  Vue.prototype.__get_style = function(dynamicStyle, staticStyle) {
-    if (!dynamicStyle && !staticStyle) {
-      return ''
-    }
-    var dynamicStyleObj = normalizeStyleBinding(dynamicStyle);
-    var styleObj = staticStyle ? extend(staticStyle, dynamicStyleObj) : dynamicStyleObj;
-    return Object.keys(styleObj).map(function (name) { return ((hyphenate(name)) + ":" + (styleObj[name])); }).join(';')
-  };
-
-  Vue.prototype.__map = function(val, iteratee) {
-    //TODO 暂不考虑 string,number
-    var ret, i, l, keys, key;
-    if (Array.isArray(val)) {
-      ret = new Array(val.length);
-      for (i = 0, l = val.length; i < l; i++) {
-        ret[i] = iteratee(val[i], i);
-      }
-      return ret
-    } else if (isObject(val)) {
-      keys = Object.keys(val);
-      ret = Object.create(null);
-      for (i = 0, l = keys.length; i < l; i++) {
-        key = keys[i];
-        ret[key] = iteratee(val[key], key, i);
-      }
-      return ret
-    }
-    return []
-  };
+    Vue.prototype.__get_style = function(dynamicStyle, staticStyle) {
+        if (!dynamicStyle && !staticStyle) {
+            return ''
+        }
+        var dynamicStyleObj = normalizeStyleBinding(dynamicStyle);
+        var styleObj = staticStyle ? extend(staticStyle, dynamicStyleObj) : dynamicStyleObj;
+        return Object.keys(styleObj).map(function (name) { return ((hyphenate(name)) + ":" + (styleObj[name])); }).join(';')
+    };
 
 }
 
@@ -7658,4 +8697,298 @@ module.exports = g;
 /***/ })
 
 }]);
-//# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map
+});
+
+define('app.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
+
+require('./common/runtime.js')
+require('./common/vendor.js')
+require('./common/main.js')
+});
+require('app.js');
+
+
+__wxRoute = 'pages/index/index';__wxRouteBegin = true;__wxAppCurrentFile__ = 'pages/index/index.js';
+
+define('pages/index/index.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/index/index"],{
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue":
+/*!******************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_8a3da618___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=8a3da618& */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=template&id=8a3da618&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&lang=css& */ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_8a3da618___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_8a3da618___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/css-loader??ref--6-oneOf-1-2!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--6-oneOf-1-3!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=template&id=8a3da618&":
+/*!*************************************************************************************************************!*\
+  !*** D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=template&id=8a3da618& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_8a3da618___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=8a3da618& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=template&id=8a3da618&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_8a3da618___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_8a3da618___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default =
+{
+  data: function data() {
+    return {
+      index: 0,
+      address: "地址",
+      type: "设施类型",
+      newsList: [],
+      types: [{
+        name: "类型" },
+      {
+
+        name: "市民健身苑点" },
+      {
+
+        name: "市民球场" },
+      {
+
+        name: "市民健身房" },
+      {
+
+        name: "市民健身步道" }] };
+
+
+  },
+
+  onPullDownRefresh: function onPullDownRefresh() {var _this = this;
+    console.log("下拉刷新了", " at pages\\index\\index.vue:67");
+    uni.request({
+      method: "GET",
+      url: "https://www.easy-mock.com/mock/5ce266bc36fff24a477c4e6a/getNews/mock",
+      success: function success(result) {
+        console.log(result, " at pages\\index\\index.vue:72");
+
+        if (result.statusCode == 200) {
+          _this.newsList = result.data.data.news;
+        } else {
+          uni.showModal({
+            title: "请求错误" });
+
+        }
+      },
+      complete: function complete() {
+        uni.stopPullDownRefresh();
+
+      } });
+
+
+  },
+  onLoad: function onLoad() {var _this2 = this;
+
+    uni.showLoading({
+      title: "请求中...." });
+
+
+    uni.request({
+      method: "GET",
+      url: "https://www.easy-mock.com/mock/5ce266bc36fff24a477c4e6a/getNews/mock",
+      success: function success(result) {
+        console.log(result, " at pages\\index\\index.vue:99");
+
+        if (result.statusCode == 200) {
+          _this2.newsList = result.data.data.news;
+        } else {
+          uni.showModal({
+            title: "请求错误" });
+
+        }
+      },
+      complete: function complete() {
+        uni.hideLoading();
+      } });
+
+  },
+
+
+
+  methods: {
+    bindPickerChange: function bindPickerChange(e) {
+      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\index\\index.vue:119");
+      this.index = e.target.value;
+      uni.showToast({
+        title: this.types[this.index].name });
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=template&id=8a3da618&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!D:/workspace/HbuilderWs/HBuilderProjects/UniDemo/pages/index/index.vue?vue&type=template&id=8a3da618& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ })
+
+},[["../../../workspace/HbuilderWs/HBuilderProjects/UniDemo/main.js?{\"page\":\"pages%2Findex%2Findex\"}","common/runtime","common/vendor"]]]);
+});
+require('pages/index/index.js');
+;(function(global) {
+    __uni_launch_ready(function() {
+        var entryPagePath = __wxConfig.entryPagePath.replace('.html', '')
+        if (entryPagePath.indexOf('/') !== 0) {
+            entryPagePath = '/' + entryPagePath
+        }
+        wx.navigateTo({
+            url: entryPagePath,
+            query: {},
+            openType: 'appLaunch',
+            webviewId: 1
+        })
+        __wxConfig.__ready__ = true
+    })
+})(this);
+

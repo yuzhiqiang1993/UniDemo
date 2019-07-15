@@ -1,1 +1,0 @@
-<view><page-head vue-id="1" title="{{title}}" bind:__l="__l"></page-head><view class="uni-padding-wrap uni-common-mt"><view class="uni-btn-v"><button type="primary" disabled="{{disabled}}" data-event-opts="{{[['tap',[['fingerprint']]]]}}" bindtap="__e">按下开始识别指纹</button></view><view style="width:100%;text-align:center;">{{result}}</view></view></view>

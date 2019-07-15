@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "YZQ",
+    "navigationBarBackgroundColor": "#1E90FF",
+    "backgroundColor": "#1E90FF"
+  },
+  "nvueCompiler": "weex",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "UniDemo",
+  "compilerVersion": "2.0.1",
+  "usingComponents": {}
+}

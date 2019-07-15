@@ -1,1 +1,0 @@
-<block wx:if="{{text}}"><view data-event-opts="{{[['tap',[['_onClick',['$event']]]]]}}" class="{{['uni-tag',disabled?'uni-tag--disabled':'',inverted?'uni-tag--inverted':'',circle?'uni-tag--circle':'',mark?'uni-tag--mark':'','uni-tag--'+size,'uni-tag--'+type]}}" bindtap="__e">{{text}}</view></block>

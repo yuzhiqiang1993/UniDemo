@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "CountDown 倒计时",
-  "usingComponents": {
-    "uni-countdown": "/components/uni-countdown/uni-countdown"
-  }
-}
