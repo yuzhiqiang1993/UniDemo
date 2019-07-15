@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "Popup 弹出层",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

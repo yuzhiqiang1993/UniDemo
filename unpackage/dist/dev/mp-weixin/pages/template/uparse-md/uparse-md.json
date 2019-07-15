@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "富文本渲染示例-markdown",
+  "usingComponents": {
+    "u-parse": "/components/uParse/src/wxParse"
+  }
+}

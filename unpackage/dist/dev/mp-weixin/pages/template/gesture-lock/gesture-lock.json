@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "手势图案锁屏",
+  "usingComponents": {
+    "mpvue-gesture-lock": "/components/mpvueGestureLock/index"
+  }
+}

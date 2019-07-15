@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "NoticeBar 通告栏",
+  "usingComponents": {
+    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar"
+  }
+}

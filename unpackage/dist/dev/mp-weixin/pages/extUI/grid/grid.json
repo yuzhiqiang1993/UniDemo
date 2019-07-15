@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "Grid 宫格",
+  "usingComponents": {
+    "uni-grid": "/components/uni-grid/uni-grid"
+  }
+}

@@ -1,0 +1,129 @@
+
+page {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	background-color: #fff
+}
+view {
+	font-size: 28rpx;
+	line-height: inherit
+}
+.example {
+	padding: 0 30rpx 30rpx
+}
+.example-title {
+	font-size: 32rpx;
+	line-height: 32rpx;
+	color: #777;
+	margin: 40rpx 25rpx;
+	position: relative
+}
+.example .example-title {
+	margin: 40rpx 0
+}
+.example-body {
+	padding: 0 40rpx
+}
+page {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	background-color: #fff;
+}
+view {
+	font-size: 28rpx;
+	line-height: inherit;
+}
+.example {
+	padding: 0 30rpx 30rpx;
+}
+.example-title {
+	font-size: 32rpx;
+	line-height: 32rpx;
+	color: #777;
+	margin: 40rpx 25rpx;
+	position: relative;
+}
+.example .example-title {
+	margin: 40rpx 0;
+}
+.example-body {
+	padding: 0 40rpx;
+}
+.uni-common-mt {
+	color: #7a7e83;
+	font-size: 28rpx;
+	padding: 30rpx;
+}
+.title {
+	font-size: 15px;
+	line-height: 20px;
+	color: #333333;
+	padding: 15px;
+}
+.city {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	width: 100%;
+	margin-left: 8px;
+	white-space: nowrap;
+}
+.input-view {
+	width: 92%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	background-color: #e7e7e7;
+	height: 30px;
+	-webkit-border-radius: 15px;
+	        border-radius: 15px;
+	padding: 0 4%;
+	-webkit-flex-wrap: nowrap;
+	    -ms-flex-wrap: nowrap;
+	        flex-wrap: nowrap;
+	margin: 7px 0;
+	line-height: 30px;
+}
+.input-view .uni-icon {
+	line-height: 30px !important;
+}
+.input-view .input {
+	height: 30px;
+	line-height: 30px;
+	width: 94%;
+	padding: 0 3%;
+}
+

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "LoadMore 加载更多",
+  "usingComponents": {
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
+}
