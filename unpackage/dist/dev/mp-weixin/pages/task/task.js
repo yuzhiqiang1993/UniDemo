@@ -163,8 +163,8 @@ var _default =
       MembershipCounty: "all",
       StreetTownName: "all",
       FacilitiesType: "all",
-      Start: "0",
-      Pagesize: "30",
+      Start: 0,
+      Pagesize: 30,
       countryIndex: 0,
       typeIndex: 0,
       address: "地址",
@@ -190,17 +190,36 @@ var _default =
   },
 
   onPullDownRefresh: function onPullDownRefresh() {var _this = this;
-
+    this.Start = 0;
     this.$api.taskList({
-      MembershipCounty: "all",
-      StreetTownName: "all",
-      FacilitiesType: "all",
-      Start: "0",
-      Pagesize: "30" }).
+      MembershipCounty: this.MembershipCounty,
+      StreetTownName: this.StreetTownName,
+      FacilitiesType: this.FacilitiesType,
+      Start: this.Start,
+      Pagesize: this.Pagesize }).
     then(function (res) {
 
       _this.taskList = res;
       uni.stopPullDownRefresh();
+    });
+
+  },
+  onReachBottom: function onReachBottom() {var _this2 = this;
+    console.log("上拉加载");
+    uni.showNavigationBarLoading();
+
+    this.$api.taskList({
+      MembershipCounty: this.MembershipCounty,
+      StreetTownName: this.StreetTownName,
+      FacilitiesType: this.FacilitiesType,
+      Start: this.Start,
+      Pagesize: this.Pagesize }).
+    then(function (res) {
+
+      console.log("加载更多：" + JSON.stringify(res));
+      _this2.taskList = _this2.taskList.concat(res);
+      _this2.Start = _this2.Start + _this2.Pagesize;
+      uni.hideNavigationBarLoading();
     });
 
   },
@@ -241,15 +260,17 @@ var _default =
 
                   this.$api.taskList({
                     MembershipCounty: this.MembershipCounty,
-                    StreetTownName: "all",
-                    FacilitiesType: "all",
-                    Start: "0",
-                    Pagesize: "30" }));case 3:data = _context2.sent;
+                    StreetTownName: this.StreetTownName,
+                    FacilitiesType: this.FacilitiesType,
+                    Start: this.Start,
+                    Pagesize: this.Pagesize }));case 3:data = _context2.sent;
 
                 console.log("任务列表：" + JSON.stringify(data));
                 this.taskList = data;
+                this.Start = this.Start + this.Pagesize;
 
-                uni.hideLoading();case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
+
+                uni.hideLoading();case 8:case "end":return _context2.stop();}}}, _callee2, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

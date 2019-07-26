@@ -47,8 +47,8 @@
 				MembershipCounty: "all",
 				StreetTownName: "all",
 				FacilitiesType: "all",
-				Start: "0",
-				Pagesize: "30",
+				Start: 0,
+				Pagesize: 30,
 				countryIndex: 0,
 				typeIndex: 0,
 				address: "地址",
@@ -74,17 +74,36 @@
 		},
 
 		onPullDownRefresh: function() {
-
+			this.Start = 0
 			this.$api.taskList({
-				MembershipCounty: "all",
-				StreetTownName: "all",
-				FacilitiesType: "all",
-				Start: "0",
-				Pagesize: "30"
+				MembershipCounty: this.MembershipCounty,
+				StreetTownName: this.StreetTownName,
+				FacilitiesType: this.FacilitiesType,
+				Start: this.Start,
+				Pagesize: this.Pagesize
 			}).then((res) => {
 
 				this.taskList = res
 				uni.stopPullDownRefresh()
+			})
+
+		},
+		onReachBottom: function() {
+			console.log("上拉加载")
+			uni.showNavigationBarLoading()
+
+			this.$api.taskList({
+				MembershipCounty: this.MembershipCounty,
+				StreetTownName: this.StreetTownName,
+				FacilitiesType: this.FacilitiesType,
+				Start: this.Start,
+				Pagesize: this.Pagesize
+			}).then((res) => {
+				
+				console.log("加载更多："+JSON.stringify(res))
+				this.taskList=this.taskList.concat(res)
+				this.Start=this.Start+this.Pagesize
+				uni.hideNavigationBarLoading()
 			})
 
 		},
@@ -106,8 +125,8 @@
 			},
 			countryChanged: function(e) {
 				this.countryIndex = e.target.value
-				this.MembershipCounty=this.countryList[this.countryIndex].CountyCode
-				
+				this.MembershipCounty = this.countryList[this.countryIndex].CountyCode
+
 			},
 			async requestCoutryList() {
 				var data = await this.$api.countyList()
@@ -121,18 +140,20 @@
 			},
 			async requestTaskList() {
 				uni.showLoading({
-					title:"请求中..."
+					title: "请求中..."
 				})
 				var data = await this.$api.taskList({
 					MembershipCounty: this.MembershipCounty,
-					StreetTownName: "all",
-					FacilitiesType: "all",
-					Start: "0",
-					Pagesize: "30"
+					StreetTownName: this.StreetTownName,
+					FacilitiesType: this.FacilitiesType,
+					Start: this.Start,
+					Pagesize: this.Pagesize
 				})
 				console.log("任务列表：" + JSON.stringify(data))
 				this.taskList = data
-				
+				this.Start = this.Start + this.Pagesize
+
+
 				uni.hideLoading()
 			}
 		}
