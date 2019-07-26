@@ -13,7 +13,8 @@
 			<text class="split_text">|</text>
 			<!-- 选择类型 -->
 			<view class="select_item">
-				<picker mode="selector" :value="typeIndex" :range="types" range-key="name" @change="bindPickerChange">
+				<picker mode="selector" :value="typeIndex" :range="types" range-key="name" @change="typeChanged"
+				 v-on:typeHasChanged="typeHasChanged">
 					<text>{{types[typeIndex].name}}</text>
 					<text class="iconfont iconjiantou"></text>
 				</picker>
@@ -48,7 +49,7 @@
 				StreetTownName: "all",
 				FacilitiesType: "all",
 				Start: 0,
-				Pagesize: 30,
+				Pagesize: 50,
 				countryIndex: 0,
 				typeIndex: 0,
 				address: "地址",
@@ -56,19 +57,25 @@
 				taskList: [],
 				countryList: [],
 				types: [{
-					name: "类型"
+					name: "类型",
+					code: "all"
 				}, {
 
-					name: "市民健身苑点"
+					name: "市民健身苑点",
+					code: "JD"
 				}, {
 
-					name: "市民球场"
+					name: "市民球场",
+					code: "QC"
 				}, {
 
-					name: "市民健身房"
+					name: "市民健身房",
+					code: "SF"
 				}, {
 
-					name: "市民健身步道"
+					name: "市民健身步道",
+					code: "BD"
+
 				}, ],
 			}
 		},
@@ -82,16 +89,24 @@
 				Start: this.Start,
 				Pagesize: this.Pagesize
 			}).then((res) => {
+				if (res.length == 0) {
+					this.taskList = []
+					uni.showToast({
+						title: '暂无数据',
+						icon: "none"
+					});
+				} else {
+					this.taskList = res
+				}
 
-				this.taskList = res
 				uni.stopPullDownRefresh()
+
 			})
 
 		},
 		onReachBottom: function() {
 			console.log("上拉加载")
 			uni.showNavigationBarLoading()
-
 			this.$api.taskList({
 				MembershipCounty: this.MembershipCounty,
 				StreetTownName: this.StreetTownName,
@@ -99,10 +114,19 @@
 				Start: this.Start,
 				Pagesize: this.Pagesize
 			}).then((res) => {
-				
-				console.log("加载更多："+JSON.stringify(res))
-				this.taskList=this.taskList.concat(res)
-				this.Start=this.Start+this.Pagesize
+
+				console.log("加载更多：" + JSON.stringify(res))
+
+				if (res.length == 0) {
+					uni.showToast({
+						title: '没有更多数据了...',
+						icon: "none"
+					});
+				} else {
+					this.taskList = this.taskList.concat(res)
+					this.Start = this.Start + this.Pagesize
+				}
+
 				uni.hideNavigationBarLoading()
 			})
 
@@ -116,18 +140,23 @@
 
 		methods: {
 
-			bindPickerChange: function(e) {
-
+			typeChanged: function(e) {
+				this.Start = 0
 				this.typeIndex = e.target.value
-				uni.showToast({
-					title: this.types[this.typeIndex].name
-				})
+				this.FacilitiesType = this.types[this.typeIndex].code
+				this.requestTaskList()
 			},
 			countryChanged: function(e) {
+				this.Start = 0
 				this.countryIndex = e.target.value
 				this.MembershipCounty = this.countryList[this.countryIndex].CountyCode
 
+				this.requestTaskList()
+
 			},
+
+
+			/* 请求区县列表 */
 			async requestCoutryList() {
 				var data = await this.$api.countyList()
 				data.unshift({
@@ -138,6 +167,7 @@
 				this.countryList = data
 				console.log("区县列表：" + JSON.stringify(data))
 			},
+			/* 请求任务列表 */
 			async requestTaskList() {
 				uni.showLoading({
 					title: "请求中..."
@@ -150,9 +180,19 @@
 					Pagesize: this.Pagesize
 				})
 				console.log("任务列表：" + JSON.stringify(data))
-				this.taskList = data
-				this.Start = this.Start + this.Pagesize
 
+				if (data.length == 0) {
+					this.taskList = []
+					uni.showToast({
+						title: '暂无数据',
+						icon: "none"
+					});
+				} else {
+					this.taskList = data
+					this.Start = this.Start + this.Pagesize
+
+
+				}
 
 				uni.hideLoading()
 			}

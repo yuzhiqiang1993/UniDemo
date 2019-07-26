@@ -156,6 +156,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -164,7 +165,7 @@ var _default =
       StreetTownName: "all",
       FacilitiesType: "all",
       Start: 0,
-      Pagesize: 30,
+      Pagesize: 50,
       countryIndex: 0,
       typeIndex: 0,
       address: "地址",
@@ -172,19 +173,25 @@ var _default =
       taskList: [],
       countryList: [],
       types: [{
-        name: "类型" },
+        name: "类型",
+        code: "all" },
       {
 
-        name: "市民健身苑点" },
+        name: "市民健身苑点",
+        code: "JD" },
       {
 
-        name: "市民球场" },
+        name: "市民球场",
+        code: "QC" },
       {
 
-        name: "市民健身房" },
+        name: "市民健身房",
+        code: "SF" },
       {
 
-        name: "市民健身步道" }] };
+        name: "市民健身步道",
+        code: "BD" }] };
+
 
 
   },
@@ -198,16 +205,24 @@ var _default =
       Start: this.Start,
       Pagesize: this.Pagesize }).
     then(function (res) {
+      if (res.length == 0) {
+        _this.taskList = [];
+        uni.showToast({
+          title: '暂无数据',
+          icon: "none" });
 
-      _this.taskList = res;
+      } else {
+        _this.taskList = res;
+      }
+
       uni.stopPullDownRefresh();
+
     });
 
   },
   onReachBottom: function onReachBottom() {var _this2 = this;
     console.log("上拉加载");
     uni.showNavigationBarLoading();
-
     this.$api.taskList({
       MembershipCounty: this.MembershipCounty,
       StreetTownName: this.StreetTownName,
@@ -217,8 +232,17 @@ var _default =
     then(function (res) {
 
       console.log("加载更多：" + JSON.stringify(res));
-      _this2.taskList = _this2.taskList.concat(res);
-      _this2.Start = _this2.Start + _this2.Pagesize;
+
+      if (res.length == 0) {
+        uni.showToast({
+          title: '没有更多数据了...',
+          icon: "none" });
+
+      } else {
+        _this2.taskList = _this2.taskList.concat(res);
+        _this2.Start = _this2.Start + _this2.Pagesize;
+      }
+
       uni.hideNavigationBarLoading();
     });
 
@@ -232,18 +256,23 @@ var _default =
 
   methods: {
 
-    bindPickerChange: function bindPickerChange(e) {
-
+    typeChanged: function typeChanged(e) {
+      this.Start = 0;
       this.typeIndex = e.target.value;
-      uni.showToast({
-        title: this.types[this.typeIndex].name });
-
+      this.FacilitiesType = this.types[this.typeIndex].code;
+      this.requestTaskList();
     },
     countryChanged: function countryChanged(e) {
+      this.Start = 0;
       this.countryIndex = e.target.value;
       this.MembershipCounty = this.countryList[this.countryIndex].CountyCode;
 
+      this.requestTaskList();
+
     },
+
+
+    /* 请求区县列表 */
     requestCoutryList: function () {var _requestCoutryList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   this.$api.countyList());case 2:data = _context.sent;
                 data.unshift({
@@ -254,6 +283,7 @@ var _default =
                 this.countryList = data;
                 console.log("区县列表：" + JSON.stringify(data));case 6:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
 
+    /* 请求任务列表 */
     requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 uni.showLoading({
                   title: "请求中..." });_context2.next = 3;return (
@@ -266,11 +296,21 @@ var _default =
                     Pagesize: this.Pagesize }));case 3:data = _context2.sent;
 
                 console.log("任务列表：" + JSON.stringify(data));
-                this.taskList = data;
-                this.Start = this.Start + this.Pagesize;
+
+                if (data.length == 0) {
+                  this.taskList = [];
+                  uni.showToast({
+                    title: '暂无数据',
+                    icon: "none" });
+
+                } else {
+                  this.taskList = data;
+                  this.Start = this.Start + this.Pagesize;
 
 
-                uni.hideLoading();case 8:case "end":return _context2.stop();}}}, _callee2, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
+                }
+
+                uni.hideLoading();case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
