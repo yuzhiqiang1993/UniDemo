@@ -9,7 +9,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.7.0",
   "appid": "wx4a9ee3a3edef27dc",
-  "projectname": "UniDemo",
+  "projectname": "ESP",
   "condition": {
     "search": {
       "current": -1,
