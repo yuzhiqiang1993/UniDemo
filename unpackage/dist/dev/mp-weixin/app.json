@@ -1,15 +1,13 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/task/task"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "上海市社区体育设施",
-    "navigationBarBackgroundColor": "#0081ff",
+    "navigationBarBackgroundColor": "#022456",
     "backgroundColor": "#1E90FF"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

@@ -47,7 +47,6 @@
 	-webkit-flex-direction: column;
 	    -ms-flex-direction: column;
 	        flex-direction: column;
-	padding: 10rpx;
 	background-color: white;
 }
 .item_content text {
@@ -75,12 +74,16 @@
 	        justify-content: flex-start;
 }
 .uni-list-cell image {
-	min-width: 176rpx;
-	min-height: 136rpx;
-	width: 176rpx;
-	height: 136rpx;
-	padding: 10rpx;
+	min-width: 160rpx;
+	min-height: 120rpx;
+	width: 160rpx;
+	height: 120rpx;
+	margin-left: 30rpx;
+	margin-top: 20rpx;
+	margin-bottom: 20rpx;
+	margin-right: 30rpx;
 	border-radius: 6rpx;
+	background-color: #F4F5F6;
 }
 @font-face {
   font-family: 'iconfont';  /* project id 1277298 */

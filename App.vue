@@ -20,4 +20,8 @@
 	.container {
 		background-color: #EEEEEE;
 	}
+	
+	text{
+		font-size: 26upx;
+	}
 </style>

@@ -6,7 +6,7 @@
 
 export default {
 	config: {
-		baseUrl: "https://www.easy-mock.com/",
+		baseUrl: "http://192.168.1.201:8003/",
 		header: {
 			'Content-Type': 'application/json;charset=UTF-8',
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -58,7 +58,10 @@ export default {
 				response.config = _config
 				if (process.env.NODE_ENV === 'development') {
 					if (statusCode === 200) {
-						console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
+						//console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
+						//console.log("【" + _config.requestId + "】 结果：" + response.data)
+				
+									
 					}
 				}
 				if (this.interceptor.response) {
@@ -69,9 +72,8 @@ export default {
 				}
 				// 统一的响应日志记录
 				// _reslog(response)
-				if (statusCode === 200) { //成功
-			
-					resolve(response);
+				if (statusCode === 200&&response.data.fig==1) { //成功
+					resolve(response.data.data);
 				} else {
 					reject(response)
 				}

@@ -4,16 +4,17 @@
 		<view class="select_container">
 			<!-- 地址选择 -->
 			<view class="select_item">
-				<text class="uni-text">{{address}}</text>
-
-				<text class="iconfont iconjiantou"></text>
+				<picker mode="selector" :value="countryIndex" :range="countryList" range-key="DCName" @change="countryChanged">
+					<text>{{countryList[countryIndex].DCName}}</text>
+					<text class="iconfont iconjiantou"></text>
+				</picker>
 			</view>
 			<!-- 中间的分割线 -->
 			<text class="split_text">|</text>
 			<!-- 选择类型 -->
 			<view class="select_item">
-				<picker mode="selector" :value="index" :range="types" range-key="name" @change="bindPickerChange">
-					<text class="uni-text">{{types[index].name}}</text>
+				<picker mode="selector" :value="typeIndex" :range="types" range-key="name" @change="bindPickerChange">
+					<text>{{types[typeIndex].name}}</text>
 					<text class="iconfont iconjiantou"></text>
 				</picker>
 			</view>
@@ -22,10 +23,13 @@
 		<!-- 列表-->
 		<scroll-view class="uni-list" scroll-y="true">
 
-			<view class="uni-list-cell" v-for="item of newsList" :key="item.id">
-				<image :src="item.img" mode="scaleToFill"></image>
+			<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode">
+				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo"></image>
 
-				<text class="text_title">{{item.name}}</text>
+				<view class="uni-flex uni-column">
+					<text class="uni-title">{{item.FacilitiesName}}</text>
+					<text class="uni-text-gray">{{item.FacilitiesAddr}}</text>
+				</view>
 
 			</view>
 
@@ -40,10 +44,17 @@
 	export default {
 		data() {
 			return {
-				index: 0,
+				MembershipCounty: "all",
+				StreetTownName: "all",
+				FacilitiesType: "all",
+				Start: "0",
+				Pagesize: "30",
+				countryIndex: 0,
+				typeIndex: 0,
 				address: "地址",
 				type: "设施类型",
-				newsList: [],
+				taskList: [],
+				countryList: [],
 				types: [{
 					name: "类型"
 				}, {
@@ -64,29 +75,22 @@
 
 		onPullDownRefresh: function() {
 
-			this.$api.taskList().then((res) => {
-			
-				this.newsList = res.data.data.news
+			this.$api.taskList({
+				MembershipCounty: "all",
+				StreetTownName: "all",
+				FacilitiesType: "all",
+				Start: "0",
+				Pagesize: "30"
+			}).then((res) => {
+
+				this.taskList = res
 				uni.stopPullDownRefresh()
 			})
 
 		},
 		onLoad: function() {
-
-			uni.showLoading({
-				title: "请求中...."
-			})
-
-			this.$api.taskList().then((res) => {
-			
-			
-			
-			console.log(res)
-				this.newsList = res.data.data.news
-
-				uni.hideLoading()
-			})
-
+			this.requestCoutryList()
+			this.requestTaskList()
 		},
 
 
@@ -94,12 +98,43 @@
 		methods: {
 
 			bindPickerChange: function(e) {
-				console.log('picker发送选择改变，携带值为：' + e.target.value)
-				this.index = e.target.value
+
+				this.typeIndex = e.target.value
 				uni.showToast({
-					title: this.types[this.index].name
+					title: this.types[this.typeIndex].name
 				})
 			},
+			countryChanged: function(e) {
+				this.countryIndex = e.target.value
+				this.MembershipCounty=this.countryList[this.countryIndex].CountyCode
+				
+			},
+			async requestCoutryList() {
+				var data = await this.$api.countyList()
+				data.unshift({
+					"ID": 0,
+					"DCName": "上海市",
+					"CountyCode": "all"
+				})
+				this.countryList = data
+				console.log("区县列表：" + JSON.stringify(data))
+			},
+			async requestTaskList() {
+				uni.showLoading({
+					title:"请求中..."
+				})
+				var data = await this.$api.taskList({
+					MembershipCounty: this.MembershipCounty,
+					StreetTownName: "all",
+					FacilitiesType: "all",
+					Start: "0",
+					Pagesize: "30"
+				})
+				console.log("任务列表：" + JSON.stringify(data))
+				this.taskList = data
+				
+				uni.hideLoading()
+			}
 		}
 	}
 </script>

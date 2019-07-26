@@ -1784,4 +1784,7 @@ checkbox-group label {
 .container {
 	background-color: #EEEEEE;
 }
+text{
+	font-size: 26rpx;
+}
 

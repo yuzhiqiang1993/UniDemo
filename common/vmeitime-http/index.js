@@ -6,31 +6,41 @@ import http from './interface'
  * 
  */
 
-// 单独导出(测试接口) import {test} from '@/common/vmeitime-http/'
-export const taskList = () => {
+/* 任务列表 */
+export const taskList = (data) => {
 
 	//设置请求结束后拦截器
 	http.interceptor.response = (response) => {
 		return response;
 	}
     return http.request({
-        url: 'mock/5ce266bc36fff24a477c4e6a/getNews/mock',
+        url: 'api/AndroidMain/WeChatHaveFacilities',
+		method:"POST",
 		dataType: 'json',
+		data:data
     })
 }
 
-// 轮播图
-export const banner = (data) => {
+
+/* 区县列表 */
+export const countyList = () => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+		return response;
+	}
     return http.request({
-        url: '/banner/36kr',
-        method: 'GET', 
-        data,
-		// handle:true
+        url: 'api/AndroidMain/WeChatHaveDistrictsCounties',
+		method:"GET",
+		dataType: 'json',
+		
     })
 }
+
 
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
 	taskList,
-    banner
+	countyList
+
 }
