@@ -273,15 +273,19 @@ var _default =
 
 
     /* 请求区县列表 */
-    requestCoutryList: function () {var _requestCoutryList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  this.$api.countyList());case 2:data = _context.sent;
+    requestCoutryList: function () {var _requestCoutryList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                uni.showLoading({
+                  title: "请求中..." });_context.next = 3;return (
+
+                  this.$api.countyList());case 3:data = _context.sent;
                 data.unshift({
                   "ID": 0,
                   "DCName": "上海市",
                   "CountyCode": "all" });
 
                 this.countryList = data;
-                console.log("区县列表：" + JSON.stringify(data));case 6:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
+                console.log("区县列表：" + JSON.stringify(data));
+                uni.hideLoading();case 8:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
 
     /* 请求任务列表 */
     requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:

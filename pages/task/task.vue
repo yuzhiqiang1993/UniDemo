@@ -158,6 +158,9 @@
 
 			/* 请求区县列表 */
 			async requestCoutryList() {
+				uni.showLoading({
+					title: "请求中..."
+				})
 				var data = await this.$api.countyList()
 				data.unshift({
 					"ID": 0,
@@ -166,6 +169,7 @@
 				})
 				this.countryList = data
 				console.log("区县列表：" + JSON.stringify(data))
+				uni.hideLoading()
 			},
 			/* 请求任务列表 */
 			async requestTaskList() {
