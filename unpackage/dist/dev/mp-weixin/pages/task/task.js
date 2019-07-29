@@ -170,6 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -213,42 +214,26 @@ var _default =
 
   },
 
-  onPullDownRefresh: function onPullDownRefresh() {var _this = this;
+  onPullDownRefresh: function onPullDownRefresh() {
     this.Start = 0;
-    this.$api.taskList({
-      MembershipCounty: this.MembershipCounty,
-      StreetTownName: this.StreetTownName,
-      FacilitiesType: this.FacilitiesType,
-      Start: this.Start,
-      Pagesize: this.Pagesize }).
-    then(function (res) {
-      if (res.length == 0) {
-        _this.taskList = [];
-        uni.showToast({
-          title: '暂无数据',
-          icon: "none" });
 
-      } else {
-        _this.taskList = res;
-      }
-
-      uni.stopPullDownRefresh();
-
-    });
-
+    this.requestTaskList();
   },
-  onReachBottom: function onReachBottom() {var _this2 = this;
+  onReachBottom: function onReachBottom() {var _this = this;
     console.log("上拉加载");
     uni.showNavigationBarLoading();
+
     this.$api.taskList({
       MembershipCounty: this.MembershipCounty,
       StreetTownName: this.StreetTownName,
       FacilitiesType: this.FacilitiesType,
       Start: this.Start,
-      Pagesize: this.Pagesize }).
+      Pagesize: this.Pagesize,
+      longitude: this.longitude,
+      latitude: this.latitude }).
     then(function (res) {
 
-      console.log("加载更多：" + JSON.stringify(res));
+      // console.log("加载更多：" + JSON.stringify(res))
 
       if (res.length == 0) {
         uni.showToast({
@@ -256,15 +241,15 @@ var _default =
           icon: "none" });
 
       } else {
-        _this2.taskList = _this2.taskList.concat(res);
-        _this2.Start = _this2.Start + _this2.Pagesize;
+        _this.taskList = _this.taskList.concat(res);
+        _this.Start = _this.Start + _this.Pagesize;
       }
 
       uni.hideNavigationBarLoading();
     });
 
   },
-  onLoad: function onLoad() {var _this3 = this;
+  onLoad: function onLoad() {var _this2 = this;
 
     this.requestCoutryList();
 
@@ -274,8 +259,8 @@ var _default =
       type: 'gcj02',
 
       success: function success(res) {
-        _this3.latitude = res.latitude;
-        _this3.longitude = res.longitude;
+        _this2.latitude = res.latitude;
+        _this2.longitude = res.longitude;
 
       },
       fail: function fail() {
@@ -284,7 +269,7 @@ var _default =
 
       },
       complete: function complete(res) {
-        _this3.requestTaskList();
+        _this2.requestTaskList();
       } });
 
 
