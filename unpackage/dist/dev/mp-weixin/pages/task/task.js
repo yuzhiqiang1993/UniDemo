@@ -170,7 +170,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
@@ -252,7 +251,6 @@ var _default =
   onLoad: function onLoad() {var _this2 = this;
 
     this.requestCoutryList();
-
     this.requestStreetTownList();
 
     uni.getLocation({
@@ -368,7 +366,17 @@ var _default =
                   this.Start = this.Start + this.Pagesize;
                 }
 
-                uni.hideLoading();case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
+                uni.hideLoading();
+                uni.stopPullDownRefresh();case 8:case "end":return _context3.stop();}}}, _callee3, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}(),
+
+
+    goToTaskDetails: function goToTaskDetails(code) {
+      console.log(code);
+
+      uni.navigateTo({
+        url: '../task_details/task_details?facilityCode=' + code });
+
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

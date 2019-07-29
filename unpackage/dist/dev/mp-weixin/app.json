@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/task/task"
+    "pages/task/task",
+    "pages/task_details/task_details"
   ],
   "subPackages": [],
   "window": {

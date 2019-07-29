@@ -28,26 +28,25 @@
 
 		<!-- 列表-->
 		<scroll-view class="uni-list" scroll-y="true">
+		
+				<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode" @click="goToTaskDetails(item.FacilitiesTypeCode)">
 
-			<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode">
-				<image :src='item.PanoramicPhoto' mode="scaleToFill" class="uni-media-list-logo"></image>
-				<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
+				<!-- 	<image :src="item.PanoramicPhoto"  mode="scaleToFill" class="uni-media-list-logo"></image> -->
+					<image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image>
 
-				<view class="uni-flex uni-column content">
-					<text class="uni-title">{{item.FacilitiesName}}</text>
+					<view class="uni-flex uni-column content">
+						<text class="uni-title">{{item.FacilitiesName}}</text>
 
 
-					<view class="uni-flex uni-row address">
-						<text class="uni-text-gray uni-flex-item address">{{item.FacilitiesAddr}}</text>
-						<text class="iconfont iconlocation"></text>
-						<text class="uni-text-gray distance">{{item.Distance}}</text>
+						<view class="uni-flex uni-row address">
+							<text class="uni-text-gray uni-flex-item address">{{item.FacilitiesAddr}}</text>
+							<text class="iconfont iconlocation"></text>
+							<text class="uni-text-gray distance">{{item.Distance}}</text>
+						</view>
+
 					</view>
 
-
 				</view>
-
-			</view>
-
 
 		</scroll-view>
 
@@ -136,7 +135,6 @@
 		onLoad: function() {
 
 			this.requestCoutryList()
-
 			this.requestStreetTownList()
 
 			uni.getLocation({
@@ -253,7 +251,15 @@
 				}
 
 				uni.hideLoading()
+				uni.stopPullDownRefresh()
 
+			},
+			goToTaskDetails:function (code) {
+				console.log(code)
+				
+				uni.navigateTo({
+					url:'../task_details/task_details?facilityCode='+code
+				})
 			}
 		}
 	}

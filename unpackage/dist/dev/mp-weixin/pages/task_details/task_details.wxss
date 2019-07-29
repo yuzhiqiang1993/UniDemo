@@ -1,0 +1,27 @@
+
+.container {
+
+	display: -webkit-box;
+
+	display: -webkit-flex;
+
+	display: -ms-flexbox;
+
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+
+	border: 1px solid red;
+	background-color: #F4F5F6;
+	padding: 10rpx;
+	text-align: center;
+}
+.img {
+	width: 690rpx;
+	height: 325rpx;
+	color: #F4F5F6;
+	border-radius: 10rpx;
+}
+

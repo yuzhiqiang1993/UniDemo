@@ -7602,13 +7602,13 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.streetTownList = exports.countyList = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.taskDetails = exports.streetTownList = exports.countyList = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
-                                                                                                                                                                                                                                                                                                                                    * 将业务所有接口统一起来便于维护
-                                                                                                                                                                                                                                                                                                                                    * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
-                                                                                                                                                                                                                                                                                                                                    * 
-                                                                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                                                                          * 将业务所有接口统一起来便于维护
+                                                                                                                                                                                                                                                                                                                                                          * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
+                                                                                                                                                                                                                                                                                                                                                          * 
+                                                                                                                                                                                                                                                                                                                                                          */
 
 /* 任务列表 */
 var taskList = function taskList(data) {
@@ -7641,6 +7641,8 @@ var countyList = function countyList() {
 
 };exports.countyList = countyList;
 
+
+
 var streetTownList = function streetTownList(data) {
   //设置请求结束后拦截器
   _interface.default.interceptor.response = function (response) {
@@ -7654,11 +7656,27 @@ var streetTownList = function streetTownList(data) {
 
 };
 
+/*设施点详情 */exports.streetTownList = streetTownList;
+
+var taskDetails = function taskDetails(data) {
+  //设置请求结束后拦截器
+  _interface.default.interceptor.response = function (response) {
+    return response;
+  };
+  return _interface.default.request({
+    url: 'api/AndroidMain/WeChatFacilitieInfo',
+    method: "POST",
+    dataType: 'json',
+    data: data });
+
+};
+
 // 默认全部导出  import api from '@/common/vmeitime-http/'
-exports.streetTownList = streetTownList;var _default = {
+exports.taskDetails = taskDetails;var _default = {
   taskList: taskList,
   countyList: countyList,
-  streetTownList: streetTownList };exports.default = _default;
+  streetTownList: streetTownList,
+  taskDetails: taskDetails };exports.default = _default;
 
 /***/ }),
 /* 12 */
@@ -8657,6 +8675,24 @@ if (hadRuntime) {
   })() || Function("return this")()
 );
 
+
+/***/ }),
+/* 22 */,
+/* 23 */,
+/* 24 */
+/*!*****************************************************************************************!*\
+  !*** D:/workspace/esp/WeChatEsp/main.js?{"page":"pages%2Ftask_details%2Ftask_details"} ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _task_details = _interopRequireDefault(__webpack_require__(/*! ./pages/task_details/task_details.vue */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_task_details.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ })
 ]]);

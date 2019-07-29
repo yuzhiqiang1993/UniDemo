@@ -13,12 +13,12 @@ export const taskList = (data) => {
 	http.interceptor.response = (response) => {
 		return response;
 	}
-    return http.request({
-        url: 'api/AndroidMain/WeChatHaveFacilities',
-		method:"POST",
+	return http.request({
+		url: 'api/AndroidMain/WeChatHaveFacilities',
+		method: "POST",
 		dataType: 'json',
-		data:data
-    })
+		data: data
+	})
 }
 
 
@@ -29,24 +29,41 @@ export const countyList = () => {
 	http.interceptor.response = (response) => {
 		return response;
 	}
-    return http.request({
-        url: 'api/AndroidMain/WeChatHaveDistrictsCounties',
-		method:"GET",
+	return http.request({
+		url: 'api/AndroidMain/WeChatHaveDistrictsCounties',
+		method: "GET",
 		dataType: 'json',
-		
-    })
+
+	})
 }
 
-export const streetTownList=(data)=>{
-		//设置请求结束后拦截器
+
+
+export const streetTownList = (data) => {
+	//设置请求结束后拦截器
 	http.interceptor.response = (response) => {
 		return response;
 	}
 	return http.request({
-	    url: 'api/AndroidMain/WeChatHaveStreetTown',
-		method:"POST",
+		url: 'api/AndroidMain/WeChatHaveStreetTown',
+		method: "POST",
 		dataType: 'json',
-		data:data
+		data: data
+	})
+}
+
+/*设施点详情 */
+
+export const taskDetails = (data) => {
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+		return response;
+	}
+	return http.request({
+		url: 'api/AndroidMain/WeChatFacilitieInfo',
+		method: "POST",
+		dataType: 'json',
+		data: data
 	})
 }
 
@@ -54,6 +71,7 @@ export const streetTownList=(data)=>{
 export default {
 	taskList,
 	countyList,
-	streetTownList
+	streetTownList,
+	taskDetails
 
 }
