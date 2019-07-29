@@ -157,6 +157,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -167,11 +172,13 @@ var _default =
       Start: 0,
       Pagesize: 50,
       countryIndex: 0,
+      streetTownIndex: 0,
       typeIndex: 0,
       address: "地址",
       type: "设施类型",
       taskList: [],
       countryList: [],
+      streetTownList: [],
       types: [{
         name: "类型",
         code: "all" },
@@ -250,23 +257,33 @@ var _default =
   onLoad: function onLoad() {
     this.requestCoutryList();
     this.requestTaskList();
+    this.requestStreetTownList();
   },
 
 
 
   methods: {
-
+    /* 选择设施类型 */
     typeChanged: function typeChanged(e) {
       this.Start = 0;
       this.typeIndex = e.target.value;
       this.FacilitiesType = this.types[this.typeIndex].code;
       this.requestTaskList();
     },
+    /* 选择区县 */
     countryChanged: function countryChanged(e) {
       this.Start = 0;
       this.countryIndex = e.target.value;
       this.MembershipCounty = this.countryList[this.countryIndex].CountyCode;
+      this.requestStreetTownList();
+      this.requestTaskList();
 
+    },
+    /* 选择街镇 */
+    streetTownChanged: function streetTownChanged(e) {
+      this.Start = 0;
+      this.streetTownIndex = e.target.value;
+      this.StreetTownName = this.streetTownList[this.streetTownIndex].StreetTownCode;
       this.requestTaskList();
 
     },
@@ -287,17 +304,39 @@ var _default =
                 console.log("区县列表：" + JSON.stringify(data));
                 uni.hideLoading();case 8:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
 
-    /* 请求任务列表 */
-    requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+    /* 请求根据区县编号请求街镇 */
+    requestStreetTownList: function () {var _requestStreetTownList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 uni.showLoading({
-                  title: "请求中..." });_context2.next = 3;return (
+                  title: "请求中" });_context2.next = 3;return (
+
+
+                  this.$api.streetTownList({
+                    CountyCode: this.MembershipCounty }));case 3:data = _context2.sent;
+
+
+                data.unshift({
+                  "ID": 0,
+                  "MembershipCounty": "01H",
+                  "StreetTownName": "全区",
+                  "StreetTownCode": "all",
+                  "GroupCode": "01H01B" });
+
+
+                console.log("请求的街镇数据：" + JSON.stringify(data));
+
+                this.streetTownList = data;case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function requestStreetTownList() {return _requestStreetTownList.apply(this, arguments);}return requestStreetTownList;}(),
+
+    /* 请求任务列表 */
+    requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                uni.showLoading({
+                  title: "请求中..." });_context3.next = 3;return (
 
                   this.$api.taskList({
                     MembershipCounty: this.MembershipCounty,
                     StreetTownName: this.StreetTownName,
                     FacilitiesType: this.FacilitiesType,
                     Start: this.Start,
-                    Pagesize: this.Pagesize }));case 3:data = _context2.sent;
+                    Pagesize: this.Pagesize }));case 3:data = _context3.sent;
 
                 console.log("任务列表：" + JSON.stringify(data));
 
@@ -314,7 +353,7 @@ var _default =
 
                 }
 
-                uni.hideLoading();case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
+                uni.hideLoading();case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -2,15 +2,20 @@
 	<view class="container">
 		<!-- 选择页 -->
 		<view class="select_container">
-			<!-- 地址选择 -->
+			<!-- 区县选择 -->
 			<view class="select_item">
 				<picker mode="selector" :value="countryIndex" :range="countryList" range-key="DCName" @change="countryChanged">
 					<text>{{countryList[countryIndex].DCName}}</text>
 					<text class="iconfont iconjiantou"></text>
 				</picker>
 			</view>
-			<!-- 中间的分割线 -->
-			<text class="split_text">|</text>
+			<!-- 区县选择 -->
+			<view class="select_item">
+				<picker mode="selector" :value="streetTownIndex" :range="streetTownList" range-key="StreetTownName" @change="streetTownChanged">
+					<text>{{streetTownList[streetTownIndex].StreetTownName}}</text>
+					<text class="iconfont iconjiantou"></text>
+				</picker>
+			</view>
 			<!-- 选择类型 -->
 			<view class="select_item">
 				<picker mode="selector" :value="typeIndex" :range="types" range-key="name" @change="typeChanged"
@@ -51,11 +56,13 @@
 				Start: 0,
 				Pagesize: 50,
 				countryIndex: 0,
+				streetTownIndex: 0,
 				typeIndex: 0,
 				address: "地址",
 				type: "设施类型",
 				taskList: [],
 				countryList: [],
+				streetTownList: [],
 				types: [{
 					name: "类型",
 					code: "all"
@@ -134,27 +141,37 @@
 		onLoad: function() {
 			this.requestCoutryList()
 			this.requestTaskList()
+			this.requestStreetTownList()
 		},
 
 
 
 		methods: {
-
+			/* 选择设施类型 */
 			typeChanged: function(e) {
 				this.Start = 0
 				this.typeIndex = e.target.value
 				this.FacilitiesType = this.types[this.typeIndex].code
 				this.requestTaskList()
 			},
+			/* 选择区县 */
 			countryChanged: function(e) {
 				this.Start = 0
 				this.countryIndex = e.target.value
 				this.MembershipCounty = this.countryList[this.countryIndex].CountyCode
-
+				this.requestStreetTownList()
 				this.requestTaskList()
 
 			},
-
+			/* 选择街镇 */
+			streetTownChanged:function (e) {
+				this.Start=0
+				this.streetTownIndex=e.target.value
+				this.StreetTownName=this.streetTownList[this.streetTownIndex].StreetTownCode
+				this.requestTaskList()
+				
+			},
+		
 
 			/* 请求区县列表 */
 			async requestCoutryList() {
@@ -170,6 +187,28 @@
 				this.countryList = data
 				console.log("区县列表：" + JSON.stringify(data))
 				uni.hideLoading()
+			},
+			/* 请求根据区县编号请求街镇 */
+			async requestStreetTownList() {
+				uni.showLoading({
+					title: "请求中"
+				})
+
+				var data = await this.$api.streetTownList({
+					CountyCode: this.MembershipCounty
+				})
+
+				data.unshift({
+					"ID": 0,
+					"MembershipCounty": "01H",
+					"StreetTownName": "全区",
+					"StreetTownCode": "all",
+					"GroupCode": "01H01B"
+				})
+
+				console.log("请求的街镇数据：" + JSON.stringify(data))
+				
+				this.streetTownList=data
 			},
 			/* 请求任务列表 */
 			async requestTaskList() {
