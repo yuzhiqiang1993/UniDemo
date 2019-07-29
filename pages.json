@@ -3,16 +3,17 @@
 		{
 			"path": "pages/task/task",
 			"style": {
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"backgroundColor":"#022456",
+				"backgroundTextStyle":"dark"
 			}
 		}
+
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "上海市社区体育设施",
 		"navigationBarBackgroundColor": "#022456",
 		"backgroundColor": "#1E90FF"
-		// "navigationStyle":"custom"
-
 	}
 }

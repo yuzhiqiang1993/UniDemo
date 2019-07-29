@@ -46,9 +46,7 @@
 
 }
 
-.uni-list-cell {
-	justify-content: flex-start;
-}
+
 
 .uni-list-cell image {
 	min-width: 160rpx;
@@ -61,4 +59,21 @@
 	margin-right: 30rpx;
 	border-radius: 6rpx;
 	background-color: #F4F5F6;
+}
+
+.content{
+	flex: 1;
+	margin-right: 20rpx;
+
+}
+.uni-list-cell .address{
+	line-height: 28rpx;
+	justify-content: flex-start;
+}
+.uni-list-cell .distance{
+	justify-content: flex-end;
+}
+.iconlocation{
+	font-size: 24rpx;
+	color: #ABADAE;
 }

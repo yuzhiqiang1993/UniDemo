@@ -59,6 +59,11 @@
         "setting" : {
             "urlCheck" : false
         },
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "计算点位距离当前位置距离"
+            }
+        },
         "usingComponents" : true
     },
     "mp-alipay" : {

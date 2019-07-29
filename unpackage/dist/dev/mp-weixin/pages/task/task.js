@@ -162,6 +162,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -169,6 +177,8 @@ var _default =
       MembershipCounty: "all",
       StreetTownName: "all",
       FacilitiesType: "all",
+      longitude: "0.0",
+      latitude: "0.0",
       Start: 0,
       Pagesize: 50,
       countryIndex: 0,
@@ -254,13 +264,33 @@ var _default =
     });
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this3 = this;
+
     this.requestCoutryList();
-    this.requestTaskList();
+
     this.requestStreetTownList();
+
+    uni.getLocation({
+      type: 'gcj02',
+
+      success: function success(res) {
+        _this3.latitude = res.latitude;
+        _this3.longitude = res.longitude;
+
+      },
+      fail: function fail() {
+        uni.showModal({
+          content: "位置信息获取失败，请检查GPS是否开启" });
+
+      },
+      complete: function complete(res) {
+        _this3.requestTaskList();
+      } });
+
+
+
+
   },
-
-
 
   methods: {
     /* 选择设施类型 */
@@ -273,6 +303,8 @@ var _default =
     /* 选择区县 */
     countryChanged: function countryChanged(e) {
       this.Start = 0;
+      this.streetTownIndex = 0;
+      this.StreetTownName = "all";
       this.countryIndex = e.target.value;
       this.MembershipCounty = this.countryList[this.countryIndex].CountyCode;
       this.requestStreetTownList();
@@ -290,56 +322,56 @@ var _default =
 
 
     /* 请求区县列表 */
-    requestCoutryList: function () {var _requestCoutryList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                uni.showLoading({
-                  title: "请求中..." });_context.next = 3;return (
+    requestCoutryList: function () {var _requestCoutryList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
 
-                  this.$api.countyList());case 3:data = _context.sent;
+                  this.$api.countyList());case 2:data = _context.sent;
                 data.unshift({
                   "ID": 0,
                   "DCName": "上海市",
                   "CountyCode": "all" });
 
                 this.countryList = data;
-                console.log("区县列表：" + JSON.stringify(data));
-                uni.hideLoading();case 8:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
+                console.log("区县列表：" + JSON.stringify(data));case 6:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
+
 
     /* 请求根据区县编号请求街镇 */
-    requestStreetTownList: function () {var _requestStreetTownList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                uni.showLoading({
-                  title: "请求中" });_context2.next = 3;return (
+    requestStreetTownList: function () {var _requestStreetTownList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
 
 
                   this.$api.streetTownList({
-                    CountyCode: this.MembershipCounty }));case 3:data = _context2.sent;
+                    CountyCode: this.MembershipCounty }));case 2:data = _context2.sent;
 
 
                 data.unshift({
                   "ID": 0,
                   "MembershipCounty": "01H",
-                  "StreetTownName": "全区",
+                  "StreetTownName": "全部",
                   "StreetTownCode": "all",
                   "GroupCode": "01H01B" });
 
 
                 console.log("请求的街镇数据：" + JSON.stringify(data));
 
-                this.streetTownList = data;case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function requestStreetTownList() {return _requestStreetTownList.apply(this, arguments);}return requestStreetTownList;}(),
+                this.streetTownList = data;case 6:case "end":return _context2.stop();}}}, _callee2, this);}));function requestStreetTownList() {return _requestStreetTownList.apply(this, arguments);}return requestStreetTownList;}(),
+
 
     /* 请求任务列表 */
     requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+
                 uni.showLoading({
                   title: "请求中..." });_context3.next = 3;return (
+
 
                   this.$api.taskList({
                     MembershipCounty: this.MembershipCounty,
                     StreetTownName: this.StreetTownName,
                     FacilitiesType: this.FacilitiesType,
                     Start: this.Start,
-                    Pagesize: this.Pagesize }));case 3:data = _context3.sent;
+                    Pagesize: this.Pagesize,
+                    longitude: this.longitude,
+                    latitude: this.latitude }));case 3:data = _context3.sent;
 
                 console.log("任务列表：" + JSON.stringify(data));
-
                 if (data.length == 0) {
                   this.taskList = [];
                   uni.showToast({
@@ -349,8 +381,6 @@ var _default =
                 } else {
                   this.taskList = data;
                   this.Start = this.Start + this.Pagesize;
-
-
                 }
 
                 uni.hideLoading();case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}() } };exports.default = _default;

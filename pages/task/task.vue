@@ -32,9 +32,17 @@
 			<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode">
 				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo"></image>
 
-				<view class="uni-flex uni-column">
+				<view class="uni-flex uni-column content">
 					<text class="uni-title">{{item.FacilitiesName}}</text>
-					<text class="uni-text-gray">{{item.FacilitiesAddr}}</text>
+
+
+					<view class="uni-flex uni-row address">
+						<text class="uni-text-gray uni-flex-item address">{{item.FacilitiesAddr}}</text>
+						<text class="iconfont iconlocation"></text>
+						<text class="uni-text-gray distance">2.3km</text>
+					</view>
+
+
 				</view>
 
 			</view>
@@ -53,6 +61,8 @@
 				MembershipCounty: "all",
 				StreetTownName: "all",
 				FacilitiesType: "all",
+				longitude: "0.0",
+				latitude: "0.0",
 				Start: 0,
 				Pagesize: 50,
 				countryIndex: 0,
@@ -139,12 +149,32 @@
 
 		},
 		onLoad: function() {
+
 			this.requestCoutryList()
-			this.requestTaskList()
+
 			this.requestStreetTownList()
+
+			uni.getLocation({
+				type: 'gcj02',
+
+				success: (res) => {
+					this.latitude = res.latitude
+					this.longitude = res.longitude
+
+				},
+				fail: () => {
+					uni.showModal({
+						content: "位置信息获取失败，请检查GPS是否开启"
+					})
+				},
+				complete: (res) => {
+					this.requestTaskList()
+				}
+
+			});
+
+
 		},
-
-
 
 		methods: {
 			/* 选择设施类型 */
@@ -157,6 +187,8 @@
 			/* 选择区县 */
 			countryChanged: function(e) {
 				this.Start = 0
+				this.streetTownIndex = 0
+				this.StreetTownName = "all"
 				this.countryIndex = e.target.value
 				this.MembershipCounty = this.countryList[this.countryIndex].CountyCode
 				this.requestStreetTownList()
@@ -164,20 +196,18 @@
 
 			},
 			/* 选择街镇 */
-			streetTownChanged:function (e) {
-				this.Start=0
-				this.streetTownIndex=e.target.value
-				this.StreetTownName=this.streetTownList[this.streetTownIndex].StreetTownCode
+			streetTownChanged: function(e) {
+				this.Start = 0
+				this.streetTownIndex = e.target.value
+				this.StreetTownName = this.streetTownList[this.streetTownIndex].StreetTownCode
 				this.requestTaskList()
-				
+
 			},
-		
+
 
 			/* 请求区县列表 */
 			async requestCoutryList() {
-				uni.showLoading({
-					title: "请求中..."
-				})
+
 				var data = await this.$api.countyList()
 				data.unshift({
 					"ID": 0,
@@ -186,13 +216,11 @@
 				})
 				this.countryList = data
 				console.log("区县列表：" + JSON.stringify(data))
-				uni.hideLoading()
+
 			},
 			/* 请求根据区县编号请求街镇 */
 			async requestStreetTownList() {
-				uni.showLoading({
-					title: "请求中"
-				})
+
 
 				var data = await this.$api.streetTownList({
 					CountyCode: this.MembershipCounty
@@ -201,29 +229,33 @@
 				data.unshift({
 					"ID": 0,
 					"MembershipCounty": "01H",
-					"StreetTownName": "全区",
+					"StreetTownName": "全部",
 					"StreetTownCode": "all",
 					"GroupCode": "01H01B"
 				})
 
 				console.log("请求的街镇数据：" + JSON.stringify(data))
-				
-				this.streetTownList=data
+
+				this.streetTownList = data
+
 			},
 			/* 请求任务列表 */
 			async requestTaskList() {
+				
 				uni.showLoading({
-					title: "请求中..."
+					title:"请求中..."
 				})
+
 				var data = await this.$api.taskList({
 					MembershipCounty: this.MembershipCounty,
 					StreetTownName: this.StreetTownName,
 					FacilitiesType: this.FacilitiesType,
 					Start: this.Start,
-					Pagesize: this.Pagesize
+					Pagesize: this.Pagesize,
+					longitude: this.longitude,
+					latitude: this.latitude
 				})
 				console.log("任务列表：" + JSON.stringify(data))
-
 				if (data.length == 0) {
 					this.taskList = []
 					uni.showToast({
@@ -233,11 +265,10 @@
 				} else {
 					this.taskList = data
 					this.Start = this.Start + this.Pagesize
-
-
 				}
-
+				
 				uni.hideLoading()
+
 			}
 		}
 	}

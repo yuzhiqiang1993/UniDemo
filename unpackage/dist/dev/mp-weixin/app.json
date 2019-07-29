@@ -9,6 +9,10 @@
     "navigationBarBackgroundColor": "#022456",
     "backgroundColor": "#1E90FF"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "permission": {
+    "scope.userLocation": {
+      "desc": "计算点位距离当前位置距离"
+    }
+  },
+  "usingComponents": {}
 }

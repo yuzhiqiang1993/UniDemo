@@ -67,12 +67,6 @@
 	margin-top: 96rpx;
 	background-color: white;
 }
-.uni-list-cell {
-	-webkit-box-pack: start;
-	-webkit-justify-content: flex-start;
-	    -ms-flex-pack: start;
-	        justify-content: flex-start;
-}
 .uni-list-cell image {
 	min-width: 160rpx;
 	min-height: 120rpx;
@@ -85,14 +79,38 @@
 	border-radius: 6rpx;
 	background-color: #F4F5F6;
 }
+.content{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	margin-right: 20rpx;
+}
+.uni-list-cell .address{
+	line-height: 28rpx;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+}
+.uni-list-cell .distance{
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	    -ms-flex-pack: end;
+	        justify-content: flex-end;
+}
+.iconlocation{
+	font-size: 24rpx;
+	color: #ABADAE;
+}
 @font-face {
   font-family: 'iconfont';  /* project id 1277298 */
-  src: url('//at.alicdn.com/t/font_1277298_cqxlrng7eqh.eot');
-  src: url('//at.alicdn.com/t/font_1277298_cqxlrng7eqh.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1277298_cqxlrng7eqh.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1277298_cqxlrng7eqh.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1277298_cqxlrng7eqh.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1277298_cqxlrng7eqh.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1277298_ww83xppyva.eot');
+  src: url('//at.alicdn.com/t/font_1277298_ww83xppyva.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1277298_ww83xppyva.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1277298_ww83xppyva.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1277298_ww83xppyva.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1277298_ww83xppyva.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -104,10 +122,7 @@
 .iconjiantou:before {
   content: "\E64A";
 }
-.iconfanhui:before {
-  content: "\E63B";
-}
-.iconsousuo-m:before {
-  content: "\E60A";
+.iconlocation:before {
+  content: "\E63C";
 }
 
