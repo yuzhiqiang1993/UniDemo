@@ -16,6 +16,7 @@
 <style>
 	
 	@import url("static/uni.css");
+	@import url("common/iconfont/iconfont.css");
 	/*每个页面公共css */
 	.container {
 		background-color: #EEEEEE;

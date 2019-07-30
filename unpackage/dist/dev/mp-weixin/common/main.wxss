@@ -1779,6 +1779,31 @@ checkbox-group label {
 	    -ms-transform: translateY(50%);
 	        transform: translateY(50%);
 }
+@font-face {
+  font-family: 'iconfont';  /* project id 1277298 */
+  src: url('//at.alicdn.com/t/font_1277298_0v5ois0548k.eot');
+  src: url('//at.alicdn.com/t/font_1277298_0v5ois0548k.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1277298_0v5ois0548k.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1277298_0v5ois0548k.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1277298_0v5ois0548k.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1277298_0v5ois0548k.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconjiantou:before {
+  content: "\E64A";
+}
+.iconlocation:before {
+  content: "\E63C";
+}
+.iconplay:before {
+  content: "\E606";
+}
 
 /*每个页面公共css */
 .container {

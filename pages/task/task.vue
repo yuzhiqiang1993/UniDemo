@@ -267,5 +267,6 @@
 
 <style>
 	@import url("styles/task.css");
-	@import url("styles/iconfont/iconfont.css");
+	/* @import url("styles/iconfont/iconfont.css"); */
+	@import url("../../common/iconfont/iconfont.css");
 </style>

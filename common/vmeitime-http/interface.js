@@ -9,7 +9,7 @@ export default {
 		baseUrl: "http://192.168.1.201:8003/",
 		header: {
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		data: {},
 		method: "GET",

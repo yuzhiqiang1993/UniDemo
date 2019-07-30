@@ -2,17 +2,16 @@
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/task_details/task_details",
+			"style": {
+				"navigationBarTitleText": "设施点详情"
+			}
+		},{
 			"path": "pages/task/task",
 			"style": {
 				"enablePullDownRefresh": true,
-				"backgroundColor":"#022456",
-				"backgroundTextStyle":"light"
-			}
-		},
-			{
-			"path":"pages/task_details/task_details",
-			"style":{
-				"navigationBarTitleText":"设施点详情"
+				"backgroundColor": "#022456",
+				"backgroundTextStyle": "light"
 			}
 		}
 
