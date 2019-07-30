@@ -41,7 +41,6 @@
 }
 .facilityInfoText {
 	height: 76rpx;
-	line-height: 76rpx;
 }
 .facilityInfo .activityArea {
 	margin-left: 28rpx;
@@ -118,6 +117,7 @@
 	color: #171717;
 	font-weight: bold;
 	text-align: left;
+	line-height: 76rpx;
 }
 .textContent {
 	font-size: 26rpx;

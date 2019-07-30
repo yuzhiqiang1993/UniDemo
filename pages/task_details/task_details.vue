@@ -12,7 +12,7 @@
 				<!-- 设施名称和面积 -->
 				<view class="uni-flex uni-row facilityInfoText">
 
-					<text class="textTitle uni-title">{{facility.FacilitiesName}}</text>
+					<text class="textTitle">{{facility.FacilitiesName}}</text>
 					<text class="activityArea uni-text uni-text-gray">{{facility.ActivityArea}}平方米</text>
 				</view>
 
@@ -93,8 +93,8 @@
 		onLoad(data) {
 			console.log(data.facilityCode)
 			this.$api.taskDetails({
-					 FacilitiesTypeCode: "08M08MJYZWT4501",
-					// FacilitiesTypeCode: data.facilityCode
+					// FacilitiesTypeCode: "08M08MJYZWT4501",
+					FacilitiesTypeCode: data.facilityCode
 				})
 				.then((res) => {
 					console.log(JSON.stringify(res))
@@ -144,7 +144,6 @@
 
 	.facilityInfoText {
 		height: 76rpx;
-		line-height: 76rpx;
 
 	}
 
@@ -152,8 +151,7 @@
 		margin-left: 28rpx;
 		text-align: center;
 		line-height: 76rpx;
-	
-		
+
 	}
 
 
@@ -203,6 +201,7 @@
 		padding-left: 20rpx;
 		padding-right: 20rpx;
 
+
 	}
 
 	.textTitle {
@@ -210,6 +209,7 @@
 		color: #171717;
 		font-weight: bold;
 		text-align: left;
+		line-height: 76rpx;
 	}
 
 	.textContent {
