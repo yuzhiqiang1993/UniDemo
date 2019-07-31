@@ -32,10 +32,9 @@
 	padding-right: 20rpx;
 }
 .img {
-
+	background: #F4F5F6;
 	width: 690rpx;
 	height: 325rpx;
-	color: #F4F5F6;
 	margin: 0 auto;
 	border-radius: 10rpx;
 }
@@ -196,7 +195,7 @@
 .instrumentItem image {
 	width: 100%;
 	min-height: 88rpx;
-	color: #F4F5F6;
+	background: #F4F5F6;
 }
 .instrumentItem text {
 	-webkit-box-flex: 1;

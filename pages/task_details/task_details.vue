@@ -7,7 +7,8 @@
 			<view class="facilityInfo">
 
 				<!-- 图片 -->
-				<image class="img" src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg'></image>
+				<image class="img" :src='facility.PanoramicPhoto'></image>
+
 
 				<!-- 设施名称和面积 -->
 				<view class="uni-flex uni-row facilityInfoText">
@@ -44,8 +45,8 @@
 				<view class="instrumentContent">
 
 					<view class="instrumentItem" v-for="item of instrumentList" :key="item.id">
-						<!-- 	<image :src="item.InstrumentImage"></image> -->
-						<image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image>
+						<image :src="item.InstrumentImage" class="uni-media-list-logo"></image>
+						<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
 						<text class="uni-text-small uni-text-gray">{{item.InstrumentName}}</text>
 					</view>
 
@@ -97,9 +98,21 @@
 					FacilitiesTypeCode: data.facilityCode
 				})
 				.then((res) => {
-					console.log(JSON.stringify(res))
+
+
+					res.PanoramicPhoto = "http://operation.esplohas.com" + res.PanoramicPhoto
+
 					this.facility = res
+					console.log(this.facility.PanoramicPhoto)
+
+
+					for (let item of res.EqInfo) {
+						item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
+					}
+
 					this.instrumentList = res.EqInfo
+
+					console.log(JSON.stringify(res))
 				})
 
 		},
@@ -134,10 +147,9 @@
 
 
 	.img {
-
+		background: #F4F5F6;
 		width: 690rpx;
 		height: 325rpx;
-		color: #F4F5F6;
 		margin: 0 auto;
 		border-radius: 10rpx;
 	}
@@ -265,7 +277,7 @@
 	.instrumentItem image {
 		width: 100%;
 		min-height: 88rpx;
-		color: #F4F5F6;
+		background: #F4F5F6;
 	}
 
 	.instrumentItem text {

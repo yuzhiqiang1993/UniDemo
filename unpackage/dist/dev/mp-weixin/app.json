@@ -15,6 +15,5 @@
       "desc": "计算点位距离当前位置距离"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
