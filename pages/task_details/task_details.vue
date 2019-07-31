@@ -119,8 +119,8 @@
 		onLoad(data) {
 			console.log(data.facilityCode)
 			this.$api.taskDetails({
-					FacilitiesTypeCode: "08M08MJYZWT4501",
-					// FacilitiesTypeCode: data.facilityCode
+					// FacilitiesTypeCode: "08M08MJYZWT4501",
+					FacilitiesTypeCode: data.facilityCode
 				})
 				.then((res) => {
 
@@ -143,16 +143,27 @@
 		},
 		methods: {
 			navication: function() {
-				console.log("查看路线")
-
-
-				var location = JSON.parse(this.facility.Coordinate)
 				
+				if(this.facility.Coordinate==""){
+					uni.showToast({
+						title: '没有经纬度数据,无法导航',
+						icon:"none"
+					});
+					return
+				}
+				var location = JSON.parse(this.facility.Coordinate)
+
 				console.log(location)
 
 				uni.openLocation({
 					latitude: parseFloat(location.latitude),
-					longitude: parseFloat(location.longitude)
+					longitude: parseFloat(location.longitude),
+					address: this.facility.address,
+					fail() {
+						uni.showToast({
+							title: '导航失败，可能是该苑点没有经纬度数据'
+						});
+					}
 				})
 			},
 			previewImg: function(e) {
@@ -369,6 +380,7 @@
 		background-color: #FFFFFF;
 		display: flex;
 		flex-direction: row;
+		border-top: 1px solid #F0F0F0;
 	}
 
 	.bottom text {

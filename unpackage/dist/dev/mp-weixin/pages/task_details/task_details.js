@@ -235,9 +235,9 @@ var _default =
   onLoad: function onLoad(data) {var _this = this;
     console.log(data.facilityCode);
     this.$api.taskDetails({
-      FacilitiesTypeCode: "08M08MJYZWT4501"
-      // FacilitiesTypeCode: data.facilityCode
-    }).
+      // FacilitiesTypeCode: "08M08MJYZWT4501",
+      FacilitiesTypeCode: data.facilityCode }).
+
     then(function (res) {
 
 
@@ -259,16 +259,27 @@ var _default =
   },
   methods: {
     navication: function navication() {
-      console.log("查看路线");
 
+      if (this.facility.Coordinate == "") {
+        uni.showToast({
+          title: '没有经纬度数据,无法导航',
+          icon: "none" });
 
+        return;
+      }
       var location = JSON.parse(this.facility.Coordinate);
 
       console.log(location);
 
       uni.openLocation({
         latitude: parseFloat(location.latitude),
-        longitude: parseFloat(location.longitude) });
+        longitude: parseFloat(location.longitude),
+        address: this.facility.address,
+        fail: function fail() {
+          uni.showToast({
+            title: '导航失败，可能是该苑点没有经纬度数据' });
+
+        } });
 
     },
     previewImg: function previewImg(e) {

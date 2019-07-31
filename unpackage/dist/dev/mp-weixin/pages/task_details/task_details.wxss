@@ -269,6 +269,7 @@ scroll-view {
 	-webkit-flex-direction: row;
 	    -ms-flex-direction: row;
 	        flex-direction: row;
+	border-top: 1px solid #F0F0F0;
 }
 .bottom text {
 	-webkit-box-flex: 1;
