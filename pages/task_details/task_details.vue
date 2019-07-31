@@ -144,6 +144,16 @@
 		methods: {
 			navication: function() {
 				console.log("查看路线")
+
+
+				var location = JSON.parse(this.facility.Coordinate)
+				
+				console.log(location)
+
+				uni.openLocation({
+					latitude: parseFloat(location.latitude),
+					longitude: parseFloat(location.longitude)
+				})
 			},
 			previewImg: function(e) {
 				console.log(e.target.dataset.src)
@@ -168,7 +178,6 @@
 	scroll-view {
 		flex: 1;
 		width: 100%;
-		border: 1px solid red;
 		padding-bottom: 90rpx;
 	}
 

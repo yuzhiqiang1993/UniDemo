@@ -260,6 +260,16 @@ var _default =
   methods: {
     navication: function navication() {
       console.log("查看路线");
+
+
+      var location = JSON.parse(this.facility.Coordinate);
+
+      console.log(location);
+
+      uni.openLocation({
+        latitude: parseFloat(location.latitude),
+        longitude: parseFloat(location.longitude) });
+
     },
     previewImg: function previewImg(e) {
       console.log(e.target.dataset.src);
