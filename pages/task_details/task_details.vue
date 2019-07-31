@@ -7,7 +7,7 @@
 			<view class="facilityInfo">
 
 				<!-- 图片 -->
-				<image class="img" :src='facility.PanoramicPhoto'></image>
+				<image class="img" :src='facility.PanoramicPhoto' :data-src="facility.PanoramicPhoto" @click="previewImg"></image>
 
 
 				<!-- 设施名称和面积 -->
@@ -45,7 +45,7 @@
 				<view class="instrumentContent">
 
 					<view class="instrumentItem" v-for="item of instrumentList" :key="item.id">
-						<image :src="item.InstrumentImage" class="uni-media-list-logo"></image>
+						<image :src="item.InstrumentImage" class="uni-media-list-logo" :data-src="item.InstrumentImage" @click="previewImg"></image>
 						<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
 						<text class="uni-text-small uni-text-gray">{{item.InstrumentName}}</text>
 					</view>
@@ -94,8 +94,8 @@
 		onLoad(data) {
 			console.log(data.facilityCode)
 			this.$api.taskDetails({
-					// FacilitiesTypeCode: "08M08MJYZWT4501",
-					FacilitiesTypeCode: data.facilityCode
+					FacilitiesTypeCode: "08M08MJYZWT4501",
+					// FacilitiesTypeCode: data.facilityCode
 				})
 				.then((res) => {
 
@@ -119,6 +119,13 @@
 		methods: {
 			navication: function() {
 				console.log("查看路线")
+			},
+			previewImg:function (e) {
+				console.log(e.target.dataset.src)
+				uni.previewImage({
+					current:e.target.dataset.src,
+					urls:[e.target.dataset.src]
+				})
 			}
 
 		}

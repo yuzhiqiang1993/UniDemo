@@ -31,7 +31,7 @@
 
 			<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode" @click="goToTaskDetails(item.FacilitiesTypeCode)">
 
-				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo"></image>
+				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo"/>
 				<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
 
 				<view class="uni-flex uni-column content">
@@ -124,8 +124,14 @@
 						icon: "none"
 					});
 				} else {
+				  for (let item of res) {
+						item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto
+					}
+					console.log("追加的数据："+JSON.stringify(res))
 					this.taskList = this.taskList.concat(res)
 					this.Start = this.Start + this.Pagesize
+					
+					
 				}
 
 				uni.hideNavigationBarLoading()

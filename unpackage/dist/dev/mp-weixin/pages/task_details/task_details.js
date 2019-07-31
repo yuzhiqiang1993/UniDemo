@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -210,9 +210,9 @@ var _default =
   onLoad: function onLoad(data) {var _this = this;
     console.log(data.facilityCode);
     this.$api.taskDetails({
-      // FacilitiesTypeCode: "08M08MJYZWT4501",
-      FacilitiesTypeCode: data.facilityCode }).
-
+      FacilitiesTypeCode: "08M08MJYZWT4501"
+      // FacilitiesTypeCode: data.facilityCode
+    }).
     then(function (res) {
 
 
@@ -235,7 +235,15 @@ var _default =
   methods: {
     navication: function navication() {
       console.log("查看路线");
+    },
+    previewImg: function previewImg(e) {
+      console.log(e.target.dataset.src);
+      uni.previewImage({
+        current: e.target.dataset.src,
+        urls: [e.target.dataset.src] });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 19 */

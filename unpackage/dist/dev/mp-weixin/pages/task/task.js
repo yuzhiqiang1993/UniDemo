@@ -230,9 +230,15 @@ var _default =
           title: '没有更多数据了...',
           icon: "none" });
 
-      } else {
+      } else {var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+          for (var _iterator = res[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var item = _step.value;
+            item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto;
+          }} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return != null) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+        console.log("追加的数据：" + JSON.stringify(res));
         _this.taskList = _this.taskList.concat(res);
         _this.Start = _this.Start + _this.Pagesize;
+
+
       }
 
       uni.hideNavigationBarLoading();
@@ -330,7 +336,7 @@ var _default =
 
 
     /* 请求任务列表 */
-    requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+    requestTaskList: function () {var _requestTaskList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, item;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
 
                 uni.showLoading({
                   title: "请求中..." });_context3.next = 3;return (
@@ -350,14 +356,14 @@ var _default =
                 this.taskList = [];
                 uni.showToast({
                   title: '暂无数据',
-                  icon: "none" });_context3.next = 31;break;case 10:_iteratorNormalCompletion = true;_didIteratorError = false;_iteratorError = undefined;_context3.prev = 13;
+                  icon: "none" });_context3.next = 31;break;case 10:_iteratorNormalCompletion2 = true;_didIteratorError2 = false;_iteratorError2 = undefined;_context3.prev = 13;
 
 
 
 
-                for (_iterator = data[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {item = _step.value;
+                for (_iterator2 = data[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {item = _step2.value;
                   item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto;
-                }_context3.next = 21;break;case 17:_context3.prev = 17;_context3.t0 = _context3["catch"](13);_didIteratorError = true;_iteratorError = _context3.t0;case 21:_context3.prev = 21;_context3.prev = 22;if (!_iteratorNormalCompletion && _iterator.return != null) {_iterator.return();}case 24:_context3.prev = 24;if (!_didIteratorError) {_context3.next = 27;break;}throw _iteratorError;case 27:return _context3.finish(24);case 28:return _context3.finish(21);case 29:
+                }_context3.next = 21;break;case 17:_context3.prev = 17;_context3.t0 = _context3["catch"](13);_didIteratorError2 = true;_iteratorError2 = _context3.t0;case 21:_context3.prev = 21;_context3.prev = 22;if (!_iteratorNormalCompletion2 && _iterator2.return != null) {_iterator2.return();}case 24:_context3.prev = 24;if (!_didIteratorError2) {_context3.next = 27;break;}throw _iteratorError2;case 27:return _context3.finish(24);case 28:return _context3.finish(21);case 29:
                 this.taskList = data;
                 this.Start = this.Start + this.Pagesize;case 31:
 
