@@ -1,86 +1,111 @@
 <template>
-	<scroll-view scroll-y="true">
-
-		<view class="container">
-
-			<!-- 设施点信息 -->
-			<view class="facilityInfo">
-
-				<!-- 图片 -->
-				<image class="img" :src='facility.PanoramicPhoto' :data-src="facility.PanoramicPhoto" @click="previewImg"></image>
 
 
-				<!-- 设施名称和面积 -->
-				<view class="uni-flex uni-row facilityInfoText">
+	<view class="page">
 
-					<text class="textTitle">{{facility.FacilitiesName}}</text>
-					<text class="activityArea uni-text uni-text-gray">{{facility.ActivityArea}}平方米</text>
-				</view>
 
-				<!-- 开放时间 -->
-				<view class="uni-flex uni-row openTime"></view>
+		<scroll-view scroll-y="true">
 
-				<!-- 地址和导航  -->
-				<view class="uni-flex uni-row addressLayout">
+			<view class="container">
 
-					<view class="addressLeft">
-						<text class="iconfont iconlocation"></text>
-						<text class="address uni-text-small uni-text-gray">{{facility.FacilitiesAddr}}</text>
+				<!-- 设施点信息 -->
+				<view class="facilityInfo">
+
+					<!-- 图片 -->
+					<image class="img" :src='facility.PanoramicPhoto' :data-src="facility.PanoramicPhoto" @click="previewImg"></image>
+
+
+					<!-- 设施名称和面积 -->
+					<view class="uni-flex uni-row facilityInfoText">
+
+						<text class="textTitle">{{facility.FacilitiesName}}</text>
+						<text class="activityArea uni-text uni-text-gray">{{facility.ActivityArea}}平方米</text>
 					</view>
 
-					<text class="navigation" @click="navication">查看路线</text>
+					<!-- 开放时间 -->
+					<view class="uni-flex uni-row openTime">
+
+						<text>工作日开放时间：全天</text>
+						<text style="margin-left: 30rpx;">节假日开放时间：全天</text>
+
+
+					</view>
+
+					<!-- 地址和导航  -->
+					<view class="uni-flex uni-row addressLayout">
+
+						<view class="addressLeft">
+							<text class="iconfont iconlocation"></text>
+							<text class="address uni-text-small uni-text-gray">{{facility.FacilitiesAddr}}</text>
+						</view>
+
+						<text class="navigation" @click="navication">查看路线</text>
+
+
+					</view>
 
 
 				</view>
 
+				<!-- 器材信息 -->
 
-			</view>
+				<view class="instrumentLayout">
+					<text class="textTitle">器材信息</text>
 
-			<!-- 器材信息 -->
+					<!-- 器材列表 -->
+					<view class="instrumentContent">
 
-			<view class="instrumentLayout">
-				<text class="textTitle">器材信息</text>
+						<view class="instrumentItem" v-for="item of instrumentList" :key="item.id">
+							<image :src="item.InstrumentImage" class="uni-media-list-logo" :data-src="item.InstrumentImage" @click="previewImg"></image>
+							<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
+							<text class="uni-text-small uni-text-gray">{{item.InstrumentName}}</text>
+						</view>
 
-				<!-- 器材列表 -->
-				<view class="instrumentContent">
-
-					<view class="instrumentItem" v-for="item of instrumentList" :key="item.id">
-						<image :src="item.InstrumentImage" class="uni-media-list-logo" :data-src="item.InstrumentImage" @click="previewImg"></image>
-						<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
-						<text class="uni-text-small uni-text-gray">{{item.InstrumentName}}</text>
 					</view>
 
 				</view>
 
+				<!-- 教学视频 -->
+
+				<view class="video">
+					<text class="textTitle uni-flex-item">教学视频</text>
+					<text class="watchText">点击观看</text>
+
+					<text class="iconfont iconplay"></text>
+
+				</view>
+
+
+				<!-- 设施信息 -->
+
+				<view class="facilityInfo" style="margin-top: 20rpx;padding-bottom: 10rpx;">
+					<text class="textTitle uni-flex-item">设施信息</text>
+
+					<text class="textContent uni-text-gray">设施类型:{{facility.FacilitiesType}}</text>
+					<text class="textContent uni-text-gray">投资性质:{{facility.ConstructionProperty}}</text>
+					<text class="textContent uni-text-gray">建成时间:{{facility.CompletionTime}}</text>
+
+
+				</view>
+
+
 			</view>
 
-			<!-- 教学视频 -->
-
-			<view class="video">
-				<text class="textTitle uni-flex-item">教学视频</text>
-				<text class="watchText">点击观看</text>
-
-				<text class="iconfont iconplay"></text>
-
-			</view>
+		</scroll-view>
 
 
-			<!-- 设施信息 -->
+		<!-- 底部报修和意见反馈 -->
 
-			<view class="facilityInfo" style="margin-bottom: 20rpx;margin-top: 20rpx;">
-				<text class="textTitle uni-flex-item">设施信息</text>
+		<view class="bottom">
 
-				<text class="textContent uni-text-gray">设施类型:{{facility.FacilitiesType}}</text>
-				<text class="textContent uni-text-gray">投资性质:{{facility.ConstructionProperty}}</text>
-				<text class="textContent uni-text-gray">建成时间:{{facility.CompletionTime}}</text>
-
-
-			</view>
+			<text>我要报修</text>
+			<view class="line"></view>
+			<text>意见反馈</text>
 
 
 		</view>
 
-	</scroll-view>
+	</view>
 </template>
 
 <script>
@@ -120,11 +145,11 @@
 			navication: function() {
 				console.log("查看路线")
 			},
-			previewImg:function (e) {
+			previewImg: function(e) {
 				console.log(e.target.dataset.src)
 				uni.previewImage({
-					current:e.target.dataset.src,
-					urls:[e.target.dataset.src]
+					current: e.target.dataset.src,
+					urls: [e.target.dataset.src]
 				})
 			}
 
@@ -133,6 +158,20 @@
 </script>
 
 <style>
+	.page {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	scroll-view {
+		flex: 1;
+		width: 100%;
+		border: 1px solid red;
+		padding-bottom: 90rpx;
+	}
+
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -197,6 +236,22 @@
 		line-height: 76rpx;
 	}
 
+
+	.openTime {
+		display: flex;
+		height: 56rpx;
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+
+	.openTime text {
+		line-height: 56rpx;
+		background: #FFF1E8;
+		padding-left: 20rpx;
+		padding-right: 20rpx;
+		font-size: 24rpx;
+		color: #888888;
+	}
 
 	.navigation {
 		width: 100rpx;
@@ -294,5 +349,29 @@
 		text-align: center;
 		height: 30rpx;
 		overflow: hidden;
+	}
+
+	.bottom {
+		width: 100%;
+		height: 90rpx;
+		position: fixed;
+		z-index: 100;
+		bottom: 0rpx;
+		background-color: #FFFFFF;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.bottom text {
+		flex: 1;
+		line-height: 90rpx;
+
+		text-align: center;
+	}
+
+	.bottom .line {
+		width: 1rpx;
+		height: 100%;
+		background: #F0F0F0;
 	}
 </style>
