@@ -143,11 +143,11 @@
 		},
 		methods: {
 			navication: function() {
-				
-				if(this.facility.Coordinate==""){
+
+				if (this.facility.Coordinate == "") {
 					uni.showToast({
 						title: '没有经纬度数据,无法导航',
-						icon:"none"
+						icon: "none"
 					});
 					return
 				}
