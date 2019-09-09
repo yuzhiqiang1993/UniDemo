@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/task/task",
-    "pages/task_details/task_details"
+    "pages/task_details/task_details",
+    "pages/feedback/feedback"
   ],
   "subPackages": [],
   "window": {

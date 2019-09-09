@@ -100,7 +100,7 @@
 
 			<text>我要报修</text>
 			<view class="line"></view>
-			<text>意见反馈</text>
+			<text @click="feedback">意见反馈</text>
 
 
 		</view>
@@ -172,6 +172,14 @@
 					current: e.target.dataset.src,
 					urls: [e.target.dataset.src]
 				})
+			},
+			feedback:function () {
+				uni.navigateTo({
+					url: '../feedback/feedback',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
 			}
 
 		}
