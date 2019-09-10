@@ -42,7 +42,7 @@
 		<view class="layout_instrument" v-for="item of instruments" :key="item.index">
 			<view class="layout_select">
 				<text>器材名称</text>
-				<picker>
+				<picker mode="selector" >
 					<text>{{item.name}}</text>
 
 				</picker>
@@ -57,7 +57,7 @@
 		</view>
 
 		<view class="layout_btn">
-			<button type="default" size="mini" plain="true" @click="submit" style="width: 40%;">添加</button>
+			<button type="default" size="mini" plain="true" @click="add" style="width: 40%;">添加</button>
 			<button type="primary" size="mini" @click="submit" style="width: 40%;background: #022456;">确定</button>
 		</view>
 
@@ -75,21 +75,21 @@
 		data() {
 			return {
 				"instruments": [{
-						"name": "上肢牵引器",
-						"damages": "轴承损坏了"
+						"name": "三人上肢牵引器",
+						"damages": "轴承损坏"
 					},
 					{
-						"name": "上肢牵引器",
-						"damages": "轴承损坏了"
+						"name": "多功能锻炼器",
+						"damages": "油漆脱落"
 					}, {
-						"name": "上肢牵引器",
-						"damages": "轴承损坏了"
+						"name": "双人扭腰器",
+						"damages": "主体部件损坏"
 					}, {
-						"name": "上肢牵引器",
-						"damages": "轴承损坏了"
+						"name": "健骑器",
+						"damages": "螺丝松动"
 					}, {
-						"name": "上肢牵引器",
-						"damages": "轴承损坏了"
+						"name": "压腿杠",
+						"damages": "用不了了"
 					},
 
 				],
@@ -99,6 +99,11 @@
 			submit: function() {
 				uni.showToast({
 					title: "提交"
+				})
+			},
+			add:function () {
+				uni.showToast({
+					title:"添加"
 				})
 			}
 		}

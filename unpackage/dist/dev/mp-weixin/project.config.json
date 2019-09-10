@@ -4,11 +4,17 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
-	"appid": "wx4a9ee3a3edef27dc",
+	"libVersion": "2.8.2",
+	"appid": "wxcecc7ff4364d025a",
 	"projectname": "ESP",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

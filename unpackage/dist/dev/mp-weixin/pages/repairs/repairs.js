@@ -191,21 +191,21 @@ var _default =
   data: function data() {
     return {
       "instruments": [{
-        "name": "上肢牵引器",
-        "damages": "轴承损坏了" },
+        "name": "三人上肢牵引器",
+        "damages": "轴承损坏" },
 
       {
-        "name": "上肢牵引器",
-        "damages": "轴承损坏了" },
+        "name": "多功能锻炼器",
+        "damages": "油漆脱落" },
       {
-        "name": "上肢牵引器",
-        "damages": "轴承损坏了" },
+        "name": "双人扭腰器",
+        "damages": "主体部件损坏" },
       {
-        "name": "上肢牵引器",
-        "damages": "轴承损坏了" },
+        "name": "健骑器",
+        "damages": "螺丝松动" },
       {
-        "name": "上肢牵引器",
-        "damages": "轴承损坏了" }] };
+        "name": "压腿杠",
+        "damages": "用不了了" }] };
 
 
 
@@ -215,6 +215,11 @@ var _default =
     submit: function submit() {
       uni.showToast({
         title: "提交" });
+
+    },
+    add: function add() {
+      uni.showToast({
+        title: "添加" });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

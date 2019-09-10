@@ -7,6 +7,7 @@
 export default {
 	config: {
 		baseUrl: "http://192.168.1.201:8003/",
+		// baseUrl: "https://repair.esplohas.com/",
 		header: {
 			'Content-Type': 'application/json;charset=UTF-8',
 			'Content-Type': 'application/x-www-form-urlencoded',
