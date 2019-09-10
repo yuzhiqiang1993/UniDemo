@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/task/task",
     "pages/task_details/task_details",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/repairs/repairs"
   ],
   "subPackages": [],
   "window": {

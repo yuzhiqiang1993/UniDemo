@@ -11,7 +11,7 @@
 
 		<text>进入设施点及详情进行报修</text>
 
-		<button style="background: #0090FF;margin-top: 60rpx;" type="primary">极速报修</button>
+		<button @click="quickReport" style="background: #0090FF;margin-top: 60rpx;" type="primary">极速报修</button>
 		<text>直接进入报修页面，输入器材编号进行报修</text>
 	</view>
 
@@ -25,6 +25,11 @@
 
 				uni.navigateTo({
 					url: "../task/task"
+				})
+			},
+			quickReport:function () {
+				uni.navigateTo({
+					url:"../repairs/repairs"
 				})
 			}
 		}

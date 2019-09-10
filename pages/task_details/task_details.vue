@@ -98,7 +98,7 @@
 
 		<view class="bottom">
 
-			<text>我要报修</text>
+			<text @click="repair">我要报修</text>
 			<view class="line"></view>
 			<text @click="feedback">意见反馈</text>
 
@@ -173,13 +173,18 @@
 					urls: [e.target.dataset.src]
 				})
 			},
-			feedback:function () {
+			feedback: function() {
 				uni.navigateTo({
 					url: '../feedback/feedback',
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
 				});
+			},
+			repair: function() {
+				uni.navigateTo({
+					url: "../repairs/repairs"
+				})
 			}
 
 		}

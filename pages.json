@@ -16,22 +16,26 @@
 				"backgroundColor": "#022456",
 				"backgroundTextStyle": "light"
 			}
-		},
-		{
+		}, {
 			"path": "pages/task_details/task_details",
 			"style": {
 				"navigationBarTitleText": "设施点详情"
 			}
-		},
-		{
+		}, {
 			"path": "pages/feedback/feedback",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "意见反馈",
+				"backgroundColor": "#022456",
+				"backgroundTextStyle": "light"
+			}
+		}, {
+			"path": "pages/repairs/repairs",
+			"style": {
+				"navigationBarTitleText": "设施报修",
 				"backgroundColor": "#022456",
 				"backgroundTextStyle": "light"
 			}
 		}
-
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
