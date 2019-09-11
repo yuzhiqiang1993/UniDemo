@@ -55,7 +55,10 @@
 </template>
 
 <script>
+	
 	export default {
+		
+	
 		data() {
 			return {
 				MembershipCounty: "all",
@@ -70,14 +73,16 @@
 				typeIndex: 0,
 				address: "地址",
 				type: "设施类型",
-				taskList: [],
-				countryList: [],
-				streetTownList: [],
+				// taskList: [],
+				// countryList: [],
+				// streetTownList: [],	
+				taskList: this.$mock.taskList,
+				countryList: this.$mock.countryList,
+				streetTownList: this.$mock.streetTowns,
 				types: [{
 					name: "类型",
 					code: "all"
 				}, {
-
 					name: "市民健身苑点",
 					code: "JD"
 				}, {
@@ -97,71 +102,71 @@
 			}
 		},
 
-		onPullDownRefresh: function() {
-			this.Start = 0
-
-			this.requestTaskList()
-		},
-		onReachBottom: function() {
-			console.log("上拉加载")
-			uni.showNavigationBarLoading()
-
-			this.$api.taskList({
-				MembershipCounty: this.MembershipCounty,
-				StreetTownName: this.StreetTownName,
-				FacilitiesType: this.FacilitiesType,
-				Start: this.Start,
-				Pagesize: this.Pagesize,
-				longitude: this.longitude,
-				latitude: this.latitude
-			}).then((res) => {
-
-				// console.log("加载更多：" + JSON.stringify(res))
-
-				if (res.length == 0) {
-					uni.showToast({
-						title: '没有更多数据了...',
-						icon: "none"
-					});
-				} else {
-				  for (let item of res) {
-						item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto
-					}
-					console.log("追加的数据："+JSON.stringify(res))
-					this.taskList = this.taskList.concat(res)
-					this.Start = this.Start + this.Pagesize
-					
-					
-				}
-
-				uni.hideNavigationBarLoading()
-			})
-
-		},
+// 		onPullDownRefresh: function() {
+// 			this.Start = 0
+// 
+// 			this.requestTaskList()
+// 		},
+// 		onReachBottom: function() {
+// 			console.log("上拉加载")
+// 			uni.showNavigationBarLoading()
+// 
+// 			this.$api.taskList({
+// 				MembershipCounty: this.MembershipCounty,
+// 				StreetTownName: this.StreetTownName,
+// 				FacilitiesType: this.FacilitiesType,
+// 				Start: this.Start,
+// 				Pagesize: this.Pagesize,
+// 				longitude: this.longitude,
+// 				latitude: this.latitude
+// 			}).then((res) => {
+// 
+// 				// console.log("加载更多：" + JSON.stringify(res))
+// 
+// 				if (res.length == 0) {
+// 					uni.showToast({
+// 						title: '没有更多数据了...',
+// 						icon: "none"
+// 					});
+// 				} else {
+// 				  for (let item of res) {
+// 						item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto
+// 					}
+// 					console.log("追加的数据："+JSON.stringify(res))
+// 					this.taskList = this.taskList.concat(res)
+// 					this.Start = this.Start + this.Pagesize
+// 					
+// 					
+// 				}
+// 
+// 				uni.hideNavigationBarLoading()
+// 			})
+// 
+// 		},
 		onLoad: function() {
 
-			this.requestCoutryList()
-			this.requestStreetTownList()
-
-			uni.getLocation({
-				type: 'gcj02',
-
-				success: (res) => {
-					this.latitude = res.latitude
-					this.longitude = res.longitude
-
-				},
-				fail: () => {
-					uni.showModal({
-						content: "位置信息获取失败，请检查GPS是否开启"
-					})
-				},
-				complete: (res) => {
-					this.requestTaskList()
-				}
-
-			});
-
+// 			this.requestCoutryList()
+// 			this.requestStreetTownList()
+// 
+// 			uni.getLocation({
+// 				type: 'gcj02',
+// 
+// 				success: (res) => {
+// 					this.latitude = res.latitude
+// 					this.longitude = res.longitude
+// 
+// 				},
+// 				fail: () => {
+// 					uni.showModal({
+// 						content: "位置信息获取失败，请检查GPS是否开启"
+// 					})
+// 				},
+// 				complete: (res) => {
+// 					this.requestTaskList()
+// 				}
+// 
+// 			});
+// 
 
 		},
 
@@ -171,7 +176,7 @@
 				this.Start = 0
 				this.typeIndex = e.target.value
 				this.FacilitiesType = this.types[this.typeIndex].code
-				this.requestTaskList()
+				// this.requestTaskList()
 			},
 			/* 选择区县 */
 			countryChanged: function(e) {
@@ -180,8 +185,8 @@
 				this.StreetTownName = "all"
 				this.countryIndex = e.target.value
 				this.MembershipCounty = this.countryList[this.countryIndex].CountyCode
-				this.requestStreetTownList()
-				this.requestTaskList()
+				// this.requestStreetTownList()
+				// this.requestTaskList()
 
 			},
 			/* 选择街镇 */
@@ -189,7 +194,7 @@
 				this.Start = 0
 				this.streetTownIndex = e.target.value
 				this.StreetTownName = this.streetTownList[this.streetTownIndex].StreetTownCode
-				this.requestTaskList()
+				// this.requestTaskList()
 
 			},
 
