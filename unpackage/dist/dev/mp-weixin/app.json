@@ -4,7 +4,8 @@
     "pages/task/task",
     "pages/task_details/task_details",
     "pages/feedback/feedback",
-    "pages/repairs/repairs"
+    "pages/repairs/repairs",
+    "pages/repairs/quick_repairs"
   ],
   "subPackages": [],
   "window": {
@@ -18,6 +19,5 @@
       "desc": "计算点位距离当前位置距离"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

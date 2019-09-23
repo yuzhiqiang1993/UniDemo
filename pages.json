@@ -35,6 +35,13 @@
 				"backgroundColor": "#022456",
 				"backgroundTextStyle": "light"
 			}
+		}, {
+			"path": "pages/repairs/quick_repairs",
+			"style": {
+				"navigationBarTitleText": "快速报修",
+				"backgroundColor": "#022456",
+				"backgroundTextStyle": "light"
+			}
 		}
 	],
 	"globalStyle": {

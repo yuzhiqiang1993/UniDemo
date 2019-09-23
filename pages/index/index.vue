@@ -29,7 +29,7 @@
 			},
 			quickReport:function () {
 				uni.navigateTo({
-					url:"../repairs/repairs"
+					url:"../repairs/quick_repairs"
 				})
 			}
 		}

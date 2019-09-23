@@ -31,7 +31,7 @@
 
 			<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode" @click="goToTaskDetails(item.FacilitiesTypeCode)">
 
-				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo"/>
+				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo" />
 				<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
 
 				<view class="uni-flex uni-column content">
@@ -55,10 +55,9 @@
 </template>
 
 <script>
-	
 	export default {
-		
-	
+
+
 		data() {
 			return {
 				MembershipCounty: "all",
@@ -102,71 +101,71 @@
 			}
 		},
 
-// 		onPullDownRefresh: function() {
-// 			this.Start = 0
-// 
-// 			this.requestTaskList()
-// 		},
-// 		onReachBottom: function() {
-// 			console.log("上拉加载")
-// 			uni.showNavigationBarLoading()
-// 
-// 			this.$api.taskList({
-// 				MembershipCounty: this.MembershipCounty,
-// 				StreetTownName: this.StreetTownName,
-// 				FacilitiesType: this.FacilitiesType,
-// 				Start: this.Start,
-// 				Pagesize: this.Pagesize,
-// 				longitude: this.longitude,
-// 				latitude: this.latitude
-// 			}).then((res) => {
-// 
-// 				// console.log("加载更多：" + JSON.stringify(res))
-// 
-// 				if (res.length == 0) {
-// 					uni.showToast({
-// 						title: '没有更多数据了...',
-// 						icon: "none"
-// 					});
-// 				} else {
-// 				  for (let item of res) {
-// 						item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto
-// 					}
-// 					console.log("追加的数据："+JSON.stringify(res))
-// 					this.taskList = this.taskList.concat(res)
-// 					this.Start = this.Start + this.Pagesize
-// 					
-// 					
-// 				}
-// 
-// 				uni.hideNavigationBarLoading()
-// 			})
-// 
-// 		},
+		// 		onPullDownRefresh: function() {
+		// 			this.Start = 0
+		// 
+		// 			this.requestTaskList()
+		// 		},
+		// 		onReachBottom: function() {
+		// 			console.log("上拉加载")
+		// 			uni.showNavigationBarLoading()
+		// 
+		// 			this.$api.taskList({
+		// 				MembershipCounty: this.MembershipCounty,
+		// 				StreetTownName: this.StreetTownName,
+		// 				FacilitiesType: this.FacilitiesType,
+		// 				Start: this.Start,
+		// 				Pagesize: this.Pagesize,
+		// 				longitude: this.longitude,
+		// 				latitude: this.latitude
+		// 			}).then((res) => {
+		// 
+		// 				// console.log("加载更多：" + JSON.stringify(res))
+		// 
+		// 				if (res.length == 0) {
+		// 					uni.showToast({
+		// 						title: '没有更多数据了...',
+		// 						icon: "none"
+		// 					});
+		// 				} else {
+		// 				  for (let item of res) {
+		// 						item.PanoramicPhoto = "http://operation.esplohas.com" + item.PanoramicPhoto
+		// 					}
+		// 					console.log("追加的数据："+JSON.stringify(res))
+		// 					this.taskList = this.taskList.concat(res)
+		// 					this.Start = this.Start + this.Pagesize
+		// 					
+		// 					
+		// 				}
+		// 
+		// 				uni.hideNavigationBarLoading()
+		// 			})
+		// 
+		// 		},
 		onLoad: function() {
 
-// 			this.requestCoutryList()
-// 			this.requestStreetTownList()
-// 
-// 			uni.getLocation({
-// 				type: 'gcj02',
-// 
-// 				success: (res) => {
-// 					this.latitude = res.latitude
-// 					this.longitude = res.longitude
-// 
-// 				},
-// 				fail: () => {
-// 					uni.showModal({
-// 						content: "位置信息获取失败，请检查GPS是否开启"
-// 					})
-// 				},
-// 				complete: (res) => {
-// 					this.requestTaskList()
-// 				}
-// 
-// 			});
-// 
+			// 			this.requestCoutryList()
+			// 			this.requestStreetTownList()
+			// 
+			// 			uni.getLocation({
+			// 				type: 'gcj02',
+			// 
+			// 				success: (res) => {
+			// 					this.latitude = res.latitude
+			// 					this.longitude = res.longitude
+			// 
+			// 				},
+			// 				fail: () => {
+			// 					uni.showModal({
+			// 						content: "位置信息获取失败，请检查GPS是否开启"
+			// 					})
+			// 				},
+			// 				complete: (res) => {
+			// 					this.requestTaskList()
+			// 				}
+			// 
+			// 			});
+			// 
 
 		},
 

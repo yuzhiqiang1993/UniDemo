@@ -9,9 +9,11 @@
 		"postcss": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.2",
+	"libVersion": "2.7.0",
 	"appid": "wxcecc7ff4364d025a",
 	"projectname": "ESP",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
