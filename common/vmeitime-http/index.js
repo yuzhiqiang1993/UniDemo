@@ -67,11 +67,44 @@ export const taskDetails = (data) => {
 	})
 }
 
+
+/* 根据编号获取器材 */
+export const getInfoByNumber = (data) => {
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+		return response;
+	}
+	return http.request({
+		url: 'api/ScanCodeRepair/GetInformationByNumber',
+		method: "POST",
+		dataType: 'json',
+		data: data
+	})
+
+}
+
+
+/* 提交报修器材数据 */
+export const submitRepairs = (data) => {
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+		return response;
+	}
+	return http.request({
+		url: '/api/ScanCodeRepair/EmergencyRepairSubmission',
+		method: "POST",
+		dataType: 'json',
+		data: data
+	})
+
+}
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
 	taskList,
 	countyList,
 	streetTownList,
-	taskDetails
+	taskDetails,
+	getInfoByNumber,
+	submitRepairs
 
 }

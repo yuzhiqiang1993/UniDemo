@@ -10,12 +10,12 @@
 
 			<view class="layout_input">
 				<text>您的姓名</text>
-				<input placeholder="请输入" type="text" v-model="userName" />
+				<input placeholder="请输入" type="text" v-model="this.userName" />
 			</view>
 
 			<view class="layout_input">
 				<text>联系电话</text>
-				<input placeholder="请输入" type="number" v-model="userPhone" />
+				<input placeholder="请输入" type="number" v-model="this.userPhone" />
 			</view>
 		</view>
 
@@ -24,34 +24,34 @@
 		<!-- 器材信息 -->
 
 
-		<view class="layout_instrument" v-for="item of instruments" :key="item.index">
+		<view class="layout_instrument" v-for="(item,index) of instruments" :key="item.index">
 
 
 			<view class="layout_input">
 
 				<text>器材编号</text>
-				<input placeholder="请输入器材编号" type="number" v-model="instrumentCode"></text>
+				<input placeholder="请输入器材编号" type="text" @input="changeInstrumentCode" :value="item.InstrumentCode"></text>
 
 				<button type="primary" size="mini" style="height: 50rpx;line-height: 50rpx;justify-content: center;margin-top: 20rpx;"
-				 @click="requestInstrumentInfo">确定</button>
+				 @click="requestInstrumentInfo(index)">确定</button>
 			</view>
 
 			<view class="layout_select">
 				<text>设施名称</text>
-				<text style="margin-left: 30rpx;">{{item.FacilitiesName}}</text>
+				<text style="margin-left: 45rpx;">{{item.FacilitiesName}}</text>
 
 			</view>
 
 
 			<view class="layout_select">
 				<text>器材名称</text>
-				<text>{{item.name}}</text>
+				<text style="margin-left: 45rpx;">{{item.InstrumentName}}</text>
 
 			</view>
 
 			<view class="layout_input">
 				<text>故障描述</text>
-				<input placeholder="请输入" />
+				<input placeholder="请输入" @input="changeDamage" :value="item.DamageInformation" />
 			</view>
 
 		</view>
@@ -61,9 +61,9 @@
 			<button type="primary" size="mini" @click="submit" style="width: 40%;background: #022456;">确定</button>
 		</view>
 
-
-
 	</view>
+
+
 
 
 
@@ -74,17 +74,11 @@
 	export default {
 		data() {
 			return {
-				"instruments": [{
-						"ID": 1,
-						"InstrumentCode": "22222222",
-						"FacilitiesName": "dfdfsafdsa"
-					}
-
-				],
-
-				"instrumentCode": "111",
+				"instruments": [],
+				"InstrumentCode": "",
 				"userName": "",
-				"userPhone": ""
+				"userPhone": "",
+				"DamageInformation": ""
 			}
 		},
 		methods: {
@@ -101,14 +95,108 @@
 
 
 			},
-			add: function() {
-				uni.showToast({
-					title: "添加"
-				})
+
+			changeInstrumentCode: function(e) {
+				console.log(e.detail.value)
+
+
+
+				this.InstrumentCode = e.detail.value
+
 			},
-			requestInstrumentInfo: function() {
-				uni.showToast({
-					title: this.instrumentCode
+
+
+			add: function() {
+
+
+
+
+
+				// debugger
+				var instrument = this.instruments[this.instruments.length - 1]
+				console.log(instrument)
+				/* 先判断列表中数据是否完整 */
+
+				if (this.instruments.length === 0) {
+					this.instruments.push({
+						ID: 0,
+						InstrumentCode: "",
+						InstrumentName: "",
+						FacilitiesName: "",
+						DamageInformation: ""
+					})
+
+				} else {
+
+					if (!instrument.InstrumentCode || !instrument.DamageInformation) {
+
+						uni.showToast({
+							title: "请先完成上个器材",
+							icon: "none"
+						})
+
+
+					} else {
+
+						this.instruments.push({
+							ID: 0,
+							InstrumentCode: "",
+							InstrumentName: "",
+							FacilitiesName: ""
+						})
+
+					}
+				}
+
+
+
+
+
+				/* {ID: 5419, InstrumentCode: "08M08MJYZJW060106", InstrumentName: "太极云手", FacilitiesName: "南方城健身苑点A"} */
+
+
+
+			},
+			requestInstrumentInfo: function(index) {
+
+
+				console.log("下标：" + index)
+
+
+				/* 先判断编号是否为空 */
+
+				console.log(this.InstrumentCode)
+
+
+				uni.showLoading({
+					title: "正在获取器材"
+				})
+
+				this.$api.getInfoByNumber({
+					"InstrumentCode": this.InstrumentCode
+				}).then((res) => {
+
+					/* 
+					{ID: 5419, InstrumentCode: "08M08MJYZJW060106", InstrumentName: "太极云手", FacilitiesName: "南方城健身苑点A"}
+					 */
+					console.log(res)
+
+					this.instruments[index] = res
+
+					this.$set(this.instruments, this.instruments[index], res)
+
+					uni.hideLoading()
+
+				}).catch((err) => {
+					uni.hideLoading()
+
+					uni.showToast({
+						title: err.Message,
+						icon: "none",
+						mask: true
+					})
+
+					console.log('request fail', err);
 				})
 			}
 		}

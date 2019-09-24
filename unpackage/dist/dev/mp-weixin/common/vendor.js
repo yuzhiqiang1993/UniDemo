@@ -8389,7 +8389,7 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23220190921001","_inBundle":false,"_integrity":"sha512-xlHjc5YqMrdr4rIKE/aMXlfzLDVxbCY31e/jH+n2NtFA14KDtNIHzsgNM0h0Mq8IUfDFtMMPmmlay59RTmHonQ==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23220190921001.tgz","_shasum":"63200bbfbdcc4c696ed0be335fa14613757c4026","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"d26b206188ff9e5de659870e5f4e8b2d24d8f02f","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23220190921001"};
+module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23320190923002","_inBundle":false,"_integrity":"sha512-MnftsvgOac3q1FCOBPzivbFn8GNQFo7D2DY325HeEZyFCWgx5GEwHpGYjT1PQU6v7DaDn0ruxa3ObdpUIYbmZw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23320190923002.tgz","_shasum":"0c400c140ca0b3c05f52d25f11583cf05a0c4e9a","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"fed4c73fb9142a1b277dd79313939cad90693d3e","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23320190923002"};
 
 /***/ }),
 /* 7 */
@@ -8400,7 +8400,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "扫码报修", "backgroundColor": "#022456", "backgroundTextStyle": "light", "usingComponents": {} }, "pages/task/task": { "enablePullDownRefresh": true, "backgroundColor": "#022456", "backgroundTextStyle": "light", "usingComponents": {} }, "pages/task_details/task_details": { "navigationBarTitleText": "设施点详情", "usingComponents": {} }, "pages/feedback/feedback": { "navigationBarTitleText": "意见反馈", "backgroundColor": "#022456", "backgroundTextStyle": "light", "usingComponents": {} }, "pages/repairs/repairs": { "navigationBarTitleText": "设施报修", "backgroundColor": "#022456", "backgroundTextStyle": "light", "usingComponents": {} }, "pages/repairs/quick_repairs": { "navigationBarTitleText": "快速报修", "backgroundColor": "#022456", "backgroundTextStyle": "light" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "上海市社区体育设施", "navigationBarBackgroundColor": "#022456", "backgroundColor": "#1E90FF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "扫码报修", "backgroundColor": "#022456", "backgroundTextStyle": "light" }, "pages/task/task": { "enablePullDownRefresh": true, "backgroundColor": "#022456", "backgroundTextStyle": "light" }, "pages/task_details/task_details": { "navigationBarTitleText": "设施点详情" }, "pages/feedback/feedback": { "navigationBarTitleText": "意见反馈", "backgroundColor": "#022456", "backgroundTextStyle": "light" }, "pages/repairs/repairs": { "navigationBarTitleText": "设施报修", "backgroundColor": "#022456", "backgroundTextStyle": "light" }, "pages/repairs/quick_repairs": { "navigationBarTitleText": "快速报修", "backgroundColor": "#022456", "backgroundTextStyle": "light" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "上海市社区体育设施", "navigationBarBackgroundColor": "#022456", "backgroundColor": "#1E90FF" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -8533,13 +8533,13 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.taskDetails = exports.streetTownList = exports.countyList = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.submitRepairs = exports.getInfoByNumber = exports.taskDetails = exports.streetTownList = exports.countyList = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
-                                                                                                                                                                                                                                                                                                                                                          * 将业务所有接口统一起来便于维护
-                                                                                                                                                                                                                                                                                                                                                          * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
-                                                                                                                                                                                                                                                                                                                                                          * 
-                                                                                                                                                                                                                                                                                                                                                          */
+                                                                                                                                                                                                                                                                                                                                                                                                            * 将业务所有接口统一起来便于维护
+                                                                                                                                                                                                                                                                                                                                                                                                            * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
+                                                                                                                                                                                                                                                                                                                                                                                                            * 
+                                                                                                                                                                                                                                                                                                                                                                                                            */
 
 /* 任务列表 */
 var taskList = function taskList(data) {
@@ -8602,12 +8602,45 @@ var taskDetails = function taskDetails(data) {
 
 };
 
+
+/* 根据编号获取器材 */exports.taskDetails = taskDetails;
+var getInfoByNumber = function getInfoByNumber(data) {
+  //设置请求结束后拦截器
+  _interface.default.interceptor.response = function (response) {
+    return response;
+  };
+  return _interface.default.request({
+    url: 'api/ScanCodeRepair/GetInformationByNumber',
+    method: "POST",
+    dataType: 'json',
+    data: data });
+
+
+};
+
+
+/* 提交报修器材数据 */exports.getInfoByNumber = getInfoByNumber;
+var submitRepairs = function submitRepairs(data) {
+  //设置请求结束后拦截器
+  _interface.default.interceptor.response = function (response) {
+    return response;
+  };
+  return _interface.default.request({
+    url: '/api/ScanCodeRepair/EmergencyRepairSubmission',
+    method: "POST",
+    dataType: 'json',
+    data: data });
+
+
+};
 // 默认全部导出  import api from '@/common/vmeitime-http/'
-exports.taskDetails = taskDetails;var _default = {
+exports.submitRepairs = submitRepairs;var _default = {
   taskList: taskList,
   countyList: countyList,
   streetTownList: streetTownList,
-  taskDetails: taskDetails };exports.default = _default;
+  taskDetails: taskDetails,
+  getInfoByNumber: getInfoByNumber,
+  submitRepairs: submitRepairs };exports.default = _default;
 
 /***/ }),
 /* 16 */
@@ -8626,7 +8659,7 @@ exports.taskDetails = taskDetails;var _default = {
 
 {
   config: {
-    // baseUrl: "http://192.168.1.201:8003/",
+    //baseUrl: "https://192.168.1.201:8010/",
     baseUrl: "https://repair.esplohas.com/",
     header: _defineProperty({
       'Content-Type': 'application/json;charset=UTF-8' }, "Content-Type",
@@ -8675,12 +8708,14 @@ exports.taskDetails = taskDetails;var _default = {
       var _config = null;
 
       options.complete = function (response) {
+
+
         var statusCode = response.statusCode;
         response.config = _config;
         if (true) {
           if (statusCode === 200) {
-            //console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
-            //console.log("【" + _config.requestId + "】 结果：" + response.data)
+            // console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
+            // console.log("【" + _config.requestId + "】 结果：" + response)
 
 
           }
@@ -8694,9 +8729,10 @@ exports.taskDetails = taskDetails;var _default = {
         // 统一的响应日志记录
         // _reslog(response)
         if (statusCode === 200 && response.data.fig == 1) {//成功
+
           resolve(response.data.data);
         } else {
-          reject(response);
+          reject(response.data);
         }
       };
 

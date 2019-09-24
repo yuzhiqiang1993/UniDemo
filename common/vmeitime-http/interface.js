@@ -6,8 +6,8 @@
 
 export default {
 	config: {
-		// baseUrl: "http://192.168.1.201:8003/",
-		 baseUrl: "https://repair.esplohas.com/",
+		//baseUrl: "https://192.168.1.201:8010/",
+		baseUrl: "https://repair.esplohas.com/",
 		header: {
 			'Content-Type': 'application/json;charset=UTF-8',
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -23,9 +23,9 @@ export default {
 	},
 	interceptor: {
 		request: function() {
-			
+
 			console.log("全局请求拦截器");
-			
+
 		},
 		response: function() {
 			console.log("全局响应拦截器");
@@ -48,21 +48,23 @@ export default {
 		_sign = {'sign': sign(JSON.stringify(options.data))}
 		options.header = Object.assign({}, options.header, _token,_sign) 
 		*/
-	   
-	 
+
+
 
 		return new Promise((resolve, reject) => {
 			let _config = null
 
 			options.complete = (response) => {
+
+
 				let statusCode = response.statusCode
 				response.config = _config
 				if (process.env.NODE_ENV === 'development') {
 					if (statusCode === 200) {
-						//console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
-						//console.log("【" + _config.requestId + "】 结果：" + response.data)
-				
-									
+						// console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
+						// console.log("【" + _config.requestId + "】 结果：" + response)
+
+
 					}
 				}
 				if (this.interceptor.response) {
@@ -73,10 +75,11 @@ export default {
 				}
 				// 统一的响应日志记录
 				// _reslog(response)
-				if (statusCode === 200&&response.data.fig==1) { //成功
+				if (statusCode === 200 && response.data.fig == 1) { //成功
+
 					resolve(response.data.data);
 				} else {
-					reject(response)
+					reject(response.data)
 				}
 			}
 
