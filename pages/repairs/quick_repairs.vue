@@ -30,7 +30,7 @@
 			<view class="layout_input">
 
 				<text>器材编号</text>
-				<input placeholder="请输入器材编号" type="text" @input="changeInstrumentCode" :value="item.InstrumentCode"></text>
+				<input placeholder="请输入器材编号" type="text" @input="changeInstrumentCode" :value="item.InstrumentCode" />
 
 				<button type="primary" size="mini" style="height: 50rpx;line-height: 50rpx;justify-content: center;margin-top: 20rpx;"
 				 @click="requestInstrumentInfo(index)">确定</button>
@@ -51,7 +51,8 @@
 
 			<view class="layout_input">
 				<text>故障描述</text>
-				<input placeholder="请输入" @input="changeDamage" :value="item.DamageInformation" />
+
+				<input placeholder="请输入" type="text" @input="changeDamage($event,index)" />
 			</view>
 
 		</view>
@@ -89,28 +90,66 @@
 						title: "提示",
 						content: "请输入您的姓名和联系电话",
 						showCancel: false
-
 					})
 				}
+
+
+
+
+				var data = {
+					"Applicant": this.userName,
+					"ApplicantPhone": this.userPhone,
+					"EquipmentInformation": this.instruments
+				}
+
+
+				console.log("要提交的数据" + JSON.stringify(data))
+
+
+
+				uni.showLoading({
+					title: "正在提交数据"
+				})
+				this.$api.submitRepairs(data).then((res) => {
+					console.log(res)
+					uni.hideLoading()
+
+				}).catch((err) => {
+					uni.hideLoading()
+
+					uni.showToast({
+						title: err.Message,
+						icon: "none",
+						mask: true
+					})
+
+					console.log('request fail', err);
+				})
+
+
 
 
 			},
 
 			changeInstrumentCode: function(e) {
 				console.log(e.detail.value)
-
-
-
 				this.InstrumentCode = e.detail.value
+				this.DamageInformation = e.detail.value
+
+			},
+
+			changeDamage: function(e, index) {
+				console.log(index)
+				console.log(e)
+
+				this.$set(this.instruments[index], "DamageInformation", e.detail.value)
+
 
 			},
 
 
+
 			add: function() {
-
-
-
-
 
 				// debugger
 				var instrument = this.instruments[this.instruments.length - 1]
@@ -127,6 +166,8 @@
 					})
 
 				} else {
+
+					console.log(instrument.DamageInformation)
 
 					if (!instrument.InstrumentCode || !instrument.DamageInformation) {
 
@@ -176,14 +217,7 @@
 					"InstrumentCode": this.InstrumentCode
 				}).then((res) => {
 
-					/* 
-					{ID: 5419, InstrumentCode: "08M08MJYZJW060106", InstrumentName: "太极云手", FacilitiesName: "南方城健身苑点A"}
-					 */
-					console.log(res)
-
-					this.instruments[index] = res
-
-					this.$set(this.instruments, this.instruments[index], res)
+					this.$set(this.instruments, index, res)
 
 					uni.hideLoading()
 

@@ -8714,8 +8714,8 @@ exports.submitRepairs = submitRepairs;var _default = {
         response.config = _config;
         if (true) {
           if (statusCode === 200) {
-            // console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
-            // console.log("【" + _config.requestId + "】 结果：" + response)
+            console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data));
+            //	console.log("【" + _config.requestId + "】 结果：" + response)
 
 
           }
@@ -8728,9 +8728,14 @@ exports.submitRepairs = submitRepairs;var _default = {
         }
         // 统一的响应日志记录
         // _reslog(response)
-        if (statusCode === 200 && response.data.fig == 1) {//成功
+        if (statusCode === 200) {//成功
 
-          resolve(response.data.data);
+          if (response.data.fig === 1) {
+            resolve(response.data.data);
+          } else {
+            reject(response.data);
+          }
+
         } else {
           reject(response.data);
         }

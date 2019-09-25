@@ -194,6 +194,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -214,27 +215,65 @@ var _default =
           content: "请输入您的姓名和联系电话",
           showCancel: false });
 
-
       }
+
+
+
+
+      var data = {
+        "Applicant": this.userName,
+        "ApplicantPhone": this.userPhone,
+        "EquipmentInformation": this.instruments };
+
+
+
+      console.log("要提交的数据" + JSON.stringify(data));
+
+
+
+      uni.showLoading({
+        title: "正在提交数据" });
+
+      this.$api.submitRepairs(data).then(function (res) {
+        console.log(res);
+        uni.hideLoading();
+
+      }).catch(function (err) {
+        uni.hideLoading();
+
+        uni.showToast({
+          title: err.Message,
+          icon: "none",
+          mask: true });
+
+
+        console.log('request fail', err);
+      });
+
+
 
 
     },
 
     changeInstrumentCode: function changeInstrumentCode(e) {
       console.log(e.detail.value);
-
-
-
       this.InstrumentCode = e.detail.value;
+      this.DamageInformation = e.detail.value;
+
+    },
+
+    changeDamage: function changeDamage(e, index) {
+      console.log(index);
+      console.log(e);
+
+      this.$set(this.instruments[index], "DamageInformation", e.detail.value);
+
 
     },
 
 
+
     add: function add() {
-
-
-
-
 
       // debugger
       var instrument = this.instruments[this.instruments.length - 1];
@@ -251,6 +290,8 @@ var _default =
 
 
       } else {
+
+        console.log(instrument.DamageInformation);
 
         if (!instrument.InstrumentCode || !instrument.DamageInformation) {
 
@@ -300,14 +341,7 @@ var _default =
         "InstrumentCode": this.InstrumentCode }).
       then(function (res) {
 
-        /* 
-                           {ID: 5419, InstrumentCode: "08M08MJYZJW060106", InstrumentName: "太极云手", FacilitiesName: "南方城健身苑点A"}
-                            */
-        console.log(res);
-
-        _this.instruments[index] = res;
-
-        _this.$set(_this.instruments, _this.instruments[index], res);
+        _this.$set(_this.instruments, index, res);
 
         uni.hideLoading();
 
