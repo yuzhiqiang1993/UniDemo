@@ -40,14 +40,6 @@ export default {
 		options.url = options.baseUrl + options.url
 		options.data = options.data || {}
 		options.method = options.method || this.config.method
-		//TODO 加密数据
-
-		//TODO 数据签名
-		/* 
-		_token = {'token': getStorage(STOREKEY_LOGIN).token || 'undefined'},
-		_sign = {'sign': sign(JSON.stringify(options.data))}
-		options.header = Object.assign({}, options.header, _token,_sign) 
-		*/
 
 
 
@@ -61,8 +53,9 @@ export default {
 				response.config = _config
 				if (process.env.NODE_ENV === 'development') {
 					if (statusCode === 200) {
+
 						console.log("【" + _config.requestId + "】 结果：" + JSON.stringify(response.data))
-						//	console.log("【" + _config.requestId + "】 结果：" + response)
+						//console.log("【" + _config.requestId + "】 结果：" + response)
 
 
 					}

@@ -112,35 +112,34 @@
 	export default {
 		data() {
 			return {
-				// facility: {},
-				// instrumentList: [],
-				facility: this.$mock.taskDetail,
-				instrumentList: this.$mock.taskDetail.EqInfo
+				facility: {},
+				instrumentList: [],
+
 			}
 		},
 		onLoad(data) {
 			console.log(data.facilityCode)
-// 			this.$api.taskDetails({
-// 					// FacilitiesTypeCode: "08M08MJYZWT4501",
-// 					FacilitiesTypeCode: data.facilityCode
-// 				})
-// 				.then((res) => {
-// 
-// 
-// 					res.PanoramicPhoto = "http://operation.esplohas.com" + res.PanoramicPhoto
-// 
-// 					this.facility = res
-// 					console.log(this.facility.PanoramicPhoto)
-// 
-// 
-// 					for (let item of res.EqInfo) {
-// 						item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
-// 					}
-// 
-// 					this.instrumentList = res.EqInfo
-// 
-// 					console.log(JSON.stringify(res))
-// 				})
+			// 			this.$api.taskDetails({
+			// 					// FacilitiesTypeCode: "08M08MJYZWT4501",
+			// 					FacilitiesTypeCode: data.facilityCode
+			// 				})
+			// 				.then((res) => {
+			// 
+			// 
+			// 					res.PanoramicPhoto = "http://operation.esplohas.com" + res.PanoramicPhoto
+			// 
+			// 					this.facility = res
+			// 					console.log(this.facility.PanoramicPhoto)
+			// 
+			// 
+			// 					for (let item of res.EqInfo) {
+			// 						item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
+			// 					}
+			// 
+			// 					this.instrumentList = res.EqInfo
+			// 
+			// 					console.log(JSON.stringify(res))
+			// 				})
 
 		},
 		methods: {

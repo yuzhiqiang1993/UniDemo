@@ -91,15 +91,37 @@
 						content: "请输入您的姓名和联系电话",
 						showCancel: false
 					})
+
+					return
 				}
 
+				if (this.instruments.length == 0) {
+					uni.showModal({
+						title: "提示",
+						content: "您还没有填写器材信息，请检查",
+						showCancel: false
+					})
+
+					return
+				}
+
+				var instrument = this.instruments[this.instruments.length - 1]
+
+				if (!instrument.InstrumentCode || !instrument.DamageInformation) {
+
+					uni.showToast({
+						title: "器材信息不完整，请检查",
+						icon: "none"
+					})
 
 
+					return
+				}
 
 				var data = {
 					"Applicant": this.userName,
 					"ApplicantPhone": this.userPhone,
-					"EquipmentInformation": this.instruments
+					"EquipmentInformation":JSON.stringify(this.instruments) 
 				}
 
 
@@ -113,6 +135,18 @@
 				this.$api.submitRepairs(data).then((res) => {
 					console.log(res)
 					uni.hideLoading()
+					
+					
+					uni.showModal({
+						title:"提示",
+						content:"提交成功",
+						showCancel:false,
+						success: () => {
+							uni.navigateBack({
+								
+							})
+						}
+					})
 
 				}).catch((err) => {
 					uni.hideLoading()

@@ -27,9 +27,9 @@
 					url: "../task/task"
 				})
 			},
-			quickReport:function () {
+			quickReport: function() {
 				uni.navigateTo({
-					url:"../repairs/quick_repairs"
+					url: "../repairs/quick_repairs"
 				})
 			}
 		}

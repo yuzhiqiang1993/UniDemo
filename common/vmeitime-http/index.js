@@ -14,7 +14,7 @@ export const taskList = (data) => {
 		return response;
 	}
 	return http.request({
-		url: 'api/AndroidMain/WeChatHaveFacilities',
+		url: 'api/ScanCodeRepair/GettingBlueprintDataSources',
 		method: "POST",
 		dataType: 'json',
 		data: data
@@ -30,8 +30,8 @@ export const countyList = () => {
 		return response;
 	}
 	return http.request({
-		url: 'api/AndroidMain/WeChatHaveDistrictsCounties',
-		method: "GET",
+		url: 'api/ScanCodeRepair/GetDistrictsAndCounties',
+		method: "POST",
 		dataType: 'json',
 
 	})
@@ -39,13 +39,29 @@ export const countyList = () => {
 
 
 
+/* 街鎮 */
 export const streetTownList = (data) => {
 	//设置请求结束后拦截器
 	http.interceptor.response = (response) => {
 		return response;
 	}
 	return http.request({
-		url: 'api/AndroidMain/WeChatHaveStreetTown',
+		url: 'api/ScanCodeRepair/GetStreetData',
+		method: "POST",
+		dataType: 'json',
+		data: data
+	})
+}
+
+
+/* 设施类型 */
+export const facilityTypeList = (data) => {
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+		return response;
+	}
+	return http.request({
+		url: 'api/ScanCodeRepair/GetFacilityType',
 		method: "POST",
 		dataType: 'json',
 		data: data
@@ -91,12 +107,11 @@ export const submitRepairs = (data) => {
 		return response;
 	}
 	return http.request({
-		url: '/api/ScanCodeRepair/EmergencyRepairSubmission',
+		url: 'api/ScanCodeRepair/EmergencyRepairSubmission',
 		method: "POST",
 		dataType: 'json',
 		data: data
 	})
-
 }
 // 默认全部导出  import api from '@/common/vmeitime-http/'
 export default {
@@ -105,6 +120,7 @@ export default {
 	streetTownList,
 	taskDetails,
 	getInfoByNumber,
-	submitRepairs
+	submitRepairs,
+	facilityTypeList
 
 }
