@@ -241,42 +241,42 @@ var _default =
 
 
   },
-  onLoad: function onLoad(data) {
-    console.log(data.facilityCode);
-    // 			this.$api.taskDetails({
-    // 					// FacilitiesTypeCode: "08M08MJYZWT4501",
-    // 					FacilitiesTypeCode: data.facilityCode
-    // 				})
-    // 				.then((res) => {
-    // 
-    // 
-    // 					res.PanoramicPhoto = "http://operation.esplohas.com" + res.PanoramicPhoto
-    // 
-    // 					this.facility = res
-    // 					console.log(this.facility.PanoramicPhoto)
-    // 
-    // 
-    // 					for (let item of res.EqInfo) {
-    // 						item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
-    // 					}
-    // 
-    // 					this.instrumentList = res.EqInfo
-    // 
-    // 					console.log(JSON.stringify(res))
-    // 				})
+  onLoad: function onLoad(data) {var _this = this;
+    console.log(data.id);
+    this.$api.taskDetails({
+      // FacilitiesTypeCode: "08M08MJYZWT4501",
+      ID: data.id }).
+
+    then(function (res) {
+
+
+      res.PanoramicPhoto = "http://operation.esplohas.com" + res.FacilityInfo.PanoramicPhoto;
+
+      _this.facility = res;
+      console.log(_this.facility.FacilityInfo.PanoramicPhoto);var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+
+
+        for (var _iterator = res.Information[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var item = _step.value;
+          item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage;
+        }} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return != null) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+
+      _this.instrumentList = res.Information;
+
+      console.log(JSON.stringify(res));
+    });
 
   },
   methods: {
     navication: function navication() {
 
-      if (this.facility.Coordinate == "") {
+      if (this.facility.Coordinate == "" || this.facility.Coordinate == null) {
         uni.showToast({
           title: '没有经纬度数据,无法导航',
           icon: "none" });
 
         return;
       }
-      var location = JSON.parse(this.facility.Coordinate);
+      var location = JSON.parse(this.facility.FacilityInfo.Coordinate);
 
       console.log(location);
 

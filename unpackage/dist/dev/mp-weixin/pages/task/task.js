@@ -276,7 +276,7 @@ var _default =
     typeChanged: function typeChanged(e) {
       this.Start = 0;
       this.typeIndex = e.target.value;
-      this.FacilitiesType = this.types[this.typeIndex].code;
+      this.FacilitiesType = this.facilityTypeList[this.typeIndex].TypeCode;
       this.requestTaskList();
     },
     /* 选择区县 */
@@ -305,14 +305,15 @@ var _default =
 
                   this.$api.countyList());case 2:data = _context.sent;
 
-                data.unshift({
-                  "CountyCode": "",
-                  "DCName": "上海市" });
+                // data.unshift({
+                // 	"CountyCode": "",
+                // 	"DCName": "上海市",
 
-
+                // })
                 this.countryList = data;
-                console.log("区县列表：" + JSON.stringify(data));case 6:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
 
+                //console.log("区县列表：" + JSON.stringify(data))
+              case 4:case "end":return _context.stop();}}}, _callee, this);}));function requestCoutryList() {return _requestCoutryList.apply(this, arguments);}return requestCoutryList;}(),
 
     /* 请求根据区县编号请求街镇 */
     requestStreetTownList: function () {var _requestStreetTownList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
@@ -321,22 +322,26 @@ var _default =
                     CountyCode: this.MembershipCounty }));case 2:data = _context2.sent;
 
 
-                data.unshift({
+                // data.unshift({
 
-                  "MembershipCounty": "01H",
-                  "StreetTownName": "全部",
-                  "StreetTownCode": "" });
+                // 	"MembershipCounty": "01H",
+                // 	"StreetTownName": "全部",
+                // 	"StreetTownCode": ""
+                // })
 
+                //console.log("请求的街镇数据：" + JSON.stringify(data))
 
-                console.log("请求的街镇数据：" + JSON.stringify(data));
-
-                this.streetTownList = data;case 6:case "end":return _context2.stop();}}}, _callee2, this);}));function requestStreetTownList() {return _requestStreetTownList.apply(this, arguments);}return requestStreetTownList;}(),
+                this.streetTownList = data;case 4:case "end":return _context2.stop();}}}, _callee2, this);}));function requestStreetTownList() {return _requestStreetTownList.apply(this, arguments);}return requestStreetTownList;}(),
 
 
     /* 获取设施类型列表 */
     requestFacilityTypeList: function () {var _requestFacilityTypeList = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
                   this.$api.facilityTypeList());case 2:data = _context3.sent;
-                this.facilityTypeList = data;case 4:case "end":return _context3.stop();}}}, _callee3, this);}));function requestFacilityTypeList() {return _requestFacilityTypeList.apply(this, arguments);}return requestFacilityTypeList;}(),
+                data.unshift({
+                  "FacilitiesTypeName": "全部",
+                  "TypeCode": "" });
+
+                this.facilityTypeList = data;case 5:case "end":return _context3.stop();}}}, _callee3, this);}));function requestFacilityTypeList() {return _requestFacilityTypeList.apply(this, arguments);}return requestFacilityTypeList;}(),
 
 
 
@@ -377,11 +382,11 @@ var _default =
                 uni.stopPullDownRefresh();case 33:case "end":return _context4.stop();}}}, _callee4, this, [[13, 17, 21, 29], [22,, 24, 28]]);}));function requestTaskList() {return _requestTaskList.apply(this, arguments);}return requestTaskList;}(),
 
 
-    goToTaskDetails: function goToTaskDetails(code) {
-      console.log(code);
+    goToTaskDetails: function goToTaskDetails(id) {
+      console.log(id);
 
       uni.navigateTo({
-        url: '../task_details/task_details?facilityCode=' + code });
+        url: '../task_details/task_details?id=' + id });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

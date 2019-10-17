@@ -12,14 +12,14 @@
 				<view class="facilityInfo">
 
 					<!-- 图片 -->
-					<image class="img" :src='facility.PanoramicPhoto' :data-src="facility.PanoramicPhoto" @click="previewImg"></image>
+					<image class="img" :src='facility.PanoramicPhoto' :data-src="facility.FacilityInfo.PanoramicPhoto" @click="previewImg"></image>
 
 
 					<!-- 设施名称和面积 -->
 					<view class="uni-flex uni-row facilityInfoText">
 
-						<text class="textTitle">{{facility.FacilitiesName}}</text>
-						<text class="activityArea uni-text uni-text-gray">{{facility.ActivityArea}}平方米</text>
+						<text class="textTitle">{{facility.FacilityInfo.FacilitiesName}}</text>
+						<text class="activityArea uni-text uni-text-gray">{{facility.FacilityInfo.ActivityArea}}平方米</text>
 					</view>
 
 					<!-- 开放时间 -->
@@ -36,7 +36,7 @@
 
 						<view class="addressLeft">
 							<text class="iconfont iconlocation"></text>
-							<text class="address uni-text-small uni-text-gray">{{facility.FacilitiesAddr}}</text>
+							<text class="address uni-text-small uni-text-gray">{{facility.FacilityInfo.FacilitiesAddr}}</text>
 						</view>
 
 						<text class="navigation" @click="navication">查看路线</text>
@@ -81,9 +81,9 @@
 				<view class="facilityInfo" style="margin-top: 20rpx;padding-bottom: 10rpx;">
 					<text class="textTitle uni-flex-item">设施信息</text>
 
-					<text class="textContent uni-text-gray">设施类型:{{facility.FacilitiesType}}</text>
-					<text class="textContent uni-text-gray">投资性质:{{facility.ConstructionProperty}}</text>
-					<text class="textContent uni-text-gray">建成时间:{{facility.CompletionTime}}</text>
+					<text class="textContent uni-text-gray">设施类型:{{facility.FacilityInfo.FacilitiesTypeText}}</text>
+					<text class="textContent uni-text-gray">投资性质:{{facility.FacilityInfo.ConstructionPropertyText}}</text>
+					<text class="textContent uni-text-gray">建成时间:{{facility.FacilityInfo.CompletionTime}}</text>
 
 
 				</view>
@@ -118,41 +118,41 @@
 			}
 		},
 		onLoad(data) {
-			console.log(data.facilityCode)
-			// 			this.$api.taskDetails({
-			// 					// FacilitiesTypeCode: "08M08MJYZWT4501",
-			// 					FacilitiesTypeCode: data.facilityCode
-			// 				})
-			// 				.then((res) => {
-			// 
-			// 
-			// 					res.PanoramicPhoto = "http://operation.esplohas.com" + res.PanoramicPhoto
-			// 
-			// 					this.facility = res
-			// 					console.log(this.facility.PanoramicPhoto)
-			// 
-			// 
-			// 					for (let item of res.EqInfo) {
-			// 						item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
-			// 					}
-			// 
-			// 					this.instrumentList = res.EqInfo
-			// 
-			// 					console.log(JSON.stringify(res))
-			// 				})
+			console.log(data.id)
+						this.$api.taskDetails({
+								// FacilitiesTypeCode: "08M08MJYZWT4501",
+								ID: data.id
+							})
+							.then((res) => {
+			
+			
+								res.PanoramicPhoto = "http://operation.esplohas.com" + res.FacilityInfo.PanoramicPhoto
+			
+								this.facility = res
+								console.log(this.facility.FacilityInfo.PanoramicPhoto)
+			
+			
+								for (let item of res.Information) {
+									item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
+								}
+			
+								this.instrumentList = res.Information
+			
+								console.log(JSON.stringify(res))
+							})
 
 		},
 		methods: {
 			navication: function() {
 
-				if (this.facility.Coordinate == "") {
+				if (this.facility.Coordinate == ""||this.facility.Coordinate==null) {
 					uni.showToast({
 						title: '没有经纬度数据,无法导航',
 						icon: "none"
 					});
 					return
 				}
-				var location = JSON.parse(this.facility.Coordinate)
+				var location = JSON.parse(this.facility.FacilityInfo.Coordinate)
 
 				console.log(location)
 

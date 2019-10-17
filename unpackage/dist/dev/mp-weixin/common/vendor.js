@@ -8611,7 +8611,7 @@ var taskDetails = function taskDetails(data) {
     return response;
   };
   return _interface.default.request({
-    url: 'api/AndroidMain/WeChatFacilitieInfo',
+    url: 'api/ScanCodeRepair/AccessToParkAndEquipmentInformation',
     method: "POST",
     dataType: 'json',
     data: data });

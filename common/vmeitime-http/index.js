@@ -76,7 +76,7 @@ export const taskDetails = (data) => {
 		return response;
 	}
 	return http.request({
-		url: 'api/AndroidMain/WeChatFacilitieInfo',
+		url: 'api/ScanCodeRepair/AccessToParkAndEquipmentInformation',
 		method: "POST",
 		dataType: 'json',
 		data: data

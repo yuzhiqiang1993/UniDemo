@@ -11,7 +11,7 @@
 			</view>
 			<!-- 区县选择 -->
 			<view class="select_item">
-				<picker mode="selector" :value="streetTownIndex" :range="streetTownList" range-key="DCName" @change="streetTownChanged">
+				<picker mode="selector" :value="streetTownIndex" :range="streetTownList" range-key="StreetTownName" @change="streetTownChanged">
 					<text>{{streetTownList[streetTownIndex].StreetTownName}}</text>
 					<text class="iconfont iconjiantou"></text>
 				</picker>
@@ -29,19 +29,19 @@
 		<!-- 列表-->
 		<scroll-view class="uni-list" scroll-y="true">
 
-			<view class="uni-list-cell" v-for="item of taskList" :key="item.FacilitiesTypeCode" @click="goToTaskDetails(item.FacilitiesTypeCode)">
+			<view class="uni-list-cell" v-for="item of taskList" :key="item.BaseInfo.FacilitiesTypeCode" @click="goToTaskDetails(item.BaseInfo.ID)">
 
 				<image :src="item.PanoramicPhoto" mode="scaleToFill" class="uni-media-list-logo" />
 				<!-- <image src='http://pic23.nipic.com/20120830/9686992_180336646144_2.jpg' mode="scaleToFill" class="uni-media-list-logo"></image> -->
 
 				<view class="uni-flex uni-column content">
-					<text class="uni-title">{{item.FacilitiesName}}</text>
+					<text class="uni-title">{{item.BaseInfo.FacilitiesName}}</text>
 
 
 					<view class="uni-flex uni-row address">
-						<text class="uni-text-gray uni-flex-item address">{{item.FacilitiesAddr}}</text>
+						<text class="uni-text-gray uni-flex-item address">{{item.BaseInfo.FacilitiesAddr}}</text>
 						<text class="iconfont iconlocation"></text>
-						<text class="uni-text-gray distance">{{item.Distance}}</text>
+						<text class="uni-text-gray distance">{{item.distance}}</text>
 					</view>
 
 				</view>
@@ -152,7 +152,7 @@
 			typeChanged: function(e) {
 				this.Start = 0
 				this.typeIndex = e.target.value
-				this.FacilitiesType = this.types[this.typeIndex].code
+				this.FacilitiesType = this.facilityTypeList[this.typeIndex].TypeCode
 				this.requestTaskList()
 			},
 			/* 选择区县 */
@@ -178,16 +178,17 @@
 
 			/* 请求区县列表 */
 			async requestCoutryList() {
-				
+
 				var data = await this.$api.countyList()
-				
-				data.unshift({
-					"CountyCode": "",
-					"DCName": "上海市",
-					
-				})
-				this.countryList=data
-				console.log("区县列表：" + JSON.stringify(data))
+
+				// data.unshift({
+				// 	"CountyCode": "",
+				// 	"DCName": "上海市",
+
+				// })
+				this.countryList = data
+
+				//console.log("区县列表：" + JSON.stringify(data))
 
 			},
 			/* 请求根据区县编号请求街镇 */
@@ -197,24 +198,28 @@
 					CountyCode: this.MembershipCounty
 				})
 
-				data.unshift({
+				// data.unshift({
 
-					"MembershipCounty": "01H",
-					"StreetTownName": "全部",
-					"StreetTownCode": ""
-				})
+				// 	"MembershipCounty": "01H",
+				// 	"StreetTownName": "全部",
+				// 	"StreetTownCode": ""
+				// })
 
-				console.log("请求的街镇数据：" + JSON.stringify(data))
+				//console.log("请求的街镇数据：" + JSON.stringify(data))
 
 				this.streetTownList = data
 
 			},
 			/* 获取设施类型列表 */
-			async requestFacilityTypeList(){
+			async requestFacilityTypeList() {
 				var data = await this.$api.facilityTypeList()
-				this.facilityTypeList=data
-				
-			
+				data.unshift({
+					"FacilitiesTypeName": "全部",
+					"TypeCode": ""
+				})
+				this.facilityTypeList = data
+
+
 			},
 			/* 请求任务列表 */
 			async requestTaskList() {
@@ -253,11 +258,11 @@
 				uni.stopPullDownRefresh()
 
 			},
-			goToTaskDetails: function(code) {
-				console.log(code)
+			goToTaskDetails: function(id) {
+				console.log(id)
 
 				uni.navigateTo({
-					url: '../task_details/task_details?facilityCode=' + code
+					url: '../task_details/task_details?id=' + id
 				})
 			}
 		}
