@@ -1,10 +1,5 @@
 <template>
-
-
 	<view class="container">
-
-
-
 		<!-- 用户信息 -->
 		<view class="layout_user_info">
 
@@ -19,16 +14,13 @@
 			</view>
 		</view>
 
-
 		<!-- 设施信息 -->
 		<view class="layout_facility_info">
-
 
 			<view class="layout_select">
 				<text>设施名称</text>
 				<picker>
 					<text>请选择</text>
-
 				</picker>
 			</view>
 
@@ -42,7 +34,7 @@
 		<view class="layout_instrument" v-for="item of instruments" :key="item.index">
 			<view class="layout_select">
 				<text>器材名称</text>
-				<picker mode="selector" >
+				<picker mode="selector">
 					<text>{{item.name}}</text>
 
 				</picker>
@@ -51,7 +43,7 @@
 
 			<view class="layout_input">
 				<text>故障描述</text>
-				<input placeholder="请输入"/>
+				<input placeholder="请输入" />
 			</view>
 
 		</view>
@@ -61,12 +53,7 @@
 			<button type="primary" size="mini" @click="submit" style="width: 40%;background: #022456;">确定</button>
 		</view>
 
-
-
 	</view>
-
-
-
 
 </template>
 
@@ -101,9 +88,9 @@
 					title: "提交"
 				})
 			},
-			add:function () {
+			add: function() {
 				uni.showToast({
-					title:"添加"
+					title: "添加"
 				})
 			}
 		}
@@ -141,7 +128,6 @@
 		line-height: 92rpx;
 		align-content: center;
 		text-align: center;
-
 	}
 
 	.layout_input input {

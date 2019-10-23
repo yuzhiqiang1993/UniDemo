@@ -119,33 +119,33 @@
 		},
 		onLoad(data) {
 			console.log(data.id)
-						this.$api.taskDetails({
-								// FacilitiesTypeCode: "08M08MJYZWT4501",
-								ID: data.id
-							})
-							.then((res) => {
-			
-			
-								res.PanoramicPhoto = "http://operation.esplohas.com" + res.FacilityInfo.PanoramicPhoto
-			
-								this.facility = res
-								console.log(this.facility.FacilityInfo.PanoramicPhoto)
-			
-			
-								for (let item of res.Information) {
-									item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
-								}
-			
-								this.instrumentList = res.Information
-			
-								console.log(JSON.stringify(res))
-							})
+			this.$api.taskDetails({
+					// FacilitiesTypeCode: "08M08MJYZWT4501",
+					ID: data.id
+				})
+				.then((res) => {
+
+
+					res.PanoramicPhoto = "http://operation.esplohas.com" + res.FacilityInfo.PanoramicPhoto
+
+					this.facility = res
+					console.log(this.facility.FacilityInfo.PanoramicPhoto)
+
+
+					for (let item of res.Information) {
+						item.InstrumentImage = "http://operation.esplohas.com" + item.InstrumentImage
+					}
+
+					this.instrumentList = res.Information
+
+					console.log(JSON.stringify(res))
+				})
 
 		},
 		methods: {
 			navication: function() {
 
-				if (this.facility.Coordinate == ""||this.facility.Coordinate==null) {
+				if (this.facility.Coordinate == "" || this.facility.Coordinate == null) {
 					uni.showToast({
 						title: '没有经纬度数据,无法导航',
 						icon: "none"

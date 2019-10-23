@@ -19,16 +19,9 @@
 			</view>
 		</view>
 
-
-
 		<!-- 器材信息 -->
-
-
 		<view class="layout_instrument" v-for="(item,index) of instruments" :key="item.index">
-
-
 			<view class="layout_input">
-
 				<text>器材编号</text>
 				<input placeholder="请输入器材编号" type="text" @input="changeInstrumentCode" :value="item.InstrumentCode" />
 
@@ -55,6 +48,13 @@
 				<input placeholder="请输入" type="text" @input="changeDamage($event,index)" />
 			</view>
 
+			<view class="layout_img">
+				<text style="line-height: 100rpx;">拍摄照片</text>
+
+				<image style="width: 130rpx;height: 100rpx;" :src="item.DamageInfosImg" @click="takePhoto($event,index)" mode="aspectFit"></image>
+			</view>
+
+
 		</view>
 
 		<view class="layout_btn">
@@ -79,10 +79,14 @@
 				"InstrumentCode": "",
 				"userName": "",
 				"userPhone": "",
-				"DamageInformation": ""
+				"DamageInformation": "",
+				"DamageInfosImg": "",
+
 			}
 		},
 		methods: {
+
+			/* 提交 */
 			submit: function() {
 
 				if (this.userName === "" || this.userPhone == "") {
@@ -113,7 +117,15 @@
 						title: "器材信息不完整，请检查",
 						icon: "none"
 					})
+					return
+				}
 
+
+				if (instrument.DamageInfosImg == "../../static/img/ic_camera_with_bg.png") {
+					uni.showToast({
+						title: "请拍摄图片",
+						icon: "none"
+					})
 
 					return
 				}
@@ -121,7 +133,7 @@
 				var data = {
 					"Applicant": this.userName,
 					"ApplicantPhone": this.userPhone,
-					"EquipmentInformation":JSON.stringify(this.instruments) 
+					"EquipmentInformation": JSON.stringify(this.instruments)
 				}
 
 
@@ -135,15 +147,15 @@
 				this.$api.submitRepairs(data).then((res) => {
 					console.log(res)
 					uni.hideLoading()
-					
-					
+
+
 					uni.showModal({
-						title:"提示",
-						content:"提交成功",
-						showCancel:false,
+						title: "提示",
+						content: "提交成功",
+						showCancel: false,
 						success: () => {
 							uni.navigateBack({
-								
+
 							})
 						}
 					})
@@ -160,11 +172,8 @@
 					console.log('request fail', err);
 				})
 
-
-
-
 			},
-
+			/* 器材编号 */
 			changeInstrumentCode: function(e) {
 				console.log(e.detail.value)
 				this.InstrumentCode = e.detail.value
@@ -172,6 +181,7 @@
 
 			},
 
+			/* 器材损坏文字 */
 			changeDamage: function(e, index) {
 				console.log(index)
 				console.log(e)
@@ -181,7 +191,59 @@
 
 			},
 
+			/* 器材拍照 */
+			takePhoto: function(e, index) {
+				uni.chooseImage({
+					count: 1,
+					sizeType: ["compressed"],
+					sourceType: ["camera "],
+					success: (chooseImageRes) => {
+						const tempFilePaths = chooseImageRes.tempFilePaths;
+						this.uploadImgFile(tempFilePaths, index)
+					}
+				})
+			},
+			uploadImgFile: function(imgPath, index) {
 
+				//console.log("要上传的图片：" + imgPath + "index:" + index)
+				uni.showLoading({
+					title: "正在上传图片..."
+				})
+
+				uni.uploadFile({
+					url: "https://repair.esplohas.com/api/FileUpload/ImgUpload",
+					filePath: imgPath[0],
+					name: "file",
+					formData: {
+						'oldImgPath': this.instruments[index].imgPath
+					},
+					success: (res) => {
+
+						const result = JSON.parse(res.data)
+
+
+						console.log(result.fig);
+
+
+						if (result.fig === 1) {
+							/* 上传成功 */
+							console.log("上传成功：" + result.Path)
+							this.$set(this.instruments[index], "DamageInfosImg", result.Path)
+							console.log(this.instruments[index])
+
+
+						} else {
+							/* 上传失败 */
+							console.log("上传失败")
+
+						}
+
+					},
+					complete() {
+						uni.hideLoading()
+					}
+				})
+			},
 
 			add: function() {
 
@@ -196,7 +258,9 @@
 						InstrumentCode: "",
 						InstrumentName: "",
 						FacilitiesName: "",
-						DamageInformation: ""
+						DamageInformation: "",
+						DamageInfosImg: "../../static/img/ic_camera_with_bg.png"
+
 					})
 
 				} else {
@@ -217,20 +281,13 @@
 							ID: 0,
 							InstrumentCode: "",
 							InstrumentName: "",
-							FacilitiesName: ""
+							FacilitiesName: "",
+							DamageInformation: "",
+							DamageInfosImg: "../../static/img/ic_camera_with_bg.png"
 						})
 
 					}
 				}
-
-
-
-
-
-				/* {ID: 5419, InstrumentCode: "08M08MJYZJW060106", InstrumentName: "太极云手", FacilitiesName: "南方城健身苑点A"} */
-
-
-
 			},
 			requestInstrumentInfo: function(index) {
 
@@ -252,7 +309,7 @@
 				}).then((res) => {
 
 					this.$set(this.instruments, index, res)
-
+					this.$set(this.instruments[index], "DamageInfosImg", "../../static/img/ic_camera_with_bg.png")
 					uni.hideLoading()
 
 				}).catch((err) => {
@@ -286,6 +343,14 @@
 		flex-direction: column;
 		padding-left: 30rpx;
 		padding-right: 30rpx;
+	}
+
+
+	.layout_img {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 
 	.layout_input {

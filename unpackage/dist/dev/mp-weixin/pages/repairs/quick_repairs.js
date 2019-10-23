@@ -203,10 +203,14 @@ var _default =
       "InstrumentCode": "",
       "userName": "",
       "userPhone": "",
-      "DamageInformation": "" };
+      "DamageInformation": "",
+      "DamageInfosImg": "" };
+
 
   },
   methods: {
+
+    /* 提交 */
     submit: function submit() {
 
       if (this.userName === "" || this.userPhone == "") {
@@ -237,6 +241,14 @@ var _default =
           title: "器材信息不完整，请检查",
           icon: "none" });
 
+        return;
+      }
+
+
+      if (instrument.DamageInfosImg == "../../static/img/ic_camera_with_bg.png") {
+        uni.showToast({
+          title: "请拍摄图片",
+          icon: "none" });
 
 
         return;
@@ -284,11 +296,8 @@ var _default =
         console.log('request fail', err);
       });
 
-
-
-
     },
-
+    /* 器材编号 */
     changeInstrumentCode: function changeInstrumentCode(e) {
       console.log(e.detail.value);
       this.InstrumentCode = e.detail.value;
@@ -296,6 +305,7 @@ var _default =
 
     },
 
+    /* 器材损坏文字 */
     changeDamage: function changeDamage(e, index) {
       console.log(index);
       console.log(e);
@@ -305,7 +315,59 @@ var _default =
 
     },
 
+    /* 器材拍照 */
+    takePhoto: function takePhoto(e, index) {var _this = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: ["compressed"],
+        sourceType: ["camera "],
+        success: function success(chooseImageRes) {
+          var tempFilePaths = chooseImageRes.tempFilePaths;
+          _this.uploadImgFile(tempFilePaths, index);
+        } });
 
+    },
+    uploadImgFile: function uploadImgFile(imgPath, index) {var _this2 = this;
+
+      //console.log("要上传的图片：" + imgPath + "index:" + index)
+      uni.showLoading({
+        title: "正在上传图片..." });
+
+
+      uni.uploadFile({
+        url: "https://repair.esplohas.com/api/FileUpload/ImgUpload",
+        filePath: imgPath[0],
+        name: "file",
+        formData: {
+          'oldImgPath': this.instruments[index].imgPath },
+
+        success: function success(res) {
+
+          var result = JSON.parse(res.data);
+
+
+          console.log(result.fig);
+
+
+          if (result.fig === 1) {
+            /* 上传成功 */
+            console.log("上传成功：" + result.Path);
+            _this2.$set(_this2.instruments[index], "DamageInfosImg", result.Path);
+            console.log(_this2.instruments[index]);
+
+
+          } else {
+            /* 上传失败 */
+            console.log("上传失败");
+
+          }
+
+        },
+        complete: function complete() {
+          uni.hideLoading();
+        } });
+
+    },
 
     add: function add() {
 
@@ -320,7 +382,9 @@ var _default =
           InstrumentCode: "",
           InstrumentName: "",
           FacilitiesName: "",
-          DamageInformation: "" });
+          DamageInformation: "",
+          DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
+
 
 
       } else {
@@ -341,22 +405,15 @@ var _default =
             ID: 0,
             InstrumentCode: "",
             InstrumentName: "",
-            FacilitiesName: "" });
+            FacilitiesName: "",
+            DamageInformation: "",
+            DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
 
 
         }
       }
-
-
-
-
-
-      /* {ID: 5419, InstrumentCode: "08M08MJYZJW060106", InstrumentName: "太极云手", FacilitiesName: "南方城健身苑点A"} */
-
-
-
     },
-    requestInstrumentInfo: function requestInstrumentInfo(index) {var _this = this;
+    requestInstrumentInfo: function requestInstrumentInfo(index) {var _this3 = this;
 
 
       console.log("下标：" + index);
@@ -375,8 +432,8 @@ var _default =
         "InstrumentCode": this.InstrumentCode }).
       then(function (res) {
 
-        _this.$set(_this.instruments, index, res);
-
+        _this3.$set(_this3.instruments, index, res);
+        _this3.$set(_this3.instruments[index], "DamageInfosImg", "../../static/img/ic_camera_with_bg.png");
         uni.hideLoading();
 
       }).catch(function (err) {
