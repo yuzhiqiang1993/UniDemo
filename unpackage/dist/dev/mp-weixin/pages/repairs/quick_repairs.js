@@ -192,9 +192,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -203,8 +200,7 @@ var _default =
       "InstrumentCode": "",
       "userName": "",
       "userPhone": "",
-      "DamageInformation": "",
-      "DamageInfosImg": "" };
+      "DamageInformation": "" };
 
 
   },
@@ -247,7 +243,7 @@ var _default =
 
       if (instrument.DamageInfosImg == "../../static/img/ic_camera_with_bg.png") {
         uni.showToast({
-          title: "请拍摄图片",
+          title: "器材图片未拍摄，请检查",
           icon: "none" });
 
 
@@ -371,47 +367,42 @@ var _default =
 
     add: function add() {
 
-      // debugger
-      var instrument = this.instruments[this.instruments.length - 1];
-      console.log(instrument);
+
       /* 先判断列表中数据是否完整 */
-
-      if (this.instruments.length === 0) {
-        this.instruments.push({
-          ID: 0,
-          InstrumentCode: "",
-          InstrumentName: "",
-          FacilitiesName: "",
-          DamageInformation: "",
-          DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
-
-
-
-      } else {
-
-        console.log(instrument.DamageInformation);
+      if (this.instruments.length != 0) {
+        var instrument = this.instruments[this.instruments.length - 1];
+        console.log(instrument);
 
         if (!instrument.InstrumentCode || !instrument.DamageInformation) {
-
           uni.showToast({
-            title: "请先完成上个器材",
+            title: "上个器材信息不完整，请检查",
+            icon: "none" });
+
+          return;
+        }
+
+
+        if (instrument.DamageInfosImg == "../../static/img/ic_camera_with_bg.png") {
+          uni.showToast({
+            title: "上个器材图片未拍摄，请检查",
             icon: "none" });
 
 
-
-        } else {
-
-          this.instruments.push({
-            ID: 0,
-            InstrumentCode: "",
-            InstrumentName: "",
-            FacilitiesName: "",
-            DamageInformation: "",
-            DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
-
-
+          return;
         }
       }
+
+      /* 新增器材 */
+      this.instruments.push({
+        ID: 0,
+        InstrumentCode: "",
+        InstrumentName: "",
+        FacilitiesName: "",
+        DamageInformation: "",
+        DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
+
+
+
     },
     requestInstrumentInfo: function requestInstrumentInfo(index) {var _this3 = this;
 
@@ -422,6 +413,28 @@ var _default =
       /* 先判断编号是否为空 */
 
       console.log(this.InstrumentCode);
+
+      /* 先判断损坏列表中是否已存在选择的器材 */
+
+      var alreadExist = false;
+      this.instruments.forEach(function (item) {
+        if (item.InstrumentCode == _this3.InstrumentCode.toLocaleUpperCase()) {
+          alreadExist = true;
+        }
+
+      });
+
+      if (alreadExist) {
+        uni.showModal({
+          title: "提示",
+          content: "您输入的器材编号已在报修列表中,无需重复报修，请检查" });
+
+
+
+        return;
+      }
+
+
 
 
       uni.showLoading({

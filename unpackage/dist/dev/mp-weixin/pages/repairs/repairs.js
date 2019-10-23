@@ -181,40 +181,248 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
+
+  onLoad: function onLoad(data) {
+    this.instruments = JSON.parse(data.instruments);
+    this.facilityName = data.facilityName;
+    console.log(this.instruments);
+  },
+
   data: function data() {
     return {
-      "instruments": [{
-        "name": "三人上肢牵引器",
-        "damages": "轴承损坏" },
-
-      {
-        "name": "多功能锻炼器",
-        "damages": "油漆脱落" },
-      {
-        "name": "双人扭腰器",
-        "damages": "主体部件损坏" },
-      {
-        "name": "健骑器",
-        "damages": "螺丝松动" },
-      {
-        "name": "压腿杠",
-        "damages": "用不了了" }] };
-
-
-
+      "facilityName": "",
+      "instruments": [],
+      "damageInstruments": [],
+      "userName": "",
+      "userPhone": "",
+      "instrumentIndex": 0 };
 
   },
   methods: {
+    /* 提交 */
     submit: function submit() {
-      uni.showToast({
-        title: "提交" });
+
+      if (this.userName === "" || this.userPhone == "") {
+        uni.showModal({
+          title: "提示",
+          content: "请输入您的姓名和联系电话",
+          showCancel: false });
+
+
+        return;
+      }
+
+      if (this.damageInstruments.length == 0) {
+        uni.showModal({
+          title: "提示",
+          content: "您还没有填写器材信息，请检查",
+          showCancel: false });
+
+
+        return;
+      }
+
+      var instrument = this.damageInstruments[this.damageInstruments.length - 1];
+
+      if (!instrument.InstrumentCode || !instrument.DamageInformation) {
+
+        uni.showToast({
+          title: "器材信息不完整，请检查",
+          icon: "none" });
+
+        return;
+      }
+
+
+      if (instrument.DamageInfosImg == "../../static/img/ic_camera_with_bg.png") {
+        uni.showToast({
+          title: "器材图片未拍摄，请检查",
+          icon: "none" });
+
+
+        return;
+      }
+
+      var data = {
+        "Applicant": this.userName,
+        "ApplicantPhone": this.userPhone,
+        "EquipmentInformation": JSON.stringify(this.damageInstruments) };
+
+
+
+      console.log("要提交的数据" + JSON.stringify(data));
+
+
+      uni.showLoading({
+        title: "正在提交数据" });
+
+      this.$api.submitRepairs(data).then(function (res) {
+        console.log(res);
+        uni.hideLoading();
+
+
+        uni.showModal({
+          title: "提示",
+          content: "提交成功",
+          showCancel: false,
+          success: function success() {
+            uni.navigateBack({});
+
+
+          } });
+
+
+      }).catch(function (err) {
+        uni.hideLoading();
+
+        uni.showToast({
+          title: err.Message,
+          icon: "none",
+          mask: true });
+
+
+        console.log('request faile', err);
+      });
 
     },
+
     add: function add() {
-      uni.showToast({
-        title: "添加" });
+
+      /* 先判断列表中数据是否完整 */
+      if (this.damageInstruments.length != 0) {
+        var instrument = this.damageInstruments[this.damageInstruments.length - 1];
+        console.log(instrument);
+
+        if (!instrument.InstrumentCode || !instrument.DamageInformation) {
+          uni.showToast({
+            title: "上个器材信息不完整，请检查",
+            icon: "none" });
+
+          return;
+        }
+
+
+        if (instrument.DamageInfosImg == "../../static/img/ic_camera_with_bg.png") {
+          uni.showToast({
+            title: "上个器材图片未拍摄，请检查",
+            icon: "none" });
+
+
+          return;
+        }
+      }
+
+      /* 新增器材 */
+      this.damageInstruments.push({
+        ID: 0,
+        InstrumentCode: "",
+        InstrumentName: "",
+        FacilitiesName: "",
+        DamageInformation: "",
+        DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
+
+
+    },
+
+    /* 选择器材 */
+    selectInstrument: function selectInstrument(e, index) {
+
+      this.instrumentIndex = e.target.value;
+      var selectedInstrument = this.instruments[this.instrumentIndex];
+
+
+      /* 先判断损坏列表中是否已存在选择的器材 */
+
+      var alreadExist = false;
+      this.damageInstruments.forEach(function (item) {
+        if (item.ID == selectedInstrument.ID) {
+          alreadExist = true;
+        }
+
+      });
+
+      if (alreadExist) {
+        uni.showModal({
+          title: "提示",
+          content: selectedInstrument.InstrumentName + " 已在报修列表中,无法重复报修" });
+
+
+
+        return;
+      }
+
+      this.$set(this.damageInstruments, index, {
+        ID: selectedInstrument.ID,
+        InstrumentCode: selectedInstrument.InstrumentCode,
+        InstrumentName: selectedInstrument.InstrumentName,
+        FacilitiesName: this.facilityName,
+        DamageInformation: "",
+        DamageInfosImg: "../../static/img/ic_camera_with_bg.png" });
+
+
+      console.log(this.damageInstruments[index]);
+
+    },
+    /* 器材损坏文字 */
+    changeDamage: function changeDamage(e, index) {
+      this.$set(this.damageInstruments[index], "DamageInformation", e.detail.value);
+    },
+    /* 器材拍照 */
+    takePhoto: function takePhoto(e, index) {var _this = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: ["compressed"],
+        sourceType: ["camera "],
+        success: function success(chooseImageRes) {
+          var tempFilePaths = chooseImageRes.tempFilePaths;
+          _this.uploadImgFile(tempFilePaths, index);
+        } });
+
+    },
+    uploadImgFile: function uploadImgFile(imgPath, index) {var _this2 = this;
+
+      //console.log("要上传的图片：" + imgPath + "index:" + index)
+      uni.showLoading({
+        title: "正在上传图片..." });
+
+
+      uni.uploadFile({
+        url: "https://repair.esplohas.com/api/FileUpload/ImgUpload",
+        filePath: imgPath[0],
+        name: "file",
+        formData: {
+          'oldImgPath': this.damageInstruments[index].imgPath },
+
+        success: function success(res) {
+
+          var result = JSON.parse(res.data);
+
+
+          console.log(result.fig);
+          if (result.fig === 1) {
+            /* 上传成功 */
+            console.log("上传成功：" + result.Path);
+            _this2.$set(_this2.damageInstruments[index], "DamageInfosImg", result.Path);
+            console.log(_this2.damageInstruments[index]);
+
+
+          } else {
+            /* 上传失败 */
+            console.log("上传失败");
+
+          }
+
+        },
+        complete: function complete() {
+          uni.hideLoading();
+        } });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

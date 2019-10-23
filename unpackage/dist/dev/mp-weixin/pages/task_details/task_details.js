@@ -308,7 +308,7 @@ var _default =
     },
     repair: function repair() {
       uni.navigateTo({
-        url: "../repairs/repairs" });
+        url: "../repairs/repairs?instruments=" + JSON.stringify(this.instrumentList) + "&facilityName=" + this.facility.FacilityInfo.FacilitiesName });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

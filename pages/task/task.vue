@@ -41,7 +41,7 @@
 					<view class="uni-flex uni-row address">
 						<text class="uni-text-gray uni-flex-item address">{{item.BaseInfo.FacilitiesAddr}}</text>
 						<text class="iconfont iconlocation"></text>
-						<text class="uni-text-gray distance">{{item.distance}}</text>
+						<text class="uni-text-gray distance">{{item.distance}}m</text>
 					</view>
 
 				</view>

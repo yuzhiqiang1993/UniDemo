@@ -99,8 +99,8 @@
 		<view class="bottom">
 
 			<text @click="repair">我要报修</text>
-			<view class="line"></view>
-			<text @click="feedback">意见反馈</text>
+		<!-- 	<view class="line"></view>
+			<text @click="feedback">意见反馈</text> -->
 
 
 		</view>
@@ -184,7 +184,7 @@
 			},
 			repair: function() {
 				uni.navigateTo({
-					url: "../repairs/repairs"
+					url: "../repairs/repairs?instruments="+JSON.stringify(this.instrumentList)+"&facilityName="+this.facility.FacilityInfo.FacilitiesName
 				})
 			}
 
