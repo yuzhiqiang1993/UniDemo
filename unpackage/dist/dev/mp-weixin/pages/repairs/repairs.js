@@ -263,7 +263,7 @@ var _default =
       uni.showLoading({
         title: "正在提交数据" });
 
-      this.$api.submitRepairs(data).then(function (res) {
+      this.$api.submitFacilityRepairs(data).then(function (res) {
         console.log(res);
         uni.hideLoading();
 

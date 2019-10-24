@@ -139,7 +139,7 @@
 				uni.showLoading({
 					title: "正在提交数据"
 				})
-				this.$api.submitRepairs(data).then((res) => {
+				this.$api.submitFacilityRepairs(data).then((res) => {
 					console.log(res)
 					uni.hideLoading()
 

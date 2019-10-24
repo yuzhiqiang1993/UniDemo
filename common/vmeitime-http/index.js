@@ -100,7 +100,7 @@ export const getInfoByNumber = (data) => {
 }
 
 
-/* 提交报修器材数据 */
+/* 提交极速报修器材数据 */
 export const submitRepairs = (data) => {
 	//设置请求结束后拦截器
 	http.interceptor.response = (response) => {
@@ -108,6 +108,20 @@ export const submitRepairs = (data) => {
 	}
 	return http.request({
 		url: 'api/ScanCodeRepair/EmergencyRepairSubmission',
+		method: "POST",
+		dataType: 'json',
+		data: data
+	})
+}
+
+/* 提交极速报修器材数据 */
+export const submitFacilityRepairs = (data) => {
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+		return response;
+	}
+	return http.request({
+		url: 'api/ScanCodeRepair/RegularRepairSubmission',
 		method: "POST",
 		dataType: 'json',
 		data: data
@@ -121,6 +135,7 @@ export default {
 	taskDetails,
 	getInfoByNumber,
 	submitRepairs,
-	facilityTypeList
+	facilityTypeList,
+	submitFacilityRepairs
 
 }

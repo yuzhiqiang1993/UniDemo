@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6979,7 +6979,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7000,14 +7000,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7083,7 +7083,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8537,13 +8537,13 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.submitRepairs = exports.getInfoByNumber = exports.taskDetails = exports.facilityTypeList = exports.streetTownList = exports.countyList = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.submitFacilityRepairs = exports.submitRepairs = exports.getInfoByNumber = exports.taskDetails = exports.facilityTypeList = exports.streetTownList = exports.countyList = exports.taskList = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                       * 将业务所有接口统一起来便于维护
-                                                                                                                                                                                                                                                                                                                                                                                                                                       * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
-                                                                                                                                                                                                                                                                                                                                                                                                                                       * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 将业务所有接口统一起来便于维护
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
 /* 任务列表 */
 var taskList = function taskList(data) {
@@ -8639,7 +8639,7 @@ var getInfoByNumber = function getInfoByNumber(data) {
 };
 
 
-/* 提交报修器材数据 */exports.getInfoByNumber = getInfoByNumber;
+/* 提交极速报修器材数据 */exports.getInfoByNumber = getInfoByNumber;
 var submitRepairs = function submitRepairs(data) {
   //设置请求结束后拦截器
   _interface.default.interceptor.response = function (response) {
@@ -8652,15 +8652,30 @@ var submitRepairs = function submitRepairs(data) {
     data: data });
 
 };
+
+/* 提交极速报修器材数据 */exports.submitRepairs = submitRepairs;
+var submitFacilityRepairs = function submitFacilityRepairs(data) {
+  //设置请求结束后拦截器
+  _interface.default.interceptor.response = function (response) {
+    return response;
+  };
+  return _interface.default.request({
+    url: 'api/ScanCodeRepair/RegularRepairSubmission',
+    method: "POST",
+    dataType: 'json',
+    data: data });
+
+};
 // 默认全部导出  import api from '@/common/vmeitime-http/'
-exports.submitRepairs = submitRepairs;var _default = {
+exports.submitFacilityRepairs = submitFacilityRepairs;var _default = {
   taskList: taskList,
   countyList: countyList,
   streetTownList: streetTownList,
   taskDetails: taskDetails,
   getInfoByNumber: getInfoByNumber,
   submitRepairs: submitRepairs,
-  facilityTypeList: facilityTypeList };exports.default = _default;
+  facilityTypeList: facilityTypeList,
+  submitFacilityRepairs: submitFacilityRepairs };exports.default = _default;
 
 /***/ }),
 /* 16 */
