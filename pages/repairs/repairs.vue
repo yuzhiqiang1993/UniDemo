@@ -168,7 +168,7 @@
 				})
 
 			},
-	
+
 			add: function() {
 
 				/* 先判断列表中数据是否完整 */
@@ -255,7 +255,7 @@
 				uni.chooseImage({
 					count: 1,
 					sizeType: ["compressed"],
-					sourceType: ["camera "],
+					sourceType: ["camera"],
 					success: (chooseImageRes) => {
 						const tempFilePaths = chooseImageRes.tempFilePaths;
 						this.uploadImgFile(tempFilePaths, index)

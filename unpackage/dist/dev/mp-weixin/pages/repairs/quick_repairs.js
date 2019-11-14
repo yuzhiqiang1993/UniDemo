@@ -316,7 +316,7 @@ var _default =
       uni.chooseImage({
         count: 1,
         sizeType: ["compressed"],
-        sourceType: ["camera "],
+        sourceType: ["camera"],
         success: function success(chooseImageRes) {
           var tempFilePaths = chooseImageRes.tempFilePaths;
           _this.uploadImgFile(tempFilePaths, index);

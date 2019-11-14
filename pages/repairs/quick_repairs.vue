@@ -192,7 +192,7 @@
 				uni.chooseImage({
 					count: 1,
 					sizeType: ["compressed"],
-					sourceType: ["camera "],
+					sourceType: ["camera"],
 					success: (chooseImageRes) => {
 						const tempFilePaths = chooseImageRes.tempFilePaths;
 						this.uploadImgFile(tempFilePaths, index)
@@ -289,28 +289,28 @@
 				/* 先判断编号是否为空 */
 
 				console.log(this.InstrumentCode)
-				
+
 				/* 先判断损坏列表中是否已存在选择的器材 */
-				
+
 				var alreadExist = false
 				this.instruments.forEach(item => {
 					if (item.InstrumentCode == this.InstrumentCode.toLocaleUpperCase()) {
 						alreadExist = true
 					}
-				
+
 				})
-				
+
 				if (alreadExist) {
 					uni.showModal({
 						title: "提示",
-						content:"您输入的器材编号已在报修列表中,无需重复报修，请检查",
-				
+						content: "您输入的器材编号已在报修列表中,无需重复报修，请检查",
+
 					})
-				
+
 					return
 				}
-				
-				
+
+
 
 
 				uni.showLoading({
