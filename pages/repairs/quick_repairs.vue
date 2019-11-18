@@ -192,7 +192,7 @@
 				uni.chooseImage({
 					count: 1,
 					sizeType: ["compressed"],
-					sourceType: ["camera"],
+					sourceType: ["camera","album"],
 					success: (chooseImageRes) => {
 						const tempFilePaths = chooseImageRes.tempFilePaths;
 						this.uploadImgFile(tempFilePaths, index)
